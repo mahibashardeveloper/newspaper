@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Dosis', sans-serif;
+}
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #eeeeee;
+    height: 20px !important;
+}
+
+@import "auth/auth";
+@import "variables/variables";
+@import "global/global";
