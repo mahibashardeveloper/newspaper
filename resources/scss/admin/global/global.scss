@@ -1,0 +1,369 @@
+.admin-wrapper{
+    width: 100%;
+    display: flex;
+
+    .admin-sidebar{
+        width: 250px;
+        height: 100vh;
+        border-right: 1px solid $border-color;
+
+        .admin-sidebar-header{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70px;
+            border-bottom: 1px solid $border-color;
+
+            .admin-title{
+                font-size: 20px;
+                font-weight: bold;
+                color: $black;
+                padding: 10px 20px;
+                display: inline-block;
+                text-decoration: none;
+            }
+
+            .admin-close{
+                font-size: 10px;
+                font-weight: bold;
+                color: $black;
+                padding: 10px 20px;
+                display: none;
+                text-decoration: none;
+            }
+
+        }
+
+        .admin-sidebar-body{
+            height: calc(100vh - 140px);
+            padding: 10px;
+
+            .admin-page-link{
+                color: $black;
+                padding: 10px 20px;
+                display: block;
+                text-decoration: none;
+                margin-bottom: 10px;
+                transition: 0.4s all ease-in-out;
+                font-size: 15px;
+                font-weight: bold;
+
+                &:hover{
+                    transition: 0.4s all ease-in-out;
+                    background-color: $border-color;
+                }
+
+                &.router-link-active{
+                    transition: 0.4s all ease-in-out;
+                    background-color: $border-color;
+                }
+
+            }
+
+        }
+
+        .admin-sidebar-footer{
+            height: 70px;
+            border-top: 1px solid $border-color;
+
+            .admin-footer-link{
+                line-height: 69px;
+                color: $black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+                font-weight: bold;
+                transition: 0.4s all ease-in-out;
+
+                &:hover{
+                    transition: 0.4s all ease-in-out;
+                    background-color: $border-color;
+                }
+
+            }
+
+        }
+
+    }
+
+    .admin-content{
+        width: calc(100% - 250px);
+
+        .admin-content-header{
+            width: 100%;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid $border-color;
+            padding: 0 20px;
+
+            .admin-sidebar-controller-link{
+                display: inline-block;
+                padding: 10px 20px;
+                text-decoration: none;
+                color: $black;
+                transition: 0.4s all ease-in-out;
+                border-radius: 10px;
+
+                &:hover{
+                    transition: 0.4s all ease-in-out;
+                    background-color: $border-color;
+                }
+
+            }
+
+            .admin-profile-dropdown{
+                position: relative;
+
+                .admin-marge{
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+
+                    img{
+                        width: 50px;
+                        height: 50px;
+                        object-fit: cover;
+                    }
+
+                    .admin-info{
+                        margin-left: 10px;
+
+                        .admin-name{
+                            font-weight: bold;
+                            font-size: 15px;
+                        }
+
+                    }
+
+                }
+
+                .admin-dropdown-menu{
+                    position: absolute;
+                    right: 20px;
+                    width: 150px;
+                    height: auto;
+                    border-radius: 10px;
+                    padding: 10px;
+                    border: 1px solid $border-color;
+                    background-color: $white;
+                    visibility: hidden;
+                    opacity: 0;
+                    top: 65px;
+                    transition: 0.4s all ease-in-out;
+                    z-index: 600;
+
+                    &.active{
+                        visibility: visible;
+                        opacity: 1;
+                        top: 75px;
+                        transition: 0.4s all ease-in-out;
+                    }
+
+                    .admin-dropdown-link{
+                        text-decoration: none;
+                        color: $black;
+                        padding: 10px 20px;
+                        display: block;
+                        border-radius: 10px;
+                        transition: 0.4s all ease-in-out;
+                        font-size: 15px;
+                        font-weight: bold;
+
+                        &:hover{
+                            transition: 0.4s all ease-in-out;
+                            background-color: $border-color;
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        .admin-content-body{
+            width: 100%;
+            height: calc(100vh - 140px);
+            overflow-y: scroll;
+            background-color: rgba(205, 250, 213, 0.5);
+
+            .img-banner{
+                width: 100%;
+                height: 350px;
+                background-color: $white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 40px;
+            }
+
+            .position-button{
+                position: absolute;
+                bottom: 20px;
+                left: 20px;
+                display: flex;
+            }
+
+            .btn-edit{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 70px;
+                height: 35px;
+                text-decoration: none;
+                color: $white;
+                background-color: $teal;
+                border-radius: 10px;
+                transition: 0.3s all ease-in-out;
+                font-size: 15px;
+
+                &:hover{
+                    transition: 0.3s all ease-in-out;
+                    background-color: darken($teal, 10%);
+                }
+
+            }
+
+            .btn-delete{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 70px;
+                height: 35px;
+                text-decoration: none;
+                color: $white;
+                background-color: $red;
+                border-radius: 10px;
+                transition: 0.3s all ease-in-out;
+                font-size: 15px;
+
+                &:hover{
+                    transition: 0.3s all ease-in-out;
+                    background-color: darken($red, 10%);
+                }
+
+            }
+
+            .card-section{
+                width: 100%;
+                padding: 0 30px;
+
+                .card-header{
+                    padding: 15px;
+                    background-color: $white;
+                }
+
+                .card-body{
+                    background-color: $white;
+                    padding: 10px;
+                    height: calc(100vh - 400px);
+
+                    .card-topic{
+                        padding: 10px 5px;
+                        border-bottom: 1px solid $border-color;
+                    }
+
+                    .card-list{
+                        padding: 10px 5px;
+                        border-bottom: 1px solid $border-color;
+                    }
+
+                }
+
+                .card-footer{
+                    padding: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: $white;
+                }
+
+            }
+
+            .modal{
+
+                .modal-dialog{
+
+                    .modal-content{
+
+                        .modal-header{
+
+                            .modal-title{
+                                font-weight: bold;
+                            }
+
+                        }
+
+                        .modal-body{
+
+                            .form-group{
+                                padding-bottom: 10px;
+                            }
+
+                        }
+
+                        .modal-footer{
+
+                            .btn-cancel{
+                                padding: 10px 20px;
+                                display: inline-block;
+                                border: none;
+                                outline: none;
+                                cursor: pointer;
+                                background-color: #888888CC;
+                                transition: 0.3s all ease-in-out;
+                                color: $white;
+
+                                &:hover{
+                                    transition: 0.3s all ease-in-out;
+                                    background-color: #888888;
+                                    color: $white;
+                                }
+
+                            }
+
+                            .btn-save{
+                                padding: 10px 20px;
+                                display: inline-block;
+                                border: none;
+                                outline: none;
+                                cursor: pointer;
+                                background-color: #198754CC;
+                                transition: 0.3s all ease-in-out;
+                                color: $white;
+
+                                &:hover{
+                                    transition: 0.3s all ease-in-out;
+                                    background-color: #198754;
+                                    color: $white;
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        .admin-content-footer{
+            border-top: 1px solid $border-color;
+            width: 100%;
+            height: 70px;
+            background-color: $white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    }
+
+}

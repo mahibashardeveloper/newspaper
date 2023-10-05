@@ -1,9 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.min.css';
-import 'owl-carousel/owl-carousel/owl.carousel.css';
-import 'owl-carousel/owl-carousel/owl.theme.css'
-import 'jquery/dist/jquery.min';
-import 'owl-carousel/owl-carousel/owl.carousel.min';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min';
 window.bootstrap = bootstrap
 import Toaster from '@meforma/vue-toaster';

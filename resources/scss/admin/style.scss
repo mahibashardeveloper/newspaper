@@ -11,10 +11,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #eeeeee;
+    background: #888888;
     height: 20px !important;
 }
 
-@import "auth/auth";
 @import "variables/variables";
+@import "auth/auth";
 @import "global/global";
