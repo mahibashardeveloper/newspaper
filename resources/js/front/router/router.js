@@ -10,25 +10,9 @@ import forget from "../components/auth/forget.vue";
 
 import layout from "../components/layout/layout.vue";
 
-// dashboard
+// home
 
-import dashboard from "../components/dashboard/dashboard.vue";
-
-// slider
-
-import slider from "../components/slider/slider.vue";
-
-// category
-
-import category from "../components/category/category.vue";
-
-// blog
-
-import blog from "../components/blog/blog.vue";
-
-// customer
-
-import customer from "../components/customer/customer.vue";
+import home from "../components/home/home.vue";
 
 // profile
 
@@ -36,17 +20,11 @@ import profile from "../components/profile/profile.vue";
 
 // directory ----- ----- ----- ----- ----- ----- ----- ----- -----
 
-const ROOT_URL = "/admin";
+const ROOT_URL = "/front";
 
 // route ----- ----- ----- ----- ----- ----- ----- ----- -----
 
 const routes = [
-
-    // authentication
-
-    {path: ROOT_URL + '/auth/login', name: 'login', component: login, meta: {title: 'login'}},
-
-    {path: ROOT_URL + '/auth/forget', name: 'forget', component: forget, meta: {title: 'forget'}},
 
     // layout
 
@@ -54,29 +32,19 @@ const routes = [
 
         children: [
 
-            // dashboard
+            // home
 
-            {path: ROOT_URL + '/dashboard', name: 'dashboard', component: dashboard, meta: {title: 'dashboard'}},
-
-            // slider
-
-            {path: ROOT_URL + '/sliders', name: 'slider', component: slider, meta: {title: 'sliders'}},
-
-            // category
-
-            {path: ROOT_URL + '/categories', name: 'category', component: category, meta: {title: 'categories'}},
-
-            // blog
-
-            {path: ROOT_URL + '/blogs', name: 'blog', component: blog, meta: {title: 'blogs'}},
-
-            // customer
-
-            {path: ROOT_URL + '/customers', name: 'customer', component: customer, meta: {title: 'customers'}},
+            {path: ROOT_URL + '/home', name: 'home', component: home, meta: {title: 'home'}},
 
             // profile
 
             {path: ROOT_URL + '/profile', name: 'profile', component: profile, meta: {title: 'profile'}},
+
+            // authentication
+
+            {path: ROOT_URL + '/auth/login', name: 'login', component: login, meta: {title: 'login'}},
+
+            {path: ROOT_URL + '/auth/forget', name: 'forget', component: forget, meta: {title: 'forget'}},
 
         ],
 
