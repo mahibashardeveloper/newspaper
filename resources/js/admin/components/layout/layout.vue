@@ -1,21 +1,31 @@
 <template>
 
     <div class="admin-wrapper">
-        <div class="admin-sidebar">
+        <div class="admin-sidebar" :class="{active: isActiveAdminSideBar}">
             <div class="admin-sidebar-header">
                 <a href="javascript:void(0)" class="admin-title">
                     Admin Portal
                 </a>
-                <a href="javascript:void(0)" class="admin-close">
+                <a href="javascript:void(0)" class="admin-close" @click="remove">
                     <i class="bi bi-x-lg"></i>
                 </a>
             </div>
             <div class="admin-sidebar-body">
-                <router-link :to="{name: 'dashboard'}" class="admin-page-link">Dashboard</router-link>
-                <router-link :to="{name: 'slider'}" class="admin-page-link">Slider</router-link>
-                <router-link :to="{name: 'category'}" class="admin-page-link">Category</router-link>
-                <router-link :to="{name: 'blog'}" class="admin-page-link">Blog</router-link>
-                <router-link :to="{name: 'customer'}" class="admin-page-link">Customer</router-link>
+                <router-link :to="{name: 'dashboard'}" class="admin-page-link" @click="remove">
+                    Dashboard
+                </router-link>
+                <router-link :to="{name: 'slider'}" class="admin-page-link" @click="remove">
+                    Slider
+                </router-link>
+                <router-link :to="{name: 'category'}" class="admin-page-link" @click="remove">
+                    Category
+                </router-link>
+                <router-link :to="{name: 'blog'}" class="admin-page-link" @click="remove">
+                    Blog
+                </router-link>
+                <router-link :to="{name: 'customer'}" class="admin-page-link" @click="remove">
+                    Customer
+                </router-link>
             </div>
             <div class="admin-sidebar-footer">
                 <a href="javascript:void(0)" class="admin-footer-link">
@@ -25,7 +35,7 @@
         </div>
         <div class="admin-content">
             <div class="admin-content-header">
-                <a href="javascript:void(0)" class="admin-sidebar-controller-link">
+                <a href="javascript:void(0)" class="admin-sidebar-controller-link" @click="AdminSideBarController">
                     <i class="bi bi-justify-left"></i>
                 </a>
                 <div class="admin-profile-dropdown">
@@ -61,6 +71,7 @@ export default {
         return{
 
             isActiveAdminDropDown: false,
+            isActiveAdminSideBar: false,
 
         }
 
@@ -78,6 +89,17 @@ export default {
 
             this.isActiveAdminDropDown = !this.isActiveAdminDropDown;
 
+        },
+
+        AdminSideBarController(){
+
+            this.isActiveAdminSideBar = !this.isActiveAdminSideBar;
+
+        },
+
+        remove(){
+            this.isActiveAdminDropDown = false;
+            this.isActiveAdminSideBar = false;
         }
 
     }
