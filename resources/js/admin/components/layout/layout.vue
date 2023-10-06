@@ -46,8 +46,12 @@
                         </div>
                     </div>
                     <div class="admin-dropdown-menu" :class="{active: isActiveAdminDropDown}">
-                        <a href="javascript:void(0)" class="admin-dropdown-link">Profile</a>
-                        <a href="javascript:void(0)" class="admin-dropdown-link">Logout</a>
+                        <router-link :to="{name: 'profile'}" class="admin-dropdown-link"  @click="remove">
+                            Profile
+                        </router-link>
+                        <a href="javascript:void(0)" class="admin-dropdown-link" @click="remove">
+                            Logout
+                        </a>
                     </div>
                 </div>
             </div>

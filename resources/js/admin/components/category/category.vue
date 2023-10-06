@@ -81,7 +81,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control shadow-none rounded-0 p-3" required>
+                        <input type="text" name="name" class="form-control shadow-none rounded-0 p-3 border-secondary-subtle" required>
                     </div>
                 </div>
                 <div class="modal-footer">

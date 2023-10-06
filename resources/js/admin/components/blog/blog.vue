@@ -74,13 +74,22 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Category</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Blog</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <label for="blog-image" class="w-100 btn-upload-image rounded-0 py-5 mb-3">
+                        <i class="bi bi-card-image"></i>
+                        Upload photo or video
+                        <input type="file" name="" class="d-none" id="blog-image">
+                    </label>
                     <div class="form-group">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control shadow-none rounded-0 p-3" required>
+                        <input type="text" name="name" class="form-control shadow-none rounded-0 p-3 border-secondary-subtle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="form-label">Description</label>
+                        <textarea name="" id="" cols="30" rows="5" class="form-textarea-control border-secondary-subtle" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

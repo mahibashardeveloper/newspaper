@@ -74,15 +74,14 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Category</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Slider</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="slider" class="form-label w-100">Photo</label>
-                        <label id="slider" for="slider-image" class="w-100 btn-upload-image rounded-0 py-5">
+                        <label for="slider-image" class="w-100 btn-upload-image rounded-0 py-5">
                             <i class="bi bi-card-image me-3"></i>
-                            Upload Image
+                            Upload photo or video
                             <input type="file" name="" class="d-none" id="slider-image">
                         </label>
                     </div>

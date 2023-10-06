@@ -184,7 +184,7 @@
 
                 .admin-dropdown-menu{
                     position: absolute;
-                    right: 20px;
+                    right: 0;
                     width: 150px;
                     height: auto;
                     border-radius: 10px;
@@ -200,7 +200,7 @@
                     &.active{
                         visibility: visible;
                         opacity: 1;
-                        top: 75px;
+                        top: 65px;
                         transition: 0.4s all ease-in-out;
                     }
 
@@ -314,6 +314,7 @@
                     .card-topic{
                         padding: 10px 10px;
                         border-bottom: 1px solid $border-color;
+                        font-weight: bold;
                     }
 
                     .card-list{
@@ -400,6 +401,13 @@
 
                             .form-group{
                                 padding-bottom: 10px;
+
+                                .form-textarea-control{
+                                    width: 100%;
+                                    outline: none;
+                                    padding: 10px;
+                                }
+
                             }
 
                             .btn-upload-image{
