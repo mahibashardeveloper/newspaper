@@ -11,7 +11,7 @@ class FrontController extends BaseController
 
     public function index(){
 
-        return view('app.admin');
+        return view('app.front.app');
 
     }
 
