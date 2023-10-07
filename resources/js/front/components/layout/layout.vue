@@ -27,6 +27,11 @@
                                     Login
                                 </router-link>
                             </li>
+                            <li>
+                                <router-link :to="{name: 'profile'}" class="dropdown-item">
+                                    Profile
+                                </router-link>
+                            </li>
                         </ul>
                     </div>
                     <div class="dropdown px-2">
@@ -48,7 +53,9 @@
         </div>
     </section>
 
-    <router-view/>
+    <div @change="translateContent">
+        <router-view/>
+    </div>
 
 </template>
 

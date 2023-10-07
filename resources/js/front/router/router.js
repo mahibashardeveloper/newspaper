@@ -40,7 +40,7 @@ const routes = [
 
             // home
 
-            {path: ROOT_URL + '/home', name: 'home', component: home, meta: {title: 'home'}},
+            {path: ROOT_URL + '/', name: 'home', component: home, meta: {title: 'home'}},
 
             // post
 

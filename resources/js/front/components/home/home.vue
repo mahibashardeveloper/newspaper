@@ -50,7 +50,9 @@
                             Blog Title {{each}}
                         </div>
                         <div class="mb-4">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus, eveniet laudantium nemo quaerat qui veritatis! Ab aliquid corporis, cumque natus optio quasi sit tenetur.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus, eveniet
+                            0laudantium nemo quaerat qui veritatis! Ab aliquid corporis, cumque natus optio
+                            quasi sit tenetur.
                         </div>
                         <router-link :to="{name: 'post'}" class="btn-post-link">Read me</router-link>
                     </div>
@@ -110,22 +112,7 @@ export default {
 
     mounted() {
 
-        $('.banner-item').owlCarousel({
-            loop:true,
-            margin:10,
-            nav:false,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:1
-                },
-                1000:{
-                    items:1
-                }
-            }
-        })
+
 
     },
 
