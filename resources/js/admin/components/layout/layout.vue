@@ -14,17 +14,14 @@
                 <router-link :to="{name: 'dashboard'}" class="admin-page-link" @click="remove">
                     Dashboard
                 </router-link>
-                <router-link :to="{name: 'slider'}" class="admin-page-link" @click="remove">
-                    Slider
-                </router-link>
                 <router-link :to="{name: 'category'}" class="admin-page-link" @click="remove">
-                    Category
+                    Categories
                 </router-link>
                 <router-link :to="{name: 'blog'}" class="admin-page-link" @click="remove">
-                    Blog
+                    Blogs
                 </router-link>
                 <router-link :to="{name: 'customer'}" class="admin-page-link" @click="remove">
-                    Customer
+                    Users
                 </router-link>
             </div>
             <div class="admin-sidebar-footer">

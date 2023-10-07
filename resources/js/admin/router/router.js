@@ -14,10 +14,6 @@ import layout from "../components/layout/layout.vue";
 
 import dashboard from "../components/dashboard/dashboard.vue";
 
-// slider
-
-import slider from "../components/slider/slider.vue";
-
 // category
 
 import category from "../components/category/category.vue";
@@ -57,10 +53,6 @@ const routes = [
             // dashboard
 
             {path: ROOT_URL + '/dashboard', name: 'dashboard', component: dashboard, meta: {title: 'dashboard'}},
-
-            // slider
-
-            {path: ROOT_URL + '/sliders', name: 'slider', component: slider, meta: {title: 'sliders'}},
 
             // category
 

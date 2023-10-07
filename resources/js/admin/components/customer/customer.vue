@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-2">
                     <div class="marge-title py-3"> Action </div>
-                    <a href="javascript:void(0)" class="text-decoration-none text-secondary" data-bs-toggle="modal" data-bs-target="#manageModal">
+                    <a href="javascript:void(0)" class="text-decoration-none text-secondary">
                         <i class="bi bi-eye"></i>
                     </a>
                 </div>
