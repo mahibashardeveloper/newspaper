@@ -1,104 +1,46 @@
 <template>
 
     <div class="px-3">
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-5 col-lg-12 col-xl-12 col-xxl-5 p-3">
+        <div class="row fw-bold">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 p-3">
                 <div class="bg-white h-100 p-3">
-                    <doughnut/>
+                    <div class="row">
+                        <div class="col-12 col-md-6">Categories</div>
+                        <div class="col-12 col-md-6 text-md-end"> 10,000 </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-7 col-lg-12 col-xl-12 col-xxl-7 p-3">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 p-3">
                 <div class="bg-white h-100 p-3">
-                    <bar/>
+                    <div class="row">
+                        <div class="col-12 col-md-6">Blogs</div>
+                        <div class="col-12 col-md-6 text-md-end"> 10,000 </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 p-3">
+                <div class="bg-white h-100 p-3">
+                    <div class="row">
+                        <div class="col-12 col-md-6">Users</div>
+                        <div class="col-12 col-md-6 text-md-end"> 10,000 </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="p-1">
-            <div class="p-2 text-center bg-white fw-bold">
+            <div class="py-3 text-center bg-white fw-bold">
                 To do list - Schedule
             </div>
         </div>
         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 fw-bold p-3">
-            <div class="p-1">
-                <input type="text" name="" placeholder="Type Here" class="form-control shadow-none rounded-0 border-0 p-2" required>
+            <div class="p-1 mb-3">
+                <input type="text" name="" placeholder="Type Here" class="form-control shadow-none rounded-0 border-0 p-3" required>
             </div>
-            <div class="p-1" v-for="each in [1,2,3,4,5,6,7,8,9,10]">
-                <div class="bg-white p-2">
+            <div class="p-1 mb-3" v-for="each in [1,2,3,4,5,6,7,8,9,10]">
+                <div class="bg-white p-3">
                     <div class="row">
                         <div class="col-8">
-                            Task 1
-                        </div>
-                        <div class="text-end col-4">
-                            <a href="javascript:void(0)" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-1">
-                <div class="bg-white p-2">
-                    <div class="row">
-                        <div class="col-8">
-                            Task 2
-                        </div>
-                        <div class="text-end col-4">
-                            <a href="javascript:void(0)" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-1">
-                <div class="bg-white p-2">
-                    <div class="row">
-                        <div class="col-8">
-                            Task 3
-                        </div>
-                        <div class="text-end col-4">
-                            <a href="javascript:void(0)" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-1">
-                <div class="bg-white p-2">
-                    <div class="row">
-                        <div class="col-8">
-                            Task 4
-                        </div>
-                        <div class="text-end col-4">
-                            <a href="javascript:void(0)" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-1">
-                <div class="bg-white p-2">
-                    <div class="row">
-                        <div class="col-8">
-                            Task 5
-                        </div>
-                        <div class="text-end col-4">
-                            <a href="javascript:void(0)" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-1">
-                <div class="bg-white p-2">
-                    <div class="row">
-                        <div class="col-8">
-                            Task 6
-                        </div>
-                        <div class="text-end col-4">
-                            <a href="javascript:void(0)" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-1">
-                <div class="bg-white p-2">
-                    <div class="row">
-                        <div class="col-8">
-                            Task 7
+                            Task {{each}}
                         </div>
                         <div class="text-end col-4">
                             <a href="javascript:void(0)" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"> Delete </a>
@@ -133,16 +75,7 @@
 
 <script>
 
-import doughnut from "./graph_chart/doughnut.vue";
-import bar from "./graph_chart/bar.vue";
-
     export default {
-
-        components: {
-
-            doughnut, bar
-
-        },
 
         data(){
 
