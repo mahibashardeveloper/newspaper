@@ -20,7 +20,7 @@
                 <router-link :to="{name: 'blog'}" class="admin-page-link" @click="remove">
                     Blogs
                 </router-link>
-                <router-link :to="{name: 'customer'}" class="admin-page-link" @click="remove">
+                <router-link :to="{name: 'user'}" class="admin-page-link" @click="remove">
                     Users
                 </router-link>
             </div>

@@ -8,5 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 class FrontService extends BaseController
 {
-    use AuthorizesRequests, ValidatesRequests;
+
+
+
 }
