@@ -278,6 +278,9 @@
                     padding-left: 30px;
                     padding-bottom: 20px;
                     background-color: $white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
 
                     .card-title{
                         font-weight: bold;
@@ -293,6 +296,15 @@
                     padding-bottom: 20px;
                     height: calc(100vh - 400px);
                     overflow-y: scroll;
+
+                    .page-no-data-found{
+                        height: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        text-align: center;
+                    }
 
                     .card-topic{
                         padding: 10px 10px;
@@ -385,10 +397,22 @@
                             .form-group{
                                 padding-bottom: 10px;
 
+                                .form-label{
+                                    font-weight: bold;
+                                }
+
                                 .form-textarea-control{
                                     width: 100%;
                                     outline: none;
                                     padding: 10px;
+                                }
+
+                                .error-text{
+                                    font-size: 15px;
+                                    color: $red;
+                                    display: block;
+                                    margin-top: 10px;
+                                    font-weight: bold;
                                 }
 
                             }
