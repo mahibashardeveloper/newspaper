@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Admins;
 use App\Models\Settings;
+use App\Models\Media;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;

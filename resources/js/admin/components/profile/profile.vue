@@ -79,31 +79,182 @@
 </template>
 
 <script>
+    import apiService from "../../services/apiServices.js";
+    import apiRoutes from "../../services/apiRoutes.js";
+    export default {
 
-export default {
+        data(){
 
-    data(){
+            return{
 
-        return{
+                profileDataLoading: false,
 
+                profile_data: '',
 
+                updateProfileLoading: false,
+
+                error: null,
+
+                edit: false,
+
+                editParam: { full_name: '', email: '', avatar: '' },
+
+                passwordParam: { password: '', password_confirmation: '' },
+
+                settingsLoading: false,
+
+                settings_data: '',
+
+                updateSettingsLoading: false,
+
+                editSettingsParam: { facebook: '', twitter: '', instagram: '', linkedin: '', youtube: '' },
+
+            }
+
+        },
+
+        mounted() {
+
+            this.getProfile();
+
+            this.getSettings();
+
+        },
+
+        methods: {
+
+            attachFile(event) {
+                let file = event.target.files[0];
+                let formData = new FormData();
+                formData.append("file", file)
+                formData.append("media_type", 1);
+                apiService.UPLOAD(apiRoutes.media, formData, (res) => {
+                    event.target.value = '';
+                    if (res.status === 200) {
+                        this.editParam.avatarFilePath = res.data.full_file_path
+                        this.editParam.avatar = res.data.id
+                    }
+                })
+            },
+
+            openEditProfileModal() {
+                const modal = new bootstrap.Modal("#editProfileModal", {keyboard: false, backdrop: 'static'});
+                modal.show();
+                this.edit = true;
+                this.editParam = JSON.parse(JSON.stringify(this.profile_data));
+                this.editParam.avatarFilePath = this.editParam.media != null ? this.editParam.media.full_file_path : null
+            },
+
+            closeEditProfileModal() {
+                this.edit = false;
+                this.error = null;
+                let myModalEl = document.getElementById('editProfileModal');
+                let modal = bootstrap.Modal.getInstance(myModalEl);
+                modal.hide();
+            },
+
+            openEditPasswordModal() {
+                const modal = new bootstrap.Modal("#editPasswordModal", {keyboard: false, backdrop: 'static'});
+                modal.show();
+                this.edit = true;
+                this.editParam = JSON.parse(JSON.stringify(this.profile_data));
+            },
+
+            closeEditPasswordModal() {
+                this.edit = false;
+                this.passwordParam = {password: "", password_confirmation: ""};
+                this.error = null;
+                let myModalEl = document.getElementById('editPasswordModal');
+                let modal = bootstrap.Modal.getInstance(myModalEl);
+                modal.hide();
+            },
+
+            getProfile() {
+                this.profileDataLoading = true;
+                apiService.GET(apiRoutes.profile_details, (res) => {
+                    this.profileDataLoading = false;
+                    if (res.status === 200) {
+                        this.profile_data = res.data;
+                    }
+                })
+            },
+
+            updateProfile() {
+                this.updateProfileLoading = true;
+                this.error = null;
+                apiService.POST(apiRoutes.profile_update, this.editParam, (res) => {
+                    this.updateProfileLoading = false;
+                    if (res.status === 200) {
+                        this.getProfile();
+                        this.edit = false;
+                        this.$toast.success('Your Profile has been updated successfully.', { position: "top-right" });
+                        this.closeEditProfileModal();
+                        window.location.reload();
+                    } else {
+                        this.error = res.errors;
+                    }
+                })
+            },
+
+            updatePassword() {
+                this.updateProfileLoading = true;
+                this.error = null;
+                apiService.POST(apiRoutes.profile_password, this.passwordParam, (res) => {
+                    this.updateProfileLoading = false;
+                    if (res.status === 200) {
+                        this.getProfile();
+                        this.edit = false;
+                        this.$toast.success('Your password has been updated successfully.', { position: "top-right" });
+                        this.closeEditPasswordModal();
+                    } else {
+                        this.error = res.errors;
+                    }
+                })
+            },
+
+            openSettingsModal() {
+                const modal = new bootstrap.Modal("#editSettingsModal", {keyboard: false, backdrop: 'static'});
+                modal.show();
+                this.edit = true;
+                this.editParam = JSON.parse(JSON.stringify(this.settings_data));
+            },
+
+            closeEditSettingsModal() {
+                this.edit = false;
+                this.error = null;
+                let myModalEl = document.getElementById('editSettingsModal');
+                let modal = bootstrap.Modal.getInstance(myModalEl);
+                modal.hide();
+            },
+
+            getSettings() {
+                this.settingsLoading = true;
+                apiService.GET(apiRoutes.settings_details, (res) => {
+                    this.settingsLoading = false;
+                    if (res.status === 200) {
+                        this.settings_data = res.data;
+                    }
+                })
+            },
+
+            updateSettings() {
+                this.updateSettingsLoading = true;
+                this.error = null;
+                apiService.POST(apiRoutes.settings_update, this.editSettingsParam, (res) => {
+                    this.updateSettingsLoading = false;
+                    if (res.status === 200) {
+                        this.getSettings();
+                        this.edit = false;
+                        this.$toast.success('Your Settings has been updated successfully.', { position: "top-right" });
+                        this.closeEditSettingsModal();
+                    } else {
+                        this.error = res.errors;
+                    }
+                })
+            },
 
         }
 
-    },
-
-    mounted() {
-
-
-
-    },
-
-    methods: {
-
-
-
     }
-
-}
 
 </script>

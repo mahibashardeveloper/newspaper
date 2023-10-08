@@ -15,9 +15,9 @@ use App\Http\Controllers\FrontController;
 |
 */
 
-Route::get('/admin/auth/{any}', [AdminController::class, 'index'])->where('any', '.*')->name('lvs.admin.auth');
-Route::get('/admin/', [AdminController::class, 'index'])->where('any', '.*')->name('lvs.admin');
-Route::get('/admin/{any}', [AdminController::class, 'index'])->where('any', '.*')->name('lvs.admin.any');
+Route::middleware('AdminLoginCheck')->get('/admin/auth/{any}', [AdminController::class, 'index'])->where('any', '.*')->name('lvs.admin.auth');
+Route::middleware('AdminLoginCheck')->get('/admin/', [AdminController::class, 'index'])->where('any', '.*')->name('lvs.admin');
+Route::middleware('AdminLoginCheck')->get('/admin/{any}', [AdminController::class, 'index'])->where('any', '.*')->name('lvs.admin.any');
 Route::get('/admin', function (){ return redirect()->route('lvs.admin.any','dashboard'); });
 
 Route::get('/front/auth/{any}', [FrontController::class, 'index'])->where('any', '.*')->name('lvs.front.auth');

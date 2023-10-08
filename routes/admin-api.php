@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,4 +78,13 @@ Route::prefix('blog')->group( function () {
     Route::post('/list', [AdminController::class, 'blogList'])->name('Blog.List');
     Route::post('/single', [AdminController::class, 'blogSingle'])->name('Blog.Single');
     Route::post('/delete', [AdminController::class, 'blogDelete'])->name('Blog.Delete');
+});
+
+/* -------------------------
+    Media Controller
+--------------------------- */
+
+Route::prefix('media')->group( function () {
+    Route::post('/upload', [MediaController::class, 'upload'])->name('Admin.Media.Upload');
+    Route::post('/update', [MediaController::class, 'update'])->name('Admin.Media.Update');
 });

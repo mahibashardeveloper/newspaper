@@ -42,4 +42,9 @@ class Admins extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function media(){
+        return  $this->hasOne(Media::class, 'id', 'avatar');
+    }
+
 }

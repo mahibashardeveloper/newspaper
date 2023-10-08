@@ -68,6 +68,10 @@ const apiRoutes = {
 
     logout: apiVersion + '/profile/logout',
 
+    // Media
+
+    media: apiVersion + '/media/upload',
+
 }
 
 export default apiRoutes;

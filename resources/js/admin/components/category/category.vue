@@ -410,7 +410,7 @@
                 this.current_page = page;
                 this.list();
             },
-            
+
         }
     }
 

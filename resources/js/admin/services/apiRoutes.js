@@ -10,17 +10,15 @@ const apiRoutes = {
 
     reset: apiVersion + '/auth/reset',
 
-    // slider
+    // Profile
 
-    sliderCreate: apiVersion + '/slider/create',
+    profile_details: apiVersion + '/profile/details',
 
-    sliderList: apiVersion + '/slider/list',
+    profile_update: apiVersion + '/profile/update',
 
-    sliderSingle: apiVersion + '/slider/single',
+    profile_password: apiVersion + '/profile/password',
 
-    sliderUpdate: apiVersion + '/slider/update',
-
-    sliderDelete: apiVersion + '/slider/delete',
+    logout: apiVersion + '/profile/logout',
 
     // category
 
@@ -58,15 +56,11 @@ const apiRoutes = {
 
     customerDelete: apiVersion + '/customer/delete',
 
-    // Profile
+    // Media
 
-    profile_details: apiVersion + '/profile/details',
+    mediaUpload: apiVersion + '/media/upload',
 
-    profile_update: apiVersion + '/profile/update',
-
-    profile_password: apiVersion + '/profile/password',
-
-    logout: apiVersion + '/profile/logout',
+    mediaUpdate: apiVersion + '/media/update',
 
 }
 

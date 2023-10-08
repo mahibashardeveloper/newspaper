@@ -39,14 +39,15 @@
                     <div class="admin-marge" @click="AdminDropdownController">
                         <img :src="'/images/avatar.png'" class="img-fluid" alt="avatar">
                         <div class="admin-info">
-                            <div class="admin-name">Mahi Bashar Akash</div>
+                            <div class="admin-name">{{profile_data.full_name}}</div>
+                            <div class="admin-email">{{profile_data.email}}</div>
                         </div>
                     </div>
                     <div class="admin-dropdown-menu" :class="{active: isActiveAdminDropDown}">
                         <router-link :to="{name: 'profile'}" class="admin-dropdown-link"  @click="remove">
                             Profile
                         </router-link>
-                        <a href="javascript:void(0)" class="admin-dropdown-link" @click="remove">
+                        <a href="javascript:void(0)" class="admin-dropdown-link" @click="logout">
                             Logout
                         </a>
                     </div>
@@ -64,47 +65,76 @@
 </template>
 
 <script>
+    import apiService from "../../services/apiServices.js";
+    import apiRoutes from "../../services/apiRoutes.js";
+    export default {
 
-export default {
+        data(){
 
-    data(){
+            return{
 
-        return{
+                isActiveAdminDropDown: false,
 
-            isActiveAdminDropDown: false,
-            isActiveAdminSideBar: false,
+                isActiveAdminSideBar: false,
 
-        }
+                logoutLoading: false,
 
-    },
+                profile_data: '',
 
-    mounted() {
+                profileDataLoading: false,
 
-
-
-    },
-
-    methods: {
-
-        AdminDropdownController(){
-
-            this.isActiveAdminDropDown = !this.isActiveAdminDropDown;
+            }
 
         },
 
-        AdminSideBarController(){
+        mounted() {
 
-            this.isActiveAdminSideBar = !this.isActiveAdminSideBar;
+            this.getProfile();
 
         },
 
-        remove(){
-            this.isActiveAdminDropDown = false;
-            this.isActiveAdminSideBar = false;
+        methods: {
+
+            AdminDropdownController(){
+
+                this.isActiveAdminDropDown = !this.isActiveAdminDropDown;
+
+            },
+
+            AdminSideBarController(){
+
+                this.isActiveAdminSideBar = !this.isActiveAdminSideBar;
+
+            },
+
+            remove(){
+                this.isActiveAdminDropDown = false;
+                this.isActiveAdminSideBar = false;
+            },
+
+            logout() {
+                this.logoutLoading = true;
+                apiService.GET(apiRoutes.logout, (res) => {
+                    this.logoutLoading = false;
+                    if (res.status === 200) {
+                        this.$toast.success('Logout Successful', { position: "top-right" });
+                        window.location.reload()
+                    }
+                })
+            },
+
+            getProfile() {
+                this.profileDataLoading = true;
+                apiService.GET(apiRoutes.profile_details, (res) => {
+                    this.profileDataLoading = false;
+                    if (res.status === 200) {
+                        this.profile_data = res.data;
+                    }
+                })
+            },
+
         }
 
     }
-
-}
 
 </script>
