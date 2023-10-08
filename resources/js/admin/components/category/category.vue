@@ -190,9 +190,7 @@
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-around align-items-center">
                     <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">Cancel</button>
-                    <button type="button" class="col-5 btn-save">
-
-                    </button>
+                    <button type="button" class="col-5 btn-delete" @click="deleteCategory">Confirm</button>
                 </div>
             </div>
         </div>
@@ -228,6 +226,7 @@
             this.list();
         },
         methods: {
+
             toggleCheckAll(e) {
                 if (e.target.checked) {
                     this.tableData.forEach((v) => {
@@ -237,6 +236,7 @@
                     this.selected = [];
                 }
             },
+
             toggleCheck(e, id) {
                 if (e.target.checked) {
                     this.selected.push(id);
@@ -245,16 +245,19 @@
                     this.selected.splice(index, 1);
                 }
             },
+
             CheckIfChecked(id) {
                 return this.selected.map(function (id) {
                     return id
                 }).indexOf(id) > -1;
             },
+
             openEditModal() {
                 this.getSingle();
                 const myModal = new bootstrap.Modal("#manageModal", {keyboard: false});
                 myModal.show();
             },
+
             deleteCategory() {
                 this.deleteLoading = true;
                 this.selected.forEach((v) => {
@@ -272,6 +275,7 @@
                     }
                 })
             },
+
             deleteModal(type, id) {
                 if (type === 1) {
                     this.deleteParam.ids.push(id)
@@ -286,6 +290,7 @@
                     modal.hide();
                 }
             },
+
             manageModal(type, data = null) {
                 this.error = null;
                 this.categoryParam = { id: '', name: '', avatar: null };
@@ -302,6 +307,7 @@
                     modal.hide();
                 }
             },
+
             getCategory() {
                 apiService.POST(apiRoutes.categoryList, '', (res) => {
                     if (res.status === 200) {
@@ -309,6 +315,7 @@
                     }
                 })
             },
+
             manageCategory() {
                 if (this.categoryParam.id) {
                     this.edit();
@@ -316,6 +323,7 @@
                     this.create();
                 }
             },
+
             getSingle(id = null) {
                 let param = { id: '' }
                 if (id != null) { param.id = id } else { param.id = this.selected[0] }
@@ -327,6 +335,7 @@
                     }
                 });
             },
+
             create() {
                 this.createLoading = true;
                 this.error = null;
@@ -342,6 +351,7 @@
                     }
                 });
             },
+
             edit() {
                 this.createLoading = true;
                 this.error = null;
@@ -358,6 +368,7 @@
                     }
                 });
             },
+
             list() {
                 this.loading = true;
                 this.formData.page = this.current_page;
@@ -373,28 +384,33 @@
                     }
                 });
             },
+
             SearchData() {
                 clearTimeout(this.searchTimeout);
                 this.searchTimeout = setTimeout(() => {
                     this.list();
                 }, 500);
             },
+
             PrevPage() {
                 if (this.current_page > 1) {
                     this.current_page = this.current_page - 1;
                     this.list()
                 }
             },
+
             NextPage() {
                 if (this.current_page < this.total_pages) {
                     this.current_page = this.current_page + 1;
                     this.list()
                 }
             },
+
             pageChange(page) {
                 this.current_page = page;
                 this.list();
             },
+            
         }
     }
 

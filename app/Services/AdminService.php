@@ -4,8 +4,6 @@ namespace App\Services;
 
 use App\Models\Admins;
 use App\Models\Settings;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -120,24 +118,18 @@ class AdminService extends BaseController
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'company_name' => 'required',
                     'email' => 'required|email|unique:admins,email,' . $request->email . ',email',
                     'avatar' => 'required',
-                    'first_name' => 'required|min:3',
-                    'last_name' => 'required|min:3',
-                    'phone_number' => 'required|min:10',
+                    'full_name' => 'required|min:3',
                 ]
             );
             if ($validator->fails()) {
                 return ['status' => 500, 'errors' => $validator->errors()];
             }
             $user = Admins::where('id', Auth::guard('admins')->id())->first();
-            $user->company_name = $request->company_name;
-            $user->first_name = $request->first_name;
-            $user->last_name = $request->last_name;
+            $user->full_name = $request->full_name;
             $user->avatar = $request->avatar ?? null;
             $user->email = $request->email;
-            $user->phone_number = $request->phone_number;
             $user->save();
             return ['status' => 200,];
         } catch (\Exception $e) {
