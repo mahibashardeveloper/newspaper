@@ -421,6 +421,23 @@
                                     font-weight: bold;
                                 }
 
+                                .form-control{
+                                    line-height: 40px;
+                                    box-shadow: 0 0 0 0;
+                                    border-radius: 0;
+                                }
+
+                                .modal-avatar{
+                                    border-radius: 50%;
+                                    width: 200px;
+                                    height: 200px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    cursor: pointer;
+                                    overflow: hidden;
+                                }
+
                             }
 
                             .btn-upload-image{

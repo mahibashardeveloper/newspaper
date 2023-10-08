@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Admins;
 use App\Models\Settings;
 use App\Models\Media;
+use App\Models\Companies;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -202,6 +203,37 @@ class AdminService extends BaseController
             $user->instagram = $request->instagram;
             $user->linkedin = $request->linkedin;
             $user->youtube = $request->youtube;
+            $user->save();
+            return ['status' => 200,];
+        } catch (\Exception $e) {
+            return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
+        }
+    }
+
+    public static function company_details($request)
+    {
+        try {
+            $user_id = Auth::guard('admins')->id();
+            $user = Companies::where('id', $user_id)->first();
+            return ['status' => 200, 'data' => $user];
+        } catch (\Exception $e) {
+            return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
+        }
+    }
+
+    public static function company_update($request)
+    {
+        try{$validator = Validator::make(
+            $request->all(),
+            [
+                'company_name' => 'required',
+            ]
+        );
+            if ($validator->fails()) {
+                return ['status' => 500, 'errors' => $validator->errors()];
+            }
+            $user = Companies::where('id', Auth::guard('admins')->id())->first();
+            $user->company_name = $request->company_name;
             $user->save();
             return ['status' => 200,];
         } catch (\Exception $e) {

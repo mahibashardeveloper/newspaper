@@ -70,6 +70,18 @@ class AdminController extends BaseController
         return response()->json($rv, 200);
     }
 
+    public function company_details(Request $request)
+    {
+        $rv = AdminService::company_details($request);
+        return response()->json($rv, 200);
+    }
+
+    public function company_update(Request $request)
+    {
+        $rv = AdminService::company_update($request);
+        return response()->json($rv, 200);
+    }
+
     // category
 
     public function categoryCreate(Request $request){

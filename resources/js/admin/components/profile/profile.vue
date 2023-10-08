@@ -3,78 +3,252 @@
     <div class="px-4 pt-4">
         <div class="row justify-content-center">
             <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-6 col-xxl-4 bg-white shadow-lg p-3">
+                <div class="d-flex">
+                    <a href="javascript:void(0)" class="btn btn-outline-dark me-2 rounded-0" @click="openSettingsModal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Edit Social Media">
+                        <i class="bi bi-patch-check"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="btn btn-outline-dark me-2 rounded-0" @click="openEditProfileModal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Edit Profile">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="btn btn-outline-dark me-2 rounded-0" @click="openEditPasswordModal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Edit Password">
+                        <i class="bi bi-fingerprint"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="btn btn-outline-dark rounded-0" @click="openCompanyInfoModal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Edit Company info">
+                        <i class="bi bi-building-fill"></i>
+                    </a>
+                </div>
                 <div class="py-4 d-flex justify-content-center">
                     <div class="col-6">
                         <img :src="'/images/avatar.png'" class="img-fluid" alt="avatar">
                     </div>
                 </div>
-                <div class="py-3 ps-3">Name: Mahi Bashar Akash</div>
-                <div class="py-3 ps-3">Email: mahibashar2023@gmail.com</div>
-                <div class="d-flex align-items-center justify-content-between flex-wrap w-100 p-3">
-                    <a href="javascript:void(0)" class="btn btn-secondary col-sm-5 col-12 my-3 rounded-0" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        Profile Edit
-                    </a>
-                    <a href="javascript:void(0)" class="btn btn-secondary col-sm-5 col-12 my-3 rounded-0" data-bs-toggle="modal" data-bs-target="#passwordModal">
-                        Password Change
-                    </a>
+                <div class="py-1 px-3 d-flex align-items-center justify-content-start flex-wrap">
+                    <div class="fw-bold me-2">
+                        Name:
+                    </div>
+                    {{profile_data.full_name}}
+                </div>
+                <div class="py-1 px-3 d-flex align-items-center justify-content-start flex-wrap">
+                    <div class="fw-bold me-2">
+                        Email:
+                    </div>
+                    {{profile_data.email}}
+                </div>
+                <div class="py-1 px-3 d-flex align-items-center justify-content-start flex-wrap">
+                    <div class="fw-bold me-2">
+                        Company Name
+                    </div>
+                    {{companyInfo_data.company_name}}
+                </div>
+                <div class="py-1 px-3 d-flex align-items-center justify-content-start flex-wrap">
+                    <div class="fw-bold me-2">
+                        Social Media:
+                    </div>
+                    <div class="d-flex justify-content-start align-items-center flex-wrap">
+                        <a :href="settings_data.facebook" target="_blank">
+                            <i class="bi bi-facebook py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                        </a>
+                        <a :href="settings_data.twitter" target="_blank">
+                            <i class="bi bi-twitter py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                        </a>
+                        <a :href="settings_data.instagram" target="_blank">
+                            <i class="bi bi-instagram py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                        </a>
+                        <a :href="settings_data.linkedin" target="_blank">
+                            <i class="bi bi-linkedin py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                        </a>
+                        <a :href="settings_data.youtube" target="_blank">
+                            <i class="bi bi-youtube py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- edit profile modal start -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Profile Edit</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content p-3">
+                <div class="modal-header border-0">
+                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
+                        Edit Profile
+                    </h1>
+                    <button type="button" class="btn-close" @click="closeEditProfileModal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control shadow-none rounded-0 p-3 border-secondary-subtle" required>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <label for="file-upload" class="modal-avatar border border-secondary-subtle">
+                                <input type="file" class="d-none" id="file-upload" @change="attachFile($event)">
+                                <span v-if="editParam.avatar === null" class="modal-avatar">
+                                    <div class="text-center">
+                                        <div class="mb-2">
+                                            <i class="bi bi-card-image"></i>
+                                        </div>
+                                        Upload Image
+                                    </div>
+                                </span>
+                                <img class="img-fluid modal-avatar" v-if="editParam.avatar !== null" :src="editParam.avatarFilePath" alt="profile">
+                            </label>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Email</label>
-                        <input type="text" name="name" class="form-control shadow-none rounded-0 p-3 border-secondary-subtle" required>
+                        <label for="full_name" class="form-label">
+                            Full Name
+                        </label>
+                        <input type="text" id="full_name" name="full_name" class="form-control border-secondary-subtle" v-model="editParam.full_name">
+                        <div class="error-text" v-if="error != null && error.full_name !== undefined" v-text="error.full_name[0]"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            Email
+                        </label>
+                        <input type="email" id="email" name="email" class="form-control border-secondary-subtle" v-model="editParam.email">
+                        <div class="error-text" v-if="error != null && error.email !== undefined" v-text="error.email[0]"></div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn-save">Save</button>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn-cancel" @click="closeEditProfileModal"> Close </button>
+                    <button type="button" class="btn-save" @click="updateProfile">
+                        <span v-if="updateProfileLoading === false">Edit</span>
+                        <span v-if="updateProfileLoading === true">Loading...</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- edit profile modal end -->
 
-    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- change password modal start -->
+    <div class="modal fade" id="editPasswordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Password Change</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content p-3">
+                <div class="modal-header border-0">
+                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
+                        Edit Password
+                    </h1>
+                    <button type="button" class="btn-close" @click="closeEditPasswordModal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name" class="form-label">Current Password</label>
-                        <input type="text" name="name" class="form-control shadow-none rounded-0 p-3 border-secondary-subtle" required>
+                        <label for="password" class="form-label">
+                            New Password
+                        </label>
+                        <input type="password" id="password" name="password" class="form-control border-secondary-subtle" v-model="passwordParam.password">
+                        <div class="error-text" v-if="error != null && error.password !== undefined" v-text="error.password[0]"></div>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">New Password</label>
-                        <input type="text" name="name" class="form-control shadow-none rounded-0 p-3 border-secondary-subtle" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="form-label">Confirm Password</label>
-                        <input type="text" name="name" class="form-control shadow-none rounded-0 p-3 border-secondary-subtle" required>
+                        <label for="password_confirmation" class="form-label">
+                            Confirm Password
+                        </label>
+                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control border-secondary-subtle" v-model="passwordParam.password_confirmation">
+                        <div class="error-text" v-if="error != null && error.password_confirmation !== undefined" v-text="error.password_confirmation[0]"></div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn-save">Save</button>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn-cancel" @click="closeEditPasswordModal">
+                        Close
+                    </button>
+                    <button type="submit" class="btn-save" @click="updatePassword">
+                        <span v-if="updateProfileLoading === false"> Edit </span>
+                        <span v-if="updateProfileLoading === true"> Loading... </span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- change password modal end -->
+
+    <!-- edit social media modal start -->
+    <div class="modal fade" id="editSettingsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3">
+                <div class="modal-header border-0">
+                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
+                        Edit Social Media
+                    </h1>
+                    <button type="button" class="btn-close" @click="closeEditSettingsModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="facebook" class="form-label">
+                            Facebook Link
+                        </label>
+                        <input type="text" id="facebook" name="facebook" class="form-control border-secondary-subtle" v-model="editParam.facebook">
+                        <div class="error-text" v-if="error != null && error.facebook !== undefined" v-text="error.facebook[0]"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="last_name" class="form-label">
+                            Twitter Link
+                        </label>
+                        <input type="text" id="twitter" name="twitter" class="form-control border-secondary-subtle" v-model="editParam.twitter">
+                        <div class="error-text" v-if="error != null && error.twitter !== undefined" v-text="error.twitter[0]"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            Instagram Link
+                        </label>
+                        <input type="text" id="instagram" name="instagram" class="form-control border-secondary-subtle" v-model="editParam.instagram">
+                        <div class="error-text" v-if="error != null && error.instagram !== undefined" v-text="error.instagram[0]"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone_number" class="form-label">
+                            Linkedin Link
+                        </label>
+                        <input type="text" id="linkedin" name="linkedin" class="form-control border-secondary-subtle" v-model="editParam.linkedin">
+                        <div class="error-text" v-if="error != null && error.linkedin !== undefined" v-text="error.linkedin[0]"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="youtube" class="form-label">
+                            Youtube Link
+                        </label>
+                        <input type="text" id="youtube" name="youtube" class="form-control border-secondary-subtle" v-model="editParam.youtube">
+                        <div class="error-text" v-if="error != null && error.youtube !== undefined" v-text="error.youtube[0]"></div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn-cancel" @click="closeEditSettingsModal"> Close </button>
+                    <button type="button" class="btn-save" @click="updateSettings">
+                        <span v-if="updateSettingsLoading === false">Edit</span>
+                        <span v-if="updateSettingsLoading === true">Loading...</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- edit social media modal end -->
+
+    <!-- edit company info modal start -->
+    <div class="modal fade" id="editCompanyInfoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3">
+                <div class="modal-header border-0">
+                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
+                        Edit Company info
+                    </h1>
+                    <button type="button" class="btn-close" @click="closeEditCompanyInfoModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="company_name" class="form-label">
+                            Company Name
+                        </label>
+                        <input type="text" id="company_name" name="company_name" class="form-control border-secondary-subtle" v-model="companyParam.company_name">
+                        <div class="error-text" v-if="error != null && error.company_name !== undefined" v-text="error.company_name[0]"></div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn-cancel" @click="closeEditCompanyInfoModal"> Close </button>
+                    <button type="button" class="btn-save" @click="updateCompanyInfo">
+                        <span v-if="updateCompanyInfoLoading === false">Edit</span>
+                        <span v-if="updateCompanyInfoLoading === true">Loading...</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- edit company info modal end -->
 
 </template>
 
@@ -101,6 +275,8 @@
 
                 passwordParam: { password: '', password_confirmation: '' },
 
+                companyParam: {company_name: ''},
+
                 settingsLoading: false,
 
                 settings_data: '',
@@ -109,15 +285,27 @@
 
                 editSettingsParam: { facebook: '', twitter: '', instagram: '', linkedin: '', youtube: '' },
 
+                companyInfoLoading: false,
+
+                companyInfo_data: '',
+
+                updateCompanyInfoLoading: false,
+
             }
 
         },
 
         mounted() {
 
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
             this.getProfile();
 
             this.getSettings();
+
+            this.getCompanyInfo();
 
         },
 
@@ -246,6 +434,47 @@
                         this.getSettings();
                         this.edit = false;
                         this.$toast.success('Your Settings has been updated successfully.', { position: "top-right" });
+                        this.closeEditSettingsModal();
+                    } else {
+                        this.error = res.errors;
+                    }
+                })
+            },
+
+            openCompanyInfoModal() {
+                const modal = new bootstrap.Modal("#editCompanyInfoModal", {keyboard: false, backdrop: 'static'});
+                modal.show();
+                this.edit = true;
+                this.companyParam = JSON.parse(JSON.stringify(this.companyInfo_data));
+            },
+
+            closeEditCompanyInfoModal() {
+                this.edit = false;
+                this.error = null;
+                let myModalEl = document.getElementById('editCompanyInfoModal');
+                let modal = bootstrap.Modal.getInstance(myModalEl);
+                modal.hide();
+            },
+
+            getCompanyInfo() {
+                this.companyInfoLoading = true;
+                apiService.GET(apiRoutes.companyInfo, (res) => {
+                    this.companyInfoLoading = false;
+                    if (res.status === 200) {
+                        this.companyInfo_data = res.data;
+                    }
+                })
+            },
+
+            updateCompanyInfo() {
+                this.updateCompanyInfoLoading = true;
+                this.error = null;
+                apiService.POST(apiRoutes.companyUpdate, this.editSettingsParam, (res) => {
+                    this.updateCompanyInfoLoading = false;
+                    if (res.status === 200) {
+                        this.getSettings();
+                        this.edit = false;
+                        this.$toast.success('Your company info has been updated successfully.', { position: "top-right" });
                         this.closeEditSettingsModal();
                     } else {
                         this.error = res.errors;

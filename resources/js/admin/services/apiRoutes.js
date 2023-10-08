@@ -20,6 +20,18 @@ const apiRoutes = {
 
     logout: apiVersion + '/profile/logout',
 
+    // settings
+
+    settings_details: apiVersion + '/settings/details',
+
+    settings_update: apiVersion + '/settings/update',
+
+    // company_info
+
+    companyInfo: apiVersion + '/company_info/details',
+
+    companyUpdate: apiVersion + '/company_info/update',
+
     // category
 
     categoryCreate: apiVersion + '/category/create',

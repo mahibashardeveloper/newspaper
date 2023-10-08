@@ -57,6 +57,18 @@ Route::group(
 );
 
 /* -------------------------
+    Admin Company Info Controller
+--------------------------- */
+
+Route::group(
+    ['middleware' => ['AdminAuthReq'], 'prefix' => 'company_info'],
+    function () {
+        Route::get('/details', [AdminController::class, 'company_details'])->name('Admin.Company.Details');
+        Route::post('/update', [AdminController::class, 'company_update'])->name('Admin.Company.Update');
+    }
+);
+
+/* -------------------------
     Category Controller
 --------------------------- */
 
