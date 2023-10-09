@@ -99,3 +99,11 @@ Route::prefix('blog')->group( function () {
 Route::prefix('media')->group( function () {
     Route::post('/upload', [MediaController::class, 'upload'])->name('Admin.Media.Upload');
 });
+
+/* -------------------------
+    User Controller
+--------------------------- */
+
+Route::prefix('user')->group( function () {
+    Route::post('/list', [AdminController::class, 'user_list'])->name('Admin.User.List');
+});

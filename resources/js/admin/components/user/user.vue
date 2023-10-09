@@ -80,30 +80,195 @@
 
 <script>
 
-export default {
+    import apiService from "../../services/apiServices.js";
+    import apiRoutes from "../../services/apiRoutes.js";
 
-    data(){
+    export default {
 
-        return{
+        data(){
 
+            return{
+                loading: false,
+                createLoading: false,
+                deleteLoading: false,
+                user: [],
+                userParam: { name: '' },
+                deleteParam: { ids: [] },
+                tableData: [],
+                formData: { limit: 10, page: 1 },
+                total_pages: 0,
+                current_page: 0,
+                buttons: [],
+                searchTimeout: null,
+                error: null,
+                responseData: null,
+                total_data: 0,
+                selected: [],
+            }
 
+        },
+
+        mounted() {
+
+            this.list();
+
+        },
+
+        methods: {
+
+            toggleCheckAll(e) {
+                if (e.target.checked) {
+                    this.tableData.forEach((v) => {
+                        this.selected.push(v.id);
+                    });
+                } else {
+                    this.selected = [];
+                }
+            },
+
+            toggleCheck(e, id) {
+                if (e.target.checked) {
+                    this.selected.push(id);
+                } else {
+                    let index = this.selected.indexOf(id);
+                    this.selected.splice(index, 1);
+                }
+            },
+
+            CheckIfChecked(id) {
+                return this.selected.map(function (id) {
+                    return id
+                }).indexOf(id) > -1;
+            },
+
+            openEditModal() {
+                this.getSingle();
+                const myModal = new bootstrap.Modal("#manageModal", {keyboard: false});
+                myModal.show();
+            },
+
+            manageModal(type, data = null) {
+                this.error = null;
+                this.userParam = { id: '', full_name: '', email: '', avatar: null };
+                if (type === 1) {
+                    this.getUser();
+                    if (data !== null) {
+                        this.getSingle(data);
+                    }
+                    const myModal = new bootstrap.Modal("#manageModal", {keyboard: false, backdrop: 'static'});
+                    myModal.show();
+                } else {
+                    const myModal = document.querySelector("#manageModal");
+                    const modal = bootstrap.Modal.getInstance(myModal);
+                    modal.hide();
+                }
+            },
+
+            getUser() {
+                apiService.POST(apiRoutes.userList, '', (res) => {
+                    if (res.status === 200) {
+                        this.user = res.data.data
+                    }
+                })
+            },
+
+            manageCategory() {
+                if (this.userParam.id) {
+                    this.edit();
+                } else {
+                    this.create();
+                }
+            },
+
+            getSingle(id = null) {
+                let param = { id: '' }
+                if (id != null) { param.id = id } else { param.id = this.selected[0] }
+                apiService.POST(apiRoutes.categorySingle, param, (res) => {
+                    if (res.status === 200) {
+                        this.categoryParam = res.data;
+                    } else {
+                        this.error = res.errors;
+                    }
+                });
+            },
+
+            create() {
+                this.createLoading = true;
+                this.error = null;
+                apiService.POST(apiRoutes.categoryCreate, this.categoryParam, (res) => {
+                    this.createLoading = false;
+                    if (res.status === 200) {
+                        this.$toast.success(res.msg, {position: "bottom-right"});
+                        this.manageModal(2, null);
+                        this.list();
+                        this.selected = [];
+                    } else {
+                        this.error = res.errors;
+                    }
+                });
+            },
+
+            edit() {
+                this.createLoading = true;
+                this.error = null;
+                apiService.POST(apiRoutes.categoryUpdate, this.categoryParam, (res) => {
+                    this.createLoading = false;
+                    if (res.status === 200) {
+                        this.getCategory();
+                        this.$toast.success(res.msg, {position: "bottom-right"});
+                        this.manageModal(2, null);
+                        this.list();
+                        this.selected = [];
+                    } else {
+                        this.error = res.errors;
+                    }
+                });
+            },
+
+            list() {
+                this.loading = true;
+                this.formData.page = this.current_page;
+                apiService.POST(apiRoutes.categoryList, this.formData, (res) => {
+                    this.loading = false;
+                    this.selected = [];
+                    if (res.status === 200) {
+                        this.tableData = res.data.data;
+                        this.total_data = res.data.total;
+                        this.total_pages = res.data.total < res.data.per_page ? 1 : Math.ceil((res.data.total / res.data.per_page));
+                        this.current_page = res.data.current_page;
+                        this.buttons = [...Array(this.total_pages).keys()].map((i) => i + 1);
+                    }
+                });
+            },
+
+            SearchData() {
+                clearTimeout(this.searchTimeout);
+                this.searchTimeout = setTimeout(() => {
+                    this.list();
+                }, 500);
+            },
+
+            PrevPage() {
+                if (this.current_page > 1) {
+                    this.current_page = this.current_page - 1;
+                    this.list()
+                }
+            },
+
+            NextPage() {
+                if (this.current_page < this.total_pages) {
+                    this.current_page = this.current_page + 1;
+                    this.list()
+                }
+            },
+
+            pageChange(page) {
+                this.current_page = page;
+                this.list();
+            },
 
         }
 
-    },
-
-    mounted() {
-
-
-
-    },
-
-    methods: {
-
-
-
     }
-
-}
 
 </script>

@@ -58,15 +58,7 @@ const apiRoutes = {
 
     // user
 
-    userCreate: apiVersion + '/user/create',
-
     userList: apiVersion + '/user/list',
-
-    userSingle: apiVersion + '/user/single',
-
-    userUpdate: apiVersion + '/user/update',
-
-    userDelete: apiVersion + '/user/delete',
 
     // Media
 

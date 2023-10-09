@@ -15,31 +15,35 @@
                     <div class="dropdown">
                         <button class="btn btn-link text-decoration-none text-secondary dropdown-toggle" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                            Account
+                            হিসাব
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <span v-if="profile_data === null">
                                 <li>
                                     <router-link :to="{name: 'registration'}" class="dropdown-item">
-                                        Registration
+                                        নিবন্ধন করুন
                                     </router-link>
                                 </li>
                                 <li>
                                     <router-link :to="{name: 'login'}" class="dropdown-item">
-                                        Login
+                                        প্রবেশ করুন
                                     </router-link>
                                 </li>
                             </span>
                             <span v-if="profile_data !== null">
                                 <li>
                                     <router-link :to="{name: 'my_account'}" class="dropdown-item">
-                                        Profile
+                                        পার্শ্বচিত্র
                                     </router-link>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0)" class="dropdown-item" @click="logout">
-                                        <span v-if="logoutLoading === false"> Logout </span>
-                                        <span v-if="logoutLoading === true"> Loading </span>
+                                        <span v-if="logoutLoading === false">
+                                            প্রস্থান করুন
+                                        </span>
+                                        <span v-if="logoutLoading === true">
+                                            লোড হচ্ছে...
+                                        </span>
                                     </a>
                                 </li>
                             </span>

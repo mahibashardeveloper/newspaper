@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\AdminService;
 use App\Services\CategoryService;
 use App\Services\BlogService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -133,6 +134,11 @@ class AdminController extends BaseController
 
     public function blogDelete(Request $request){
         $rv = BlogService::blogDelete($request);
+        return response()->json($rv, 200);
+    }
+
+    public function user_list(Request $request){
+        $rv = UserService::user_list($request);
         return response()->json($rv, 200);
     }
 

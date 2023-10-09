@@ -1,20 +1,22 @@
 <template>
 
     <section class="w-100 container-fluid profile">
-        <div class="col-12 col-sm-8 col-md-6 bg-white border p-3">
-            <div class="py-4 d-flex justify-content-center">
-                <img class="img-fluid profile-avatar" v-if="!profile_data.avatar" :src="'https://ui-avatars.com/api/?name='+profile_data.full_name" alt="profile-dummy">
-                <img class="img-fluid profile-avatar" v-else :src="profile_data.media && profile_data.media.full_file_path" alt="profile">
-            </div>
-            <div class="py-3 ps-3">Name: {{profile_data.full_name}}</div>
-            <div class="py-3 ps-3">Email: {{profile_data.email}}</div>
-            <div class="d-flex align-items-center justify-content-between flex-wrap w-100 p-3">
-                <a href="javascript:void(0)" class="btn btn-secondary col-sm-5 col-12 mb-3 rounded-0" @click="openEditProfileModal">
-                    Profile Edit
-                </a>
-                <a href="javascript:void(0)" class="btn btn-secondary col-sm-5 col-12 mb-3 rounded-0" @click="openEditPasswordModal">
-                    Password Change
-                </a>
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-8 col-md-6 bg-white border p-3">
+                <div class="py-4 d-flex justify-content-center">
+                    <img class="img-fluid profile-avatar" v-if="!profile_data.avatar" :src="'https://ui-avatars.com/api/?name='+profile_data.full_name" alt="profile-dummy">
+                    <img class="img-fluid profile-avatar" v-else :src="profile_data.media && profile_data.media.full_file_path" alt="profile">
+                </div>
+                <div class="py-3 ps-3">পুরো নাম <br><br> {{profile_data.full_name}}</div>
+                <div class="py-3 ps-3">ইমেইল: <br><br> {{profile_data.email}}</div>
+                <div class="d-flex align-items-center justify-content-between flex-wrap w-100 p-3">
+                    <a href="javascript:void(0)" class="btn btn-secondary col-sm-5 col-12 mb-3 rounded-0" @click="openEditProfileModal">
+                        পার্শ্বচিত্র সম্পাদন করুন
+                    </a>
+                    <a href="javascript:void(0)" class="btn btn-secondary col-sm-5 col-12 mb-3 rounded-0" @click="openEditPasswordModal">
+                        পাসওয়ার্ড পরিবর্তন করুন
+                    </a>
+                </div>
             </div>
         </div>
     </section>

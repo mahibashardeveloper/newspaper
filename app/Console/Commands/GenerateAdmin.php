@@ -41,14 +41,14 @@ class GenerateAdmin extends Command
     public function handle()
     {
         $admin = array(
-            'full_name' => 'Mahi Bashar Akash',
+            'full_name' => 'mahi bashar akash',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('ideal4321'),
+            'password' => bcrypt('123123'),
         );
         Admins::insert([$admin]);
         print_r(PHP_EOL.PHP_EOL);
         print_r("Admin Email : ".$admin['email'].PHP_EOL);
-        print_r("Admin password : ideal4321".PHP_EOL.PHP_EOL);
+        print_r("Admin password : 123123".PHP_EOL.PHP_EOL);
         $settings = array(
             'facebook' => 'https://www.facebook.com/',
             'twitter' => 'https://www.twitter.com/',
