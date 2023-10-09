@@ -20,6 +20,10 @@ class BlogService extends BaseController
             if (isset($keyword) && !empty($keyword)) {
                 $results->where(function ($q) use ($keyword) {
                     $q->where('title', 'LIKE', '%' . $keyword . '%');
+                    $q->orWhere('description', 'LIKE', '%' . $keyword . '%');
+                    $q->orWhereHas('category_info', function ($q) use ($keyword) {
+                        $q->where('name', 'LIKE', '%' . $keyword . '%');
+                    });
                 });
             }
             $paginatedData = $results->paginate($limit);

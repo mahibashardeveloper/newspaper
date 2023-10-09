@@ -28,7 +28,7 @@
                                 </router-link>
                             </li>
                             <li>
-                                <router-link :to="{name: 'profile'}" class="dropdown-item">
+                                <router-link :to="{name: 'details'}" class="dropdown-item">
                                     Profile
                                 </router-link>
                             </li>

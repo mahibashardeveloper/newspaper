@@ -56,17 +56,17 @@ const apiRoutes = {
 
     blogDelete: apiVersion + '/blog/delete',
 
-    // customer
+    // user
 
-    customerCreate: apiVersion + '/customer/create',
+    userCreate: apiVersion + '/user/create',
 
-    customerList: apiVersion + '/customer/list',
+    userList: apiVersion + '/user/list',
 
-    customerSingle: apiVersion + '/customer/single',
+    userSingle: apiVersion + '/user/single',
 
-    customerUpdate: apiVersion + '/customer/update',
+    userUpdate: apiVersion + '/user/update',
 
-    customerDelete: apiVersion + '/customer/delete',
+    userDelete: apiVersion + '/user/delete',
 
     // Media
 

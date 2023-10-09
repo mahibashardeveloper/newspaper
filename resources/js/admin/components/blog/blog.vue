@@ -61,29 +61,42 @@
             <!-- no data end -->
 
             <div v-if="tableData.length > 0 && loading === false">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 p-3">
-                    <div class="p-2" v-for="(each) in tableData">
-                        <div class="border p-2 blog">
-                            <div class="blog-size">
-                                <span v-if="each.avatar === null">
+                <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-1 row-cols-xl-2 p-3">
+                    <div class="p-2 border" v-for="(each) in tableData">
+                        <div class="row align-items-center blog p-3">
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-7">
+                                <div class="h3 mb-4">
+                                    {{each.title}}
+                                </div>
+                                <div class="mb-4">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus, eveniet
+                                    0laudantium nemo quaerat qui veritatis! Ab aliquid corporis, cumque natus optio
+                                    quasi sit tenetur.
+                                </div>
+                                <div class="mb-3">
+                                    <span v-if="each.category_info != null">
+                                        {{ each.category_info.name }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-6 col-lg-5">
+                                <div class="blog-size">
+                                    <span v-if="each.avatar === null">
                                     No Image Found
                                 </span>
-                                <span class="w-100 h-100" v-if="each.avatar !== null">
+                                    <span class="w-100 h-100" v-if="each.avatar !== null">
                                     <img class="img-fluid" :src="'/storage/media/image/'+each.avatar" alt="person-image">
                                 </span>
+                                </div>
                             </div>
-                            <div class="mb-3 h3">{{each.title}}</div>
-                            <div class="mb-3">
-                                <span v-if="each.category_info != null">
-                                    {{ each.category_info.name }}
-                                </span>
-                            </div>
-                            <div class="mb-3">{{each.description}}</div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="javascript:void(0)" class="btn-edit col-5" @click="manageModal(1, each.id)">Edit</a>
-                                <a href="javascript:void(0)" class="btn-delete col-5" @click="deleteModal(1, each.id)">Delete</a>
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href="javascript:void(0)" class="btn-edit col-5" @click="manageModal(1, each.id)">Edit</a>
+                                    <a href="javascript:void(0)" class="btn-delete col-5" @click="deleteModal(1, each.id)">Delete</a>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

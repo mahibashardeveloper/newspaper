@@ -5,16 +5,38 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 p-3">
                 <div class="bg-white h-100 p-3">
                     <div class="row">
-                        <div class="col-12 col-md-6">Categories</div>
-                        <div class="col-12 col-md-6 text-md-end"> 10,000 </div>
+                        <div class="col-12 col-md-6">
+                            <span v-if="category_total_data.total <= 1">
+                                Category
+                            </span>
+                            <span v-else>
+                                Categories
+                            </span>
+                        </div>
+                        <div class="col-12 col-md-6 text-md-end">
+                            {{category_total_data.total}}
+                            <span v-if="category_total_data.total <= 1"> Item </span>
+                            <span v-else> Items </span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 p-3">
                 <div class="bg-white h-100 p-3">
                     <div class="row">
-                        <div class="col-12 col-md-6">Blogs</div>
-                        <div class="col-12 col-md-6 text-md-end"> 10,000 </div>
+                        <div class="col-12 col-md-6">
+                            <span v-if="blog_total_data.total <= 1">
+                                Blog
+                            </span>
+                            <span v-else>
+                                Blogs
+                            </span>
+                        </div>
+                        <div class="col-12 col-md-6 text-md-end">
+                            {{blog_total_data.total}}
+                            <span v-if="blog_total_data.total <= 1"> Item </span>
+                            <span v-else> Items </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -53,13 +75,18 @@
 
 <script>
 
+    import apiService from "../../services/apiServices.js";
+    import apiRoutes from "../../services/apiRoutes.js";
+
     export default {
 
         data(){
 
             return{
 
+                category_total_data: '0',
 
+                blog_total_data: '0',
 
             }
 
@@ -67,13 +94,32 @@
 
         mounted() {
 
-
+            this.getCategoryTotal();
+            this.getBlogTotal();
 
         },
 
         methods: {
 
+            getCategoryTotal(){
+                this.loading = true;
+                apiService.POST(apiRoutes.categoryList, this.formData, (res) => {
+                    this.loading = false;
+                    if (parseInt(res.status) === 200) {
+                        this.category_total_data = res.data;
+                    }
+                });
+            },
 
+            getBlogTotal(){
+                this.loading = true;
+                apiService.POST(apiRoutes.blogList, this.formData, (res) => {
+                    this.loading = false;
+                    if (parseInt(res.status) === 200) {
+                        this.blog_total_data = res.data;
+                    }
+                });
+            }
 
         }
 
