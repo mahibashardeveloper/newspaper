@@ -28,6 +28,10 @@ const apiRoutes = {
 
     media: userApi + '/media/upload',
 
+    // company name
+
+    globalInfo: listApi + '/globalInfo/list',
+
     // category
 
     globalCategoryList: listApi + '/globalCategory/list',

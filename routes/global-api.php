@@ -15,6 +15,14 @@ use App\Http\Controllers\FrontController;
 */
 
 /* --------------------------
+    company_name
+------------------------ */
+
+Route::prefix('globalInfo')->group(function () {
+    Route::get('/list', [FrontController::class, 'company_details']);
+});
+
+/* --------------------------
     category_list
 ------------------------ */
 

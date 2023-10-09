@@ -3,7 +3,7 @@
     <header class="container py-4">
         <div class="nav-group">
             <a href="javascript:void(0)" class="nav-link-hover"
-               @click="formData.category_id = ''; blog_list(current_page = 0)"> All
+               @click="formData.category_id = ''; blog_list(current_page = 0)"> সব
             </a>
             <a href="javascript:void(0)" class="nav-link-hover"
                v-for="(each) in categories" v-if="loading === false" @click="formData.category_id = each.id;

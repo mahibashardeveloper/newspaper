@@ -162,7 +162,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <div>
                             <label for="file-upload" class="square-modal-avatar cs-pointer border border-secondary-subtle">
                                 <input type="file" class="d-none" id="file-upload" @change="attachFile($event)">
                                 <span v-if="blogParam.avatar === null" class="py-4">
@@ -175,11 +174,12 @@
                                 </span>
                                 <img class="img-fluid" v-if="blogParam.avatar !== null" :src="'/storage/media/image/'+blogParam.avatar" alt="profile">
                             </label>
-                        </div>
+                        <div class="error-text" v-if="error != null && error.avatar !== undefined" v-text="error.avatar[0]"></div>
                     </div>
                     <div class="form-group">
                         <label for="title" class="form-label">Name</label>
                         <input type="text" name="title" class="form-control border-secondary-subtle" v-model="blogParam.title">
+                        <div class="error-text" v-if="error != null && error.title !== undefined" v-text="error.title[0]"></div>
                     </div>
                     <div class="form-group">
                         <label for="category_id" class="form-label">Category</label>
@@ -187,10 +187,12 @@
                             <option :value="0">Select Category Option</option>
                             <option :value="each.id" v-for="(each) in category"> {{each.name}} </option>
                         </select>
+                        <div class="error-text" v-if="error != null && error.category_id !== undefined" v-text="error.category_id[0]"></div>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Description</label>
-                        <textarea name="" id="" cols="30" rows="5" class="form-textarea-control border-secondary-subtle" v-model="blogParam.description"></textarea>
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="description" id="description" cols="30" rows="5" class="form-textarea-control border-secondary-subtle" v-model="blogParam.description"></textarea>
+                        <div class="error-text" v-if="error != null && error.description !== undefined" v-text="error.description[0]"></div>
                     </div>
                 </div>
                 <div class="modal-footer">

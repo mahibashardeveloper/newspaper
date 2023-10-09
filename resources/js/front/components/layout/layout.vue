@@ -8,7 +8,7 @@
                 </div>
                 <div class="col-md-4 p-3">
                     <router-link :to="{name: 'home'}" class="h3 text-decoration-none text-dark fw-bold">
-                        Ses Alo
+                        {{companyInfo_data.company_name}}
                     </router-link>
                 </div>
                 <div class="col-md-4 p-3 d-flex justify-content-center">
@@ -93,6 +93,9 @@
 
 <script>
 
+import apiService from "../../services/apiServices.js";
+import apiRoutes from "../../services/apiRoutes.js";
+
 export default {
 
     data(){
@@ -100,6 +103,7 @@ export default {
         return{
             isActiveAdminDropDown: false,
             isActiveAdminSideBar: false,
+            companyInfo_data: '',
         }
 
     },
@@ -122,11 +126,21 @@ export default {
 
         let timeInterval = setInterval(time, 1000);
 
+        this.getCompanyInfo();
+
     },
 
     methods: {
 
-
+        getCompanyInfo() {
+            this.companyInfoLoading = true;
+            apiService.GET(apiRoutes.globalInfo, (res) => {
+                this.companyInfoLoading = false;
+                if (res.status === 200) {
+                    this.companyInfo_data = res.data;
+                }
+            })
+        },
 
     }
 
