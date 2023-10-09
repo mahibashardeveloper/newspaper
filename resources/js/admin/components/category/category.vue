@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-md-6 mb-3">
                 <div class="position-relative">
-                    <input type="text" name="" class="form-control shadow-none rounded-0 py-3 ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
+                    <input type="text" class="form-control shadow-none rounded-0 py-3 ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
                     <div class="position-absolute top-50 start-0 translate-middle-y ps-3">
                         <i class="bi bi-search"></i>
                     </div>
@@ -72,8 +72,10 @@
                 </div>
                 <div class="row card-list" v-for="(each) in tableData">
                     <div class="col-12 col-sm-6"> <div class="marge-title py-3"> Name </div>
-                        <input type="checkbox" class="form-check-input me-3 d-none d-sm-block" :checked="CheckIfChecked(each.id)" @change="toggleCheck($event,each.id)">
-                        Category {{each.name}}
+                        <div class="d-flex align-items-center">
+                            <input type="checkbox" class="form-check-input me-3 d-none d-sm-block" :checked="CheckIfChecked(each.id)" @change="toggleCheck($event,each.id)">
+                            {{each.name}}
+                        </div>
                     </div>
                     <div class="col-12 col-sm-6 text-sm-end">
                         <div class="marge-title py-3"> Action </div>
@@ -151,7 +153,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control shadow-none rounded-0 p-3 border-secondary-subtle" v-model="categoryParam.name">
+                            <input type="text" name="name" class="form-control border-secondary-subtle" v-model="categoryParam.name">
                             <div class="error-text" v-if="error != null && error.name !== undefined" v-text="error.name[0]"></div>
                         </div>
                     </div>

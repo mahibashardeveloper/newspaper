@@ -24,6 +24,10 @@ import post from "../components/post/post.vue";
 
 import profile from "../components/profile/profile.vue";
 
+// details
+
+import details from "../components/profile/subComponents/details.vue";
+
 // directory ----- ----- ----- ----- ----- ----- ----- ----- -----
 
 const ROOT_URL = "/front";
@@ -46,10 +50,6 @@ const routes = [
 
             {path: ROOT_URL + '/post', name: 'post', component: post, meta: {title: 'post'}},
 
-            // profile
-
-            {path: ROOT_URL + '/profile', name: 'profile', component: profile, meta: {title: 'profile'}},
-
             // authentication
 
             {path: ROOT_URL + '/auth/register', name: 'register', component: register, meta: {title: 'register'}},
@@ -57,6 +57,18 @@ const routes = [
             {path: ROOT_URL + '/auth/login', name: 'login', component: login, meta: {title: 'login'}},
 
             {path: ROOT_URL + '/auth/forget', name: 'forget', component: forget, meta: {title: 'forget'}},
+
+            // profile
+
+            {path: ROOT_URL + '/profile', name: 'profile', component: profile,
+
+                children: [
+
+                    {path: ROOT_URL + '/profile', name: 'details', component: details, meta: {title: 'details'}},
+
+                ]
+
+            },
 
         ],
 

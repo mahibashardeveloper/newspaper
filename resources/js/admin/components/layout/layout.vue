@@ -25,7 +25,7 @@
                 </router-link>
             </div>
             <div class="admin-sidebar-footer">
-                <a href="javascript:void(0)" class="admin-footer-link">
+                <a href="javascript:void(0)" class="admin-footer-link" @click="logout">
                     Logout
                 </a>
             </div>

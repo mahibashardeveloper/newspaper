@@ -1,6 +1,6 @@
 <template>
 
-    <div class="px-4 pt-4">
+    <div class="px-4 pt-4 profile">
         <div class="row justify-content-center">
             <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-6 col-xxl-4 bg-white shadow-lg p-3">
                 <div class="d-flex">
@@ -18,8 +18,9 @@
                     </a>
                 </div>
                 <div class="py-4 d-flex justify-content-center">
-                    <div class="col-6">
-                        <img :src="'/images/avatar.png'" class="img-fluid" alt="avatar">
+                    <div class="profile-circle">
+                        <img class="img-fluid" v-if="!profile_data.avatar" :src="'https://ui-avatars.com/api/?name='+profile_data.full_name" alt="profile-dummy">
+                        <img class="img-fluid" v-else :src="profile_data.media && profile_data.media.full_file_path" alt="profile">
                     </div>
                 </div>
                 <div class="py-1 px-3 d-flex align-items-center justify-content-start flex-wrap">
@@ -79,7 +80,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="d-flex justify-content-center align-items-center">
-                            <label for="file-upload" class="modal-avatar border border-secondary-subtle">
+                            <label for="file-upload" class="modal-avatar cs-pointer border border-secondary-subtle" v-if="editParam.avatar === null">
                                 <input type="file" class="d-none" id="file-upload" @change="attachFile($event)">
                                 <span v-if="editParam.avatar === null" class="modal-avatar">
                                     <div class="text-center">
@@ -89,8 +90,8 @@
                                         Upload Image
                                     </div>
                                 </span>
-                                <img class="img-fluid modal-avatar" v-if="editParam.avatar !== null" :src="editParam.avatarFilePath" alt="profile">
                             </label>
+                            <img class="img-fluid modal-avatar" v-if="editParam.avatar !== null" :src="editParam.avatarFilePath" alt="profile">
                         </div>
                     </div>
                     <div class="form-group">
@@ -171,39 +172,39 @@
                     <button type="button" class="btn-close" @click="closeEditSettingsModal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="facebook" class="form-label">
                             Facebook Link
                         </label>
-                        <input type="text" id="facebook" name="facebook" class="form-control border-secondary-subtle" v-model="editParam.facebook">
+                        <input type="text" id="facebook" name="facebook" class="form-control border-secondary-subtle" v-model="editSettingsParam.facebook">
                         <div class="error-text" v-if="error != null && error.facebook !== undefined" v-text="error.facebook[0]"></div>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="last_name" class="form-label">
                             Twitter Link
                         </label>
-                        <input type="text" id="twitter" name="twitter" class="form-control border-secondary-subtle" v-model="editParam.twitter">
+                        <input type="text" id="twitter" name="twitter" class="form-control border-secondary-subtle" v-model="editSettingsParam.twitter">
                         <div class="error-text" v-if="error != null && error.twitter !== undefined" v-text="error.twitter[0]"></div>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="email" class="form-label">
                             Instagram Link
                         </label>
-                        <input type="text" id="instagram" name="instagram" class="form-control border-secondary-subtle" v-model="editParam.instagram">
+                        <input type="text" id="instagram" name="instagram" class="form-control border-secondary-subtle" v-model="editSettingsParam.instagram">
                         <div class="error-text" v-if="error != null && error.instagram !== undefined" v-text="error.instagram[0]"></div>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="phone_number" class="form-label">
                             Linkedin Link
                         </label>
-                        <input type="text" id="linkedin" name="linkedin" class="form-control border-secondary-subtle" v-model="editParam.linkedin">
+                        <input type="text" id="linkedin" name="linkedin" class="form-control border-secondary-subtle" v-model="editSettingsParam.linkedin">
                         <div class="error-text" v-if="error != null && error.linkedin !== undefined" v-text="error.linkedin[0]"></div>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="youtube" class="form-label">
                             Youtube Link
                         </label>
-                        <input type="text" id="youtube" name="youtube" class="form-control border-secondary-subtle" v-model="editParam.youtube">
+                        <input type="text" id="youtube" name="youtube" class="form-control border-secondary-subtle" v-model="editSettingsParam.youtube">
                         <div class="error-text" v-if="error != null && error.youtube !== undefined" v-text="error.youtube[0]"></div>
                     </div>
                 </div>
@@ -230,7 +231,7 @@
                     <button type="button" class="btn-close" @click="closeEditCompanyInfoModal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
+                    <div class="form-group">
                         <label for="company_name" class="form-label">
                             Company Name
                         </label>
@@ -316,7 +317,21 @@
                 let formData = new FormData();
                 formData.append("file", file)
                 formData.append("media_type", 1);
-                apiService.UPLOAD(apiRoutes.media, formData, (res) => {
+                apiService.UPLOAD(apiRoutes.mediaUpload, formData, (res) => {
+                    event.target.value = '';
+                    if (res.status === 200) {
+                        this.editParam.avatarFilePath = res.data.full_file_path
+                        this.editParam.avatar = res.data.id
+                    }
+                })
+            },
+
+            changeFile(event) {
+                let file = event.target.files[0];
+                let formData = new FormData();
+                formData.append("file", file)
+                formData.append("media_type", 1);
+                apiService.UPLOAD(apiRoutes.mediaUpload, formData, (res) => {
                     event.target.value = '';
                     if (res.status === 200) {
                         this.editParam.avatarFilePath = res.data.full_file_path
@@ -404,7 +419,7 @@
                 const modal = new bootstrap.Modal("#editSettingsModal", {keyboard: false, backdrop: 'static'});
                 modal.show();
                 this.edit = true;
-                this.editParam = JSON.parse(JSON.stringify(this.settings_data));
+                this.editSettingsParam = JSON.parse(JSON.stringify(this.settings_data));
             },
 
             closeEditSettingsModal() {
@@ -469,13 +484,13 @@
             updateCompanyInfo() {
                 this.updateCompanyInfoLoading = true;
                 this.error = null;
-                apiService.POST(apiRoutes.companyUpdate, this.editSettingsParam, (res) => {
+                apiService.POST(apiRoutes.companyUpdate, this.companyParam, (res) => {
                     this.updateCompanyInfoLoading = false;
                     if (res.status === 200) {
-                        this.getSettings();
+                        this.getCompanyInfo();
                         this.edit = false;
                         this.$toast.success('Your company info has been updated successfully.', { position: "top-right" });
-                        this.closeEditSettingsModal();
+                        this.closeEditCompanyInfoModal();
                     } else {
                         this.error = res.errors;
                     }

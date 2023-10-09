@@ -147,3 +147,36 @@
     }
 
 }
+
+.profile{
+    display: flex;
+
+    .profile-group-link{
+        width: 250px;
+        height: 100vh;
+
+        .profile-link{
+            text-decoration: none;
+            color: $black;
+            padding: 10px 20px;
+            display: block;
+            transition: 0.3s all ease-in-out;
+
+            &:hover{
+                background-color: $border-color;
+            }
+
+            &.router-link-active{
+                background-color: $border-color;
+            }
+
+        }
+
+    }
+
+    .profile-content{
+        width: calc(100% - 250px);
+        height: 100vh;
+    }
+
+}

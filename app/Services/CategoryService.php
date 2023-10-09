@@ -47,7 +47,6 @@ class CategoryService extends BaseController
             $category = new Categories();
             $category-> admin_id = $admin_id;
             $category-> name = $request->name;
-            $category-> avatar = $request->avatar ?? null;
             $category-> save();
             return ['status' => 200, 'msg' => 'data has been saved successfully.'];
         } catch (\Exception $e) {
@@ -96,7 +95,6 @@ class CategoryService extends BaseController
                 return ['status' => 500, 'errors' => 'data not found'];
             }
             $category->name = $request->name;
-            $category-> avatar = $request->avatar ?? null;
             $category->save();
             return ['status' => 200, 'msg' => 'data has been updated successfully.'];
         } catch (\Exception $e) {

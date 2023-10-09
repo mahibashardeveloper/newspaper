@@ -25,7 +25,7 @@
         <div class="card-body">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 p-3">
                 <div class="p-2" v-for="each in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
-                    <div class="border p-2">
+                    <div class="border p-2 blog">
                         <div class="blog-size">
                             Blog {{each}}
                         </div>
