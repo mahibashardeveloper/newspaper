@@ -39,51 +39,29 @@
         </div>
     </section>
 
+    <header class="container py-4">
+        <div class="nav-group">
+            <router-link :to="{name: 'home'}" class="nav-link-hover" @click="formData.category_id = ''; blog_list(current_page = 0)">
+                সব
+            </router-link>
+            <router-link :to="{name: 'home'}" class="nav-link-hover" v-for="(each) in getCategoryInRange(1, 9)" :key="each.id" v-if="loading === false" @click="formData.category_id = each.id; blog_list(current_page = 0);">
+                {{each.name}}
+            </router-link>
+        </div>
+    </header>
+
     <router-view/>
 
     <footer class="w-100 bg-light">
         <div class="container footer">
             <div class="py-4 ps-4">
-                <router-link :to="{name: 'home'}" class="h3 text-decoration-none text-dark fw-bold">
-                    Ses Alo
-                </router-link>
+                <a href="javascript:void(0)" class="h3 text-decoration-none text-dark fw-bold">
+                    {{companyInfo_data.company_name}}
+                </a>
             </div>
             <div class="d-flex justify-content-start flex-wrap py-4">
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    গোলটেবিল
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    বিশেষ সংখ্যা
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    কিশোর আলো
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    চিরন্তন ১৯৭১
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    বিজ্ঞানচিন্তা
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    প্রতিচিন্তা
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    প্রথমা
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    বন্ধুসভা
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    প্রথম আলো ট্রাস্ট
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    মোবাইল ভ্যাস
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    নাগরিক সংবাদ
-                </a>
-                <a href="javascript:void(0)" class="text-secondary footer-hover">
-                    ইপেপার
+                <a href="javascript:void(0)" class="text-secondary footer-hover" v-for="(each) in getCategoryInRange(10, 30)" :key="each.id" v-if="loading === false" @click="formData.category_id = each.id; blog_list(current_page = 0);">
+                    {{each.name}}
                 </a>
             </div>
         </div>
@@ -98,12 +76,31 @@ import apiRoutes from "../../services/apiRoutes.js";
 
 export default {
 
+    computed: {
+
+        getCategoryInRange() {
+            return (startId, endId) => {
+                return this.categories.filter(category => category.id >= startId && category.id <= endId);
+            };
+        },
+
+    },
+
     data(){
 
         return{
             isActiveAdminDropDown: false,
             isActiveAdminSideBar: false,
             companyInfo_data: '',
+            categories: [],
+            current_page: 0,
+            loading: false,
+            formData:{
+                keyword:'',
+                category_id:'',
+                limit: 10,
+                page: 1
+            },
         }
 
     },
@@ -128,6 +125,10 @@ export default {
 
         this.getCompanyInfo();
 
+        this.blog_list();
+
+        this.category_list();
+
     },
 
     methods: {
@@ -138,6 +139,30 @@ export default {
                 this.companyInfoLoading = false;
                 if (res.status === 200) {
                     this.companyInfo_data = res.data;
+                }
+            })
+        },
+
+        category_list() {
+            this.loading = true;
+            apiService.GET(apiRoutes.globalCategoryList, (res) =>{
+                this.loading = false;
+                if(res.status === 200) {
+                    this.categories = res.data.data;
+                }
+            })
+        },
+
+        blog_list() {
+            this.blogLoading = true;
+            this.formData.page = this.current_page;
+            apiService.POST(apiRoutes.globalBlogList, this.formData,(res) =>{
+                this.blogLoading = false;
+                if (res.status === 200) {
+                    this.blogs = res.data.data;
+                    this.total_pages = res.data.total < res.data.per_page ? 1 : Math.ceil((res.data.total / res.data.per_page));
+                    this.current_page = res.data.current_page;
+                    this.buttons = [...Array(this.total_pages).keys()].map((i) => i + 1);
                 }
             })
         },

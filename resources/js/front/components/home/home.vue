@@ -1,17 +1,5 @@
 <template>
 
-    <header class="container py-4">
-        <div class="nav-group">
-            <a href="javascript:void(0)" class="nav-link-hover"
-               @click="formData.category_id = ''; blog_list(current_page = 0)"> সব
-            </a>
-            <a href="javascript:void(0)" class="nav-link-hover"
-               v-for="(each) in categories" v-if="loading === false" @click="formData.category_id = each.id;
-                   blog_list(current_page = 0);"> {{each.name}}
-            </a>
-        </div>
-    </header>
-
     <section class="container">
 
         <!-- page loading start -->
@@ -29,6 +17,17 @@
             </h6>
         </div>
         <!-- page loading end -->
+
+        <!-- no data start -->
+        <div class="page-no-data-found"  v-if="blogs.length === 0 && loading === false">
+            <div class="w-100">
+                <div class="mb-3">
+                    <i class="bi bi-exclamation-circle fs-1"></i>
+                </div>
+                <div class="mb-3">কোনো তথ্য নেই </div>
+            </div>
+        </div>
+        <!-- no data end -->
 
         <div class="row row cols-1 row-cols-sm-1 row-cols-md-2" v-if="blogLoading === false">
             <div class="post" v-for="(blog) in blogs" :key="blog.id">
@@ -57,30 +56,49 @@
         </div>
     </section>
 
-    <section class="d-flex justify-content-center py-4">
+    <section class="d-flex justify-content-center py-4" v-if="blogs.length > 0 && loading === false">
         <div class="pagination">
-            <div class="page-item">
-                <a href="javascript:void(0)" class="page-link">
+            <div class="page-item" @click="PrevPage">
+                <a class="page-link" href="javascript:void(0)">
                     <i class="bi bi-caret-left-fill"></i>
                 </a>
             </div>
-            <div class="page-item">
-                <a href="javascript:void(0)" class="page-link">
-                    1
-                </a>
+            <div v-if="buttons.length <= 6" class="d-flex">
+                <div v-for="(page) in buttons" class="page-item" :class="{'active': current_page === page}">
+                    <a class="page-link" @click="pageChange(page)" href="javascript:void(0)" v-text="page"></a>
+                </div>
             </div>
-            <div class="page-item">
-                <a href="javascript:void(0)" class="page-link">
-                    2
-                </a>
+            <div v-if="buttons.length > 6" class="d-flex">
+                <div class="page-item" :class="{'active': current_page === 1}">
+                    <a class="page-link" @click="pageChange(1)" href="javascript:void(0)">1</a>
+                </div>
+                <div v-if="current_page > 3" class="page-item">
+                    <a class="page-link" @click="pageChange(current_page - 2)" href="javascript:void(0)">...</a>
+                </div>
+                <div v-if="current_page === buttons.length" class="page-item" :class="{'active': current_page === (current_page - 2)}">
+                    <a class="page-link" @click="pageChange(current_page - 2)" href="javascript:void(0)" v-text="current_page - 2"></a>
+                </div>
+                <div v-if="current_page > 2" class="page-item" :class="{'active': current_page === (current_page - 1)}">
+                    <a class="page-link" @click="pageChange(current_page - 1)" href="javascript:void(0)" v-text="current_page - 1"></a>
+                </div>
+                <div v-if="current_page !== 1 && current_page !== buttons.length" class="page-item active">
+                    <a class="page-link" @click="pageChange(current_page)" href="javascript:void(0)" v-text="current_page"></a>
+                </div>
+                <div v-if="current_page < buttons.length - 1" class="page-item" :class="{'active': current_page === (current_page + 1)}">
+                    <a class="page-link" @click="pageChange(current_page + 1)" href="javascript:void(0)" v-text="current_page + 1"></a>
+                </div>
+                <div v-if="current_page === 1" class="page-item" :class="{'active': current_page === (current_page + 2)}">
+                    <a class="page-link" @click="pageChange(current_page + 2)" href="javascript:void(0)" v-text="current_page + 2"></a>
+                </div>
+                <div v-if="current_page < buttons.length - 2" class="page-item">
+                    <a class="page-link" @click="pageChange(current_page + 2)" href="javascript:void(0)">...</a>
+                </div>
+                <div class="page-item" :class="{'active': current_page === (current_page - buttons.length)}">
+                    <a class="page-link" @click="pageChange(buttons.length)" href="javascript:void(0)" v-text="buttons.length"></a>
+                </div>
             </div>
-            <div class="page-item">
-                <a href="javascript:void(0)" class="page-link">
-                    3
-                </a>
-            </div>
-            <div class="page-item">
-                <a href="javascript:void(0)" class="page-link">
+            <div class="page-item" @click="NextPage">
+                <a class="page-link" href="javascript:void(0)">
                     <i class="bi bi-caret-right-fill"></i>
                 </a>
             </div>
@@ -134,9 +152,9 @@
 
         mounted() {
 
-            this.category_list();
-
             this.blog_list();
+
+            this.category_list();
 
         },
 
