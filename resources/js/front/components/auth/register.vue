@@ -4,7 +4,7 @@
 
         <div class="container">
 
-            <div class="min-vh-100 row justify-content-around align-items-center p-3">
+            <div class="min-vh-100 row justify-content-center align-items-center p-3">
 
                 <div class="col-12 col-sm-10 col-lg-6 col-xl-5 p-3 d-none d-lg-block">
                     <img :src="'/images/background1.svg'" class="img-fluid" alt="background image">

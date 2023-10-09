@@ -33,6 +33,11 @@
                                     Profile
                                 </router-link>
                             </li>
+                            <li>
+                                <a href="javascript:void(0)" class="dropdown-item">
+                                    Logout
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
