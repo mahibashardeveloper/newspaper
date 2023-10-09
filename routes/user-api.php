@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\MediaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,21 +17,21 @@ use App\Http\Controllers\FrontController;
 */
 
 /* -------------------------
-    Auth User Controller
+    auth user Controller
 --------------------------- */
 
 Route::group(
     ['middleware' => ['UserAuth'], 'prefix' => 'auth'],
     function () {
-        Route::post('/register', [FrontController::class, 'register'])->name('User.Auth.Register');
         Route::post('/login', [FrontController::class, 'login'])->name('User.Auth.Login');
+        Route::post('/register', [FrontController::class, 'register'])->name('User.Auth.Register');
         Route::post('/forgot', [FrontController::class, 'forgot'])->name('User.Auth.Forgot');
         Route::post('/reset', [FrontController::class, 'reset'])->name('User.Auth.Reset');
     }
 );
 
 /* -------------------------
-    User Profile Controller
+    user Profile Controller
 --------------------------- */
 
 Route::group(
@@ -43,3 +44,11 @@ Route::group(
         Route::get('/logout', [FrontController::class, 'profile_logout'])->name('User.Profile.Logout');
     }
 );
+
+/* -------------------------
+    Media Controller
+--------------------------- */
+
+Route::prefix('media')->group( function () {
+    Route::post('/upload', [MediaController::class, 'upload'])->name('User.Media.Upload');
+});

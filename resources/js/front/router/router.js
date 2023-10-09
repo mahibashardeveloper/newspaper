@@ -26,7 +26,7 @@ import profile from "../components/profile/profile.vue";
 
 // details
 
-import details from "../components/profile/subComponents/details.vue";
+import my_account from "../components/profile/subComponents/my_account.vue";
 
 // directory ----- ----- ----- ----- ----- ----- ----- ----- -----
 
@@ -44,7 +44,7 @@ const routes = [
 
             // home
 
-            {path: ROOT_URL + '/', name: 'home', component: home, meta: {title: 'home'}},
+            {path: ROOT_URL + '/home', name: 'home', component: home, meta: {title: 'home'}},
 
             // post
 
@@ -60,11 +60,11 @@ const routes = [
 
             // profile
 
-            {path: ROOT_URL + '/profile', name: 'profile', component: profile,
+            {path: ROOT_URL + "/profile", component: profile,
 
                 children: [
 
-                    {path: ROOT_URL + '/profile', name: 'details', component: details, meta: {title: 'details'}},
+                    {path: ROOT_URL + "/my_account", name: "my_account", component: my_account, meta: { title: "my_account" }},
 
                 ]
 

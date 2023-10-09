@@ -25,13 +25,12 @@ Route::middleware('AdminLoginCheck')->get('/admin/{any}', [AdminController::clas
 Route::get('/admin', function (){ return redirect()->route('lvs.admin.any','dashboard'); });
 
 /* --------------------------
-    Customer Authentication Controller
+    User Authentication Controller
 ------------------------ */
 
 Route::middleware('UserLoginCheck')->get('/front/auth/{any}', [FrontController::class, 'index'])->where('any', '.*')->name('lvs.front.auth');
 Route::middleware('UserLoginCheck')->get('/front/profile', [FrontController::class, 'index'])->name('lvs.front.profile');
 Route::middleware('UserLoginCheck')->get('/front/my_account', [FrontController::class, 'index'])->name('lvs.front.my_account');
-Route::middleware('UserLoginCheck')->get('/front/order_history', [FrontController::class, 'index'])->name('lvs.front.order_history');
 
 /* --------------------------
     Front Controller

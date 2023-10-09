@@ -1,6 +1,6 @@
 <template>
 
-    <section class="auth bg-dark-subtle">
+    <section class="auth">
 
         <div class="container">
 
@@ -17,12 +17,12 @@
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" name="email" class="form-control" v-model="loginParam.email">
+                            <input type="text" name="email" class="form-control" v-model="loginParam.email" autocomplete="Off">
                             <div class="error-text" v-if="error != null && error.email !== undefined" v-text="error.email[0]"></div>
                         </div>
                         <div class="form-group">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" v-model="loginParam.password">
+                            <input type="password" name="password" class="form-control" v-model="loginParam.password" autocomplete="Off">
                             <div class="error-text" v-if="error != null && error.password !== undefined" v-text="error.password[0]"></div>
                         </div>
                         <div class="form-group">

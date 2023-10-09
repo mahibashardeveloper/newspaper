@@ -18,48 +18,46 @@
                     </a>
                 </div>
                 <div class="py-4 d-flex justify-content-center">
-                    <div class="profile-circle">
-                        <img class="img-fluid" v-if="!profile_data.avatar" :src="'https://ui-avatars.com/api/?name='+profile_data.full_name" alt="profile-dummy">
-                        <img class="img-fluid" v-else :src="profile_data.media && profile_data.media.full_file_path" alt="profile">
-                    </div>
+                    <img class="img-fluid profile-circle" v-if="!profile_data.avatar" :src="'https://ui-avatars.com/api/?name='+profile_data.full_name" alt="profile-dummy">
+                    <img class="img-fluid profile-circle" v-else :src="profile_data.media && profile_data.media.full_file_path" alt="profile">
                 </div>
-                <div class="py-1 px-3 d-flex align-items-center justify-content-start flex-wrap">
-                    <div class="fw-bold me-2">
+                <div class="py-2">
+                    <div class="fw-bold mb-2">
                         Name:
                     </div>
                     {{profile_data.full_name}}
                 </div>
-                <div class="py-1 px-3 d-flex align-items-center justify-content-start flex-wrap">
-                    <div class="fw-bold me-2">
+                <div class="py-2">
+                    <div class="fw-bold mb-2">
                         Email:
                     </div>
                     {{profile_data.email}}
                 </div>
-                <div class="py-1 px-3 d-flex align-items-center justify-content-start flex-wrap">
-                    <div class="fw-bold me-2">
+                <div class="py-2">
+                    <div class="fw-bold mb-2">
                         Company Name
                     </div>
                     {{companyInfo_data.company_name}}
                 </div>
-                <div class="py-1 px-3 d-flex align-items-center justify-content-start flex-wrap">
-                    <div class="fw-bold me-2">
+                <div class="py-2">
+                    <div class="fw-bold mb-2">
                         Social Media:
                     </div>
                     <div class="d-flex justify-content-start align-items-center flex-wrap">
-                        <a :href="settings_data.facebook" target="_blank">
-                            <i class="bi bi-facebook py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                        <a :href="settings_data.facebook" target="_blank" class="btn btn-outline-dark me-2 rounded-0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Facebook Link">
+                            <i class="bi bi-facebook"></i>
                         </a>
-                        <a :href="settings_data.twitter" target="_blank">
-                            <i class="bi bi-twitter py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                        <a :href="settings_data.twitter" target="_blank" class="btn btn-outline-dark me-2 rounded-0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Twitter X Link">
+                            <i class="bi bi-twitter"></i>
                         </a>
-                        <a :href="settings_data.instagram" target="_blank">
-                            <i class="bi bi-instagram py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                        <a :href="settings_data.instagram" target="_blank" class="btn btn-outline-dark me-2 rounded-0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Instagram Link">
+                            <i class="bi bi-instagram"></i>
                         </a>
-                        <a :href="settings_data.linkedin" target="_blank">
-                            <i class="bi bi-linkedin py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                        <a :href="settings_data.linkedin" target="_blank" class="btn btn-outline-dark me-2 rounded-0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Linkedin Link">
+                            <i class="bi bi-linkedin"></i>
                         </a>
-                        <a :href="settings_data.youtube" target="_blank">
-                            <i class="bi bi-youtube py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                        <a :href="settings_data.youtube" target="_blank" class="btn btn-outline-dark rounded-0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Youtube Link">
+                            <i class="bi bi-youtube"></i>
                         </a>
                     </div>
                 </div>

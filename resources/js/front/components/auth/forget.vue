@@ -1,6 +1,6 @@
 <template>
 
-    <section class="auth bg-dark-subtle">
+    <section class="auth">
 
         <div class="container">
 
@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
-                            <input id="email" type="text" name="email" class="form-control shadow-none border-secondary-subtle" v-model="forgotParam.email">
+                            <input id="email" type="text" name="email" class="form-control shadow-none border-secondary-subtle" v-model="forgotParam.email" autocomplete="Off">
                             <div class="error-text" v-if="error != null && error.email !== undefined" v-text="error.email[0]"></div>
                         </div>
                         <div class="form-group">
@@ -41,19 +41,19 @@
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
-                            <input id="email" type="email" name="email" class="form-control" disabled v-model="resetParam.email">
+                            <input id="email" type="email" name="email" class="form-control" disabled v-model="resetParam.email" autocomplete="Off">
                         </div>
                         <div class="form-group">
                             <label for="code" class="form-label">Code</label>
-                            <input id="code" type="text" name="code" class="form-control" v-model="resetParam.code">
+                            <input id="code" type="text" name="code" class="form-control" v-model="resetParam.code" autocomplete="Off">
                         </div>
                         <div class="form-group">
                             <label for="password" class="form-label">New Password</label>
-                            <input id="password" type="password" name="password" class="form-control" v-model="resetParam.password">
+                            <input id="password" type="password" name="password" class="form-control" v-model="resetParam.password" autocomplete="Off">
                         </div>
                         <div class="form-group">
                             <label for="password_confirmation" class="form-label">Password Confirmation</label>
-                            <input id="password_confirmation" type="password" name="password_confirmation" class="form-control" v-model="resetParam.password_confirmation">
+                            <input id="password_confirmation" type="password" name="password_confirmation" class="form-control" v-model="resetParam.password_confirmation" autocomplete="Off">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-theme" v-if="resetLoading === false">

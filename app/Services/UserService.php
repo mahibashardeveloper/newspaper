@@ -20,7 +20,7 @@ class UserService extends BaseController
                 $request->all(),
                 [
                     'full_name' => 'required',
-                    'email' => 'required|unique:customers,email',
+                    'email' => 'required|unique:users,email',
                     'password' => 'required|min:6|confirmed',
                 ]
             );
@@ -32,6 +32,7 @@ class UserService extends BaseController
             $user->full_name = $request->full_name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
+            $user->avatar = $request->avatar ?? null;
             $user->save();
             return ['status' => 200, 'msg' => 'Registration Complete.']; } catch (\Exception $e) {
 
@@ -47,7 +48,7 @@ class UserService extends BaseController
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'email' => 'required|email|exists:customers,email',
+                    'email' => 'required|email|exists:users,email',
                     'password' => 'required|min:6'
                 ]
             );
@@ -55,8 +56,8 @@ class UserService extends BaseController
                 return ['status' => 500, 'errors' => $validator->errors()];
             }
             $credential = ['email' => $request->email, 'password' => $request->password];
-            if (Auth::guard('customers')->attempt($credential, $request->remember)) {
-                return ['status' => 200, 'data' => Auth::guard('customers')->user()];
+            if (Auth::guard('users')->attempt($credential, $request->remember)) {
+                return ['status' => 200, 'data' => Auth::guard('users')->user()];
             } else {
                 return ['status' => 500, 'errors' => ['error' => 'Invalid Credentials! Please try again']];
             }
@@ -124,7 +125,7 @@ class UserService extends BaseController
     public static function profile_details($request)
     {
         try {
-            $user_id = Auth::guard('customers')->id();
+            $user_id = Auth::guard('users')->id();
             $user = User::with('media')->where('id', $user_id)->first();
             return ['status' => 200, 'data' => $user];
         } catch (\Exception $e) {
@@ -140,14 +141,16 @@ class UserService extends BaseController
                 [
                     'full_name' => 'required',
                     'email' => 'required|email',
+                    'avatar' => 'required',
                 ]
             );
             if ($validator->fails()) {
                 return ['status' => 500, 'errors' => $validator->errors()];
             }
-            $user = User::where('id', Auth::guard('customers')->id())->first();
+            $user = User::where('id', Auth::guard('users')->id())->first();
             $user->full_name = $request->full_name;
             $user->email = $request->email;
+            $user->avatar = $request->avatar ?? null;
             $user->save();
             return ['status' => 200,];
         } catch (\Exception $e) {
@@ -167,7 +170,7 @@ class UserService extends BaseController
             if ($validator->fails()) {
                 return ['status' => 500, 'errors' => $validator->errors()];
             }
-            $user = User::where('id', Auth::guard('customers')->id())->first();
+            $user = User::where('id', Auth::guard('users')->id())->first();
             $user->password = bcrypt($request->password);
             $user->save();
             return ['status' => 200,];
@@ -179,29 +182,8 @@ class UserService extends BaseController
     public static function profile_logout($request)
     {
         try {
-            Auth::guard('customers')->logout();
+            Auth::guard('users')->logout();
             return ['status' => 200 ];
-        } catch (\Exception $e) {
-            return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
-        }
-    }
-
-    public static function customer_list($request)
-    {
-        try {
-            $limit = $request->limit ?? 10000;
-            $keyword = $request->q ?? '';
-            $results = User::orderBy('id', 'desc');
-            if (isset($keyword) && !empty($keyword)) {
-                $results->where(function ($q) use ($keyword) {
-                    $q->orWhere('full_name', 'LIKE', '%' . $keyword . '%');
-                    $q->orWhere('email', 'LIKE', '%' . $keyword . '%');
-                    $q->orWhere('phone_number', 'LIKE', '%' . $keyword . '%');
-                    $q->orWhere('address', 'LIKE', '%' . $keyword . '%');
-                });
-            }
-            $paginatedData = $results->paginate($limit);
-            return ['status' => 200, 'data' => $paginatedData];
         } catch (\Exception $e) {
             return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
         }

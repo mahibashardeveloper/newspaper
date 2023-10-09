@@ -1,6 +1,6 @@
 <template>
 
-    <section class="auth bg-dark-subtle">
+    <section class="auth">
 
         <div class="container">
 
@@ -17,23 +17,23 @@
                         </div>
                         <div class="form-group">
                             <label for="full_name" class="form-label">Full Name</label>
-                            <input type="text" name="full_name" class="form-control" v-model="registerParam.full_name">
+                            <input type="text" name="full_name" class="form-control" v-model="registerParam.full_name" autocomplete="Off">
                             <div class="error-text" v-if="error != null && error.full_name !== undefined" v-text="error.full_name[0]"></div>
                         </div>
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" name="email" class="form-control" v-model="registerParam.email">
+                            <input type="text" name="email" class="form-control" v-model="registerParam.email" autocomplete="Off">
                             <div class="error-text" v-if="error != null && error.email !== undefined" v-text="error.email[0]"></div>
                         </div>
                         <div class="row px-3">
                             <div class="form-group col-12 col-md-6">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control" v-model="registerParam.password">
+                                <input type="password" name="password" class="form-control" v-model="registerParam.password" autocomplete="Off">
                                 <div class="error-text" v-if="error != null && error.password !== undefined" v-text="error.password[0]"></div>
                             </div>
                             <div class="form-group col-12 col-md-6">
                                 <label for="password" class="form-label">Password Confirmation</label>
-                                <input type="password" name="password_confirmation" class="form-control" v-model="registerParam.password_confirmation">
+                                <input type="password" name="password_confirmation" class="form-control" v-model="registerParam.password_confirmation" autocomplete="Off">
                                 <div class="error-text" v-if="error != null && error.password_confirmation !== undefined" v-text="error.password_confirmation[0]"></div>
                             </div>
                         </div>

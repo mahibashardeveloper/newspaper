@@ -18,26 +18,31 @@
                             Account
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <router-link :to="{name: 'registration'}" class="dropdown-item">
-                                    Registration
-                                </router-link>
-                            </li>
-                            <li>
-                                <router-link :to="{name: 'login'}" class="dropdown-item">
-                                    Login
-                                </router-link>
-                            </li>
-                            <li>
-                                <router-link :to="{name: 'details'}" class="dropdown-item">
-                                    Profile
-                                </router-link>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="dropdown-item">
-                                    Logout
-                                </a>
-                            </li>
+                            <span v-if="profile_data === null">
+                                <li>
+                                    <router-link :to="{name: 'registration'}" class="dropdown-item">
+                                        Registration
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link :to="{name: 'login'}" class="dropdown-item">
+                                        Login
+                                    </router-link>
+                                </li>
+                            </span>
+                            <span v-if="profile_data !== null">
+                                <li>
+                                    <router-link :to="{name: 'my_account'}" class="dropdown-item">
+                                        Profile
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" class="dropdown-item" @click="logout">
+                                        <span v-if="logoutLoading === false"> Logout </span>
+                                        <span v-if="logoutLoading === true"> Loading </span>
+                                    </a>
+                                </li>
+                            </span>
                         </ul>
                     </div>
                 </div>
@@ -95,11 +100,19 @@ export default {
             companyInfo_data: '',
             socialInfoLoading: false,
             socialInfo_data: '',
+            profile_data: null,
+            profileDataLoading: false,
+            logoutLoading: false,
+            core:window.core
         }
 
     },
 
     mounted() {
+
+        if(this.core.UserInfo != null){
+            this.getProfile();
+        }
 
         function time() {
             const currentTime = new Date();
@@ -124,6 +137,26 @@ export default {
     },
 
     methods: {
+
+        getProfile() {
+            this.profileDataLoading = true;
+            apiService.GET(apiRoutes.profile_details, (res) => {
+                this.profileDataLoading = false;
+                if (res.status === 200) {
+                    this.profile_data = res.data;
+                }
+            })
+        },
+
+        logout() {
+            this.logoutLoading = true;
+            apiService.GET(apiRoutes.logout, (res) => {
+                this.logoutLoading = false;
+                if (res.status === 200) {
+                    window.location.reload();
+                }
+            })
+        },
 
         getCompanyInfo() {
             this.companyInfoLoading = true;
