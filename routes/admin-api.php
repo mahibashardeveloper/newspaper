@@ -98,5 +98,4 @@ Route::prefix('blog')->group( function () {
 
 Route::prefix('media')->group( function () {
     Route::post('/upload', [MediaController::class, 'upload'])->name('Admin.Media.Upload');
-    Route::post('/update', [MediaController::class, 'update'])->name('Admin.Media.Update');
 });

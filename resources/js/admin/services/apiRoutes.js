@@ -70,9 +70,7 @@ const apiRoutes = {
 
     // Media
 
-    mediaUpload: apiVersion + '/media/upload',
-
-    mediaUpdate: apiVersion + '/media/update',
+    media: apiVersion + '/media/upload',
 
 }
 

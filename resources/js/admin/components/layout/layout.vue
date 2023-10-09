@@ -3,9 +3,9 @@
     <div class="admin-wrapper">
         <div class="admin-sidebar" :class="{active: isActiveAdminSideBar}">
             <div class="admin-sidebar-header">
-                <a href="javascript:void(0)" class="admin-title">
+                <router-link :to="{name: 'dashboard'}" class="admin-title">
                     Admin Portal
-                </a>
+                </router-link>
                 <a href="javascript:void(0)" class="admin-close" @click="remove">
                     <i class="bi bi-x-lg"></i>
                 </a>
@@ -37,7 +37,8 @@
                 </a>
                 <div class="admin-profile-dropdown">
                     <div class="admin-marge" @click="AdminDropdownController">
-                        <img :src="'/images/avatar.png'" class="img-fluid" alt="avatar">
+                        <img class="img-fluid" v-if="!profile_data.avatar" :src="'https://ui-avatars.com/api/?name='+profile_data.full_name" alt="profile-dummy">
+                        <img class="img-fluid" v-else :src="profile_data.media && profile_data.media.full_file_path" alt="profile">
                         <div class="admin-info">
                             <div class="admin-name">{{profile_data.full_name}}</div>
                             <div class="admin-email">{{profile_data.email}}</div>

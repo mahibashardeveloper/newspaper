@@ -16,10 +16,10 @@ class BlogService extends BaseController
             $admin_id = Auth::guard('admins')->id();
             $limit = $request->limit ?? 10000;
             $keyword = $request->q ?? '';
-            $results = Blogs::where('admin_id', $admin_id)->orderBy('id', 'desc');
+            $results = Blogs::with('media', 'category_info')->where('admin_id', $admin_id)->orderBy('id', 'desc');
             if (isset($keyword) && !empty($keyword)) {
                 $results->where(function ($q) use ($keyword) {
-                    $q->where('name', 'LIKE', '%' . $keyword . '%');
+                    $q->where('title', 'LIKE', '%' . $keyword . '%');
                 });
             }
             $paginatedData = $results->paginate($limit);
@@ -35,7 +35,10 @@ class BlogService extends BaseController
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'name' => 'required|unique:categories,name',
+                    'title' => 'required',
+                    'avatar' => 'required',
+                    'category_id' => 'required',
+                    'description' => 'required',
                 ]
             );
             if ($validator->fails()) {
@@ -44,8 +47,10 @@ class BlogService extends BaseController
             $admin_id = Auth::guard('admins')->id();
             $blog = new Blogs();
             $blog-> admin_id = $admin_id;
-            $blog-> name = $request->name;
+            $blog-> title = $request->title;
             $blog-> avatar = $request->avatar ?? null;
+            $blog-> category_id = $request->category_id;
+            $blog-> description = $request->description;
             $blog-> save();
             return ['status' => 200, 'msg' => 'data has been saved successfully.'];
         } catch (\Exception $e) {
@@ -83,7 +88,10 @@ class BlogService extends BaseController
             $validator = Validator::make(
                 $request->all(),
                 [
-                    'name' => 'required',
+                    'title' => 'required',
+                    'avatar' => 'required',
+                    'category_id' => 'required',
+                    'description' => 'required',
                 ]
             );
             if ($validator->fails()) {
@@ -93,7 +101,9 @@ class BlogService extends BaseController
             if($blog == null){
                 return ['status' => 500, 'errors' => 'data not found'];
             }
-            $blog->name = $request->name;
+            $blog->title = $request->title;
+            $blog->description = $request->description;
+            $blog->category_id = $request->category_id;
             $blog-> avatar = $request->avatar ?? null;
             $blog->save();
             return ['status' => 200, 'msg' => 'data has been updated successfully.'];

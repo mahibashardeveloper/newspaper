@@ -21,6 +21,7 @@ class Blogs extends Authenticatable
         'avatar',
         'title',
         'description',
+        'category_id',
     ];
 
     /**
@@ -43,6 +44,10 @@ class Blogs extends Authenticatable
 
     public function media(){
         return  $this->hasOne(Media::class, 'id', 'avatar');
+    }
+
+    public function category_info(){
+        return  $this->hasOne(Categories::class, 'id', 'category_id');
     }
 
 }

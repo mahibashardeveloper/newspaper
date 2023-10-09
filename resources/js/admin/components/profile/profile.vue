@@ -317,7 +317,7 @@
                 let formData = new FormData();
                 formData.append("file", file)
                 formData.append("media_type", 1);
-                apiService.UPLOAD(apiRoutes.mediaUpload, formData, (res) => {
+                apiService.UPLOAD(apiRoutes.media, formData, (res) => {
                     event.target.value = '';
                     if (res.status === 200) {
                         this.editParam.avatarFilePath = res.data.full_file_path

@@ -16,9 +16,4 @@ class MediaController extends BaseController
         return response()->json($rv, 200);
     }
 
-    public function update(Request $request){
-        $rv = MediaService::update($request);
-        return response()->json($rv, 200);
-    }
-
 }

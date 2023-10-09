@@ -31,6 +31,7 @@
             </span>
         </div>
         <div class="card-body">
+
             <!-- page loading start -->
             <div v-if="loading === true">
                 <h6 class="card-text placeholder-glow">
@@ -58,19 +59,25 @@
                 </div>
             </div>
             <!-- no data end -->
+
             <div v-if="tableData.length > 0 && loading === false">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 p-3">
                     <div class="p-2" v-for="(each) in tableData">
                         <div class="border p-2 blog">
                             <div class="blog-size">
                                 <span v-if="each.avatar === null">
-                                    <img class="img-fluid category-image" :src="'/images/category.svg'" alt="category.png">
+                                    No Image Found
                                 </span>
                                 <span class="w-100 h-100" v-if="each.avatar !== null">
                                     <img class="img-fluid" :src="'/storage/media/image/'+each.avatar" alt="person-image">
                                 </span>
                             </div>
                             <div class="mb-3 h3">{{each.title}}</div>
+                            <div class="mb-3">
+                                <span v-if="each.category_info != null">
+                                    {{ each.category_info.name }}
+                                </span>
+                            </div>
                             <div class="mb-3">{{each.description}}</div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="javascript:void(0)" class="btn-edit col-5" @click="manageModal(1, each.id)">Edit</a>
@@ -142,10 +149,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <label for="file-upload" class="modal-avatar cs-pointer border border-secondary-subtle" v-if="editParam.avatar === null">
+                        <div>
+                            <label for="file-upload" class="square-modal-avatar cs-pointer border border-secondary-subtle">
                                 <input type="file" class="d-none" id="file-upload" @change="attachFile($event)">
-                                <span v-if="editParam.avatar === null" class="modal-avatar">
+                                <span v-if="blogParam.avatar === null" class="py-4">
                                     <div class="text-center">
                                         <div class="mb-2">
                                             <i class="bi bi-card-image"></i>
@@ -153,27 +160,34 @@
                                         Upload Image
                                     </div>
                                 </span>
+                                <img class="img-fluid" v-if="blogParam.avatar !== null" :src="'/storage/media/image/'+blogParam.avatar" alt="profile">
                             </label>
-                            <img class="img-fluid modal-avatar" v-if="editParam.avatar !== null" :src="editParam.avatarFilePath" alt="profile">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control shadow-none rounded-0 p-3 border-secondary-subtle" v-model="editParam.name">
+                        <label for="title" class="form-label">Name</label>
+                        <input type="text" name="title" class="form-control border-secondary-subtle" v-model="blogParam.title">
+                    </div>
+                    <div class="form-group">
+                        <label for="category_id" class="form-label">Category</label>
+                        <select name="category_id" id="category_id" v-model="blogParam.category_id" class="form-select">
+                            <option :value="0">Select Category Option</option>
+                            <option :value="each.id" v-for="(each) in category"> {{each.name}} </option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="name" class="form-label">Description</label>
-                        <textarea name="" id="" cols="30" rows="5" class="form-textarea-control border-secondary-subtle" v-model="editParam.description"></textarea>
+                        <textarea name="" id="" cols="30" rows="5" class="form-textarea-control border-secondary-subtle" v-model="blogParam.description"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-cancel" @click="manageModal(2,'')">Cancel</button>
-                    <button type="button" class="btn-save" @click="manageCategory">
+                    <button type="button" class="btn-save" @click="manageBlog">
                         <span v-if="createLoading === false">
-                            <span v-if="categoryParam.id === ''">
+                            <span v-if="blogParam.id === ''">
                                 save
                             </span>
-                            <span v-if="categoryParam.id !== ''">
+                            <span v-if="blogParam.id !== ''">
                                 Update
                             </span>
                         </span>
@@ -190,7 +204,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-header border-bottom-0">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Category</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Blog</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -200,7 +214,7 @@
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-around align-items-center">
                     <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">Cancel</button>
-                    <button type="button" class="col-5 btn-delete" @click="deleteCategory">Confirm</button>
+                    <button type="button" class="col-5 btn-delete" @click="deleteBlog">Confirm</button>
                 </div>
             </div>
         </div>
@@ -221,8 +235,9 @@
                 loading: false,
                 createLoading: false,
                 deleteLoading: false,
+                blog: [],
                 category: [],
-                categoryParam: { name: '' },
+                blogParam: { avatar: '', title: '', description: '', category_id: '' },
                 deleteParam: { ids: [] },
                 tableData: [],
                 formData: { limit: 10, page: 1 },
@@ -240,20 +255,28 @@
 
         mounted() {
             this.list();
+            this.getCategory();
         },
 
         methods: {
+
+            getCategory() {
+                apiService.POST(apiRoutes.categoryList, '', (res) =>{
+                    if(res.status === 200) {
+                        this.category = res.data.data
+                    }
+                })
+            },
 
             attachFile(event) {
                 let file = event.target.files[0];
                 let formData = new FormData();
                 formData.append("file", file)
                 formData.append("media_type", 1);
-                apiService.UPLOAD(apiRoutes.mediaUpload, formData, (res) => {
+                apiService.UPLOAD(apiRoutes.media, formData, (res) => {
                     event.target.value = '';
                     if (res.status === 200) {
-                        this.editParam.avatarFilePath = res.data.full_file_path
-                        this.editParam.avatar = res.data.id
+                        this.blogParam.avatar = res.data.file_path
                     }
                 })
             },
@@ -289,12 +312,12 @@
                 myModal.show();
             },
 
-            deleteCategory() {
+            deleteBlog() {
                 this.deleteLoading = true;
                 this.selected.forEach((v) => {
                     this.deleteParam.ids.push(v);
                 })
-                apiService.POST(apiRoutes.categoryDelete, this.deleteParam, (res) => {
+                apiService.POST(apiRoutes.blogDelete, this.deleteParam, (res) => {
                     this.deleteLoading = false;
                     if (res.status === 200) {
                         this.$toast.success(res.msg, {position: "bottom-right"});
@@ -314,7 +337,7 @@
                     myModal.show();
                 } else {
                     this.selected = [];
-                    this.categoryParam = { id: '', name: '', avatar: '' };
+                    this.blogParam = { id: '', avatar: '', title: '', description: '', category_id: '' };
                     this.current_page = 1;
                     let myModalEl = document.getElementById('deleteModal');
                     let modal = bootstrap.Modal.getInstance(myModalEl)
@@ -324,9 +347,9 @@
 
             manageModal(type, data = null) {
                 this.error = null;
-                this.categoryParam = { id: '', name: '', avatar: null };
+                this.blogParam = { id: '', title: '', description: '', category_id: 0, avatar: null };
                 if (type === 1) {
-                    this.getCategory();
+                    this.getBlog();
                     if (data !== null) {
                         this.getSingle(data);
                     }
@@ -339,16 +362,16 @@
                 }
             },
 
-            getCategory() {
-                apiService.POST(apiRoutes.categoryList, '', (res) => {
+            getBlog() {
+                apiService.POST(apiRoutes.blogList, '', (res) => {
                     if (res.status === 200) {
-                        this.category = res.data.data
+                        this.blog = res.data.data
                     }
                 })
             },
 
-            manageCategory() {
-                if (this.categoryParam.id) {
+            manageBlog() {
+                if (this.blogParam.id) {
                     this.edit();
                 } else {
                     this.create();
@@ -358,9 +381,9 @@
             getSingle(id = null) {
                 let param = { id: '' }
                 if (id != null) { param.id = id } else { param.id = this.selected[0] }
-                apiService.POST(apiRoutes.categorySingle, param, (res) => {
+                apiService.POST(apiRoutes.blogSingle, param, (res) => {
                     if (res.status === 200) {
-                        this.categoryParam = res.data;
+                        this.blogParam = res.data;
                     } else {
                         this.error = res.errors;
                     }
@@ -370,7 +393,7 @@
             create() {
                 this.createLoading = true;
                 this.error = null;
-                apiService.POST(apiRoutes.categoryCreate, this.categoryParam, (res) => {
+                apiService.POST(apiRoutes.blogCreate, this.blogParam, (res) => {
                     this.createLoading = false;
                     if (res.status === 200) {
                         this.$toast.success(res.msg, {position: "bottom-right"});
@@ -386,10 +409,10 @@
             edit() {
                 this.createLoading = true;
                 this.error = null;
-                apiService.POST(apiRoutes.categoryUpdate, this.categoryParam, (res) => {
+                apiService.POST(apiRoutes.blogUpdate, this.blogParam, (res) => {
                     this.createLoading = false;
                     if (res.status === 200) {
-                        this.getCategory();
+                        this.getBlog();
                         this.$toast.success(res.msg, {position: "bottom-right"});
                         this.manageModal(2, null);
                         this.list();
@@ -403,7 +426,7 @@
             list() {
                 this.loading = true;
                 this.formData.page = this.current_page;
-                apiService.POST(apiRoutes.categoryList, this.formData, (res) => {
+                apiService.POST(apiRoutes.blogList, this.formData, (res) => {
                     this.loading = false;
                     this.selected = [];
                     if (res.status === 200) {
