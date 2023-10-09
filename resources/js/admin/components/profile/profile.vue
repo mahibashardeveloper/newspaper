@@ -326,20 +326,6 @@
                 })
             },
 
-            changeFile(event) {
-                let file = event.target.files[0];
-                let formData = new FormData();
-                formData.append("file", file)
-                formData.append("media_type", 1);
-                apiService.UPLOAD(apiRoutes.mediaUpload, formData, (res) => {
-                    event.target.value = '';
-                    if (res.status === 200) {
-                        this.editParam.avatarFilePath = res.data.full_file_path
-                        this.editParam.avatar = res.data.id
-                    }
-                })
-            },
-
             openEditProfileModal() {
                 const modal = new bootstrap.Modal("#editProfileModal", {keyboard: false, backdrop: 'static'});
                 modal.show();

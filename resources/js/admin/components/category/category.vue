@@ -148,7 +148,7 @@
                 <form>
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Create Category</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" @click="manageModal(2,'')"></button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
