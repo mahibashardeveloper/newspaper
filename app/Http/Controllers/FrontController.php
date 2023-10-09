@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\FrontService;
 use App\Services\UserService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -63,9 +64,13 @@ class FrontController extends BaseController
         return response()->json($rv, 200);
     }
 
-    public function customer_list(Request $request)
-    {
-        $rv = UserService::customer_list($request);
+    public function category_list(Request $request){
+        $rv = FrontService::category_list($request);
+        return response()->json($rv, 200);
+    }
+
+    public function blog_list(Request $request){
+        $rv = FrontService::blog_list($request);
         return response()->json($rv, 200);
     }
 

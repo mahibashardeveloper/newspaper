@@ -1,76 +1,40 @@
-const apiVersion = '/api/admin';
+const userApi = '/api/user';
+
+const listApi = '/api/global';
 
 const apiRoutes = {
 
     // Authentication
 
-    login: apiVersion + '/auth/login',
+    register: userApi + '/auth/register',
 
-    forgot: apiVersion + '/auth/forgot',
+    login: userApi + '/auth/login',
 
-    reset: apiVersion + '/auth/reset',
+    forgot: userApi + '/auth/forgot',
 
-    // slider
-
-    sliderCreate: apiVersion + '/slider/create',
-
-    sliderList: apiVersion + '/slider/list',
-
-    sliderSingle: apiVersion + '/slider/single',
-
-    sliderUpdate: apiVersion + '/slider/update',
-
-    sliderDelete: apiVersion + '/slider/delete',
-
-    // category
-
-    categoryCreate: apiVersion + '/category/create',
-
-    categoryList: apiVersion + '/category/list',
-
-    categorySingle: apiVersion + '/category/single',
-
-    categoryUpdate: apiVersion + '/category/update',
-
-    categoryDelete: apiVersion + '/category/delete',
-
-    // blog
-
-    blogCreate: apiVersion + '/blog/create',
-
-    blogList: apiVersion + '/blog/list',
-
-    blogSingle: apiVersion + '/blog/single',
-
-    blogUpdate: apiVersion + '/blog/update',
-
-    blogDelete: apiVersion + '/blog/delete',
-
-    // customer
-
-    customerCreate: apiVersion + '/customer/create',
-
-    customerList: apiVersion + '/customer/list',
-
-    customerSingle: apiVersion + '/customer/single',
-
-    customerUpdate: apiVersion + '/customer/update',
-
-    customerDelete: apiVersion + '/customer/delete',
+    reset: userApi + '/auth/reset',
 
     // Profile
 
-    profile_details: apiVersion + '/profile/details',
+    profile_details: userApi + '/profile/details',
 
-    profile_update: apiVersion + '/profile/update',
+    profile_update: userApi + '/profile/update',
 
-    profile_password: apiVersion + '/profile/password',
+    profile_password: userApi + '/profile/password',
 
-    logout: apiVersion + '/profile/logout',
+    logout: userApi + '/profile/logout',
 
     // Media
 
-    media: apiVersion + '/media/upload',
+    media: userApi + '/media/upload',
+
+    // category
+
+    globalCategoryList: listApi + '/globalCategory/list',
+
+    // blog
+
+    globalBlogList: listApi + '/globalBlog/list',
 
 }
 
