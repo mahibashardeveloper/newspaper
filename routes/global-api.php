@@ -15,7 +15,7 @@ use App\Http\Controllers\FrontController;
 */
 
 /* --------------------------
-    company_name
+    company name
 ------------------------ */
 
 Route::prefix('globalInfo')->group(function () {
@@ -23,7 +23,7 @@ Route::prefix('globalInfo')->group(function () {
 });
 
 /* --------------------------
-    category_list
+    category list
 ------------------------ */
 
 Route::prefix('globalCategory')->group(function () {
@@ -31,9 +31,17 @@ Route::prefix('globalCategory')->group(function () {
 } );
 
 /* --------------------------
-    productList
+    blog list
 ------------------------ */
 
 Route::prefix('globalBlog')->group(function () {
     Route::post('/list', [FrontController::class, 'blog_list']);
 } );
+
+/* --------------------------
+    social media link
+------------------------ */
+
+Route::prefix('globalSocialInfo')->group(function () {
+    Route::get('/list', [FrontController::class, 'social_media_details']);
+});

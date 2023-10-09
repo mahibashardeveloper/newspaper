@@ -22,8 +22,6 @@ class UserService extends BaseController
                     'full_name' => 'required',
                     'email' => 'required|unique:customers,email',
                     'password' => 'required|min:6|confirmed',
-                    'phone_number' => 'required',
-                    'address' => 'required',
                 ]
             );
 
@@ -34,8 +32,6 @@ class UserService extends BaseController
             $user->full_name = $request->full_name;
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
-            $user->phone_number = $request->phone_number;
-            $user->address = $request->address;
             $user->save();
             return ['status' => 200, 'msg' => 'Registration Complete.']; } catch (\Exception $e) {
 
@@ -144,8 +140,6 @@ class UserService extends BaseController
                 [
                     'full_name' => 'required',
                     'email' => 'required|email',
-                    'phone_number' => 'required',
-                    'address' => 'required',
                 ]
             );
             if ($validator->fails()) {
@@ -154,8 +148,6 @@ class UserService extends BaseController
             $user = User::where('id', Auth::guard('customers')->id())->first();
             $user->full_name = $request->full_name;
             $user->email = $request->email;
-            $user->phone_number = $request->phone_number;
-            $user->address = $request->address;
             $user->save();
             return ['status' => 200,];
         } catch (\Exception $e) {

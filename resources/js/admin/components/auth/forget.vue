@@ -2,7 +2,7 @@
 
     <div class="authentication">
 
-        <div class="row vh-100 justify-content-center align-items-center">
+        <div class="row vh-100 bg-dark-subtle justify-content-center align-items-center">
 
             <div class="col-12 col-sm-10 col-lg-6 col-xl-4 p-3 d-none d-lg-block">
                 <img :src="'/images/background1.svg'" class="img-fluid" alt="background image">

@@ -52,7 +52,7 @@ const routes = [
 
             // authentication
 
-            {path: ROOT_URL + '/auth/register', name: 'register', component: register, meta: {title: 'register'}},
+            {path: ROOT_URL + '/auth/registration', name: 'registration', component: register, meta: {title: 'register'}},
 
             {path: ROOT_URL + '/auth/login', name: 'login', component: login, meta: {title: 'login'}},
 

@@ -5,10 +5,32 @@
 
         .form-control{
             height: 45px;
+            border-radius: 10px;
+            box-shadow: 0 0 0 0;
+            outline: none;
+            border: 1px solid $border-color;
         }
 
-        .btn-height{
-            height: 45px;
+        .error-text{
+            margin-top: 10px;
+            color: $red;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .btn-theme{
+            height: 50px;
+            padding: 0 20px;
+            border-radius: 10px;
+            background-color: $teal;
+            color: $white;
+            transition: 0.3s all ease-in-out;
+
+            &:hover{
+                transition: 0.3s all ease-in-out;
+                background-color: darken($teal, 10);
+            }
+
         }
 
     }

@@ -14,6 +14,15 @@
     <app></app>
 </div>
 
+<script>
+    window.core = {
+        @if(\Illuminate\Support\Facades\Auth::guard('users')->check())
+            UserInfo: {!! \Illuminate\Support\Facades\Auth::guard('users')->user() !!},
+        @else
+            UserInfo: null
+        @endif
+    }
+</script>
 </body>
 @vite('resources/js/front/app.js')
 </html>

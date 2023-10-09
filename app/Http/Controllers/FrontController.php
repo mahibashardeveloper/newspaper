@@ -79,4 +79,9 @@ class FrontController extends BaseController
         return response()->json($rv, 200);
     }
 
+    public function social_media_details(Request $request){
+        $rv = FrontService::social_media_details($request);
+        return response()->json($rv, 200);
+    }
+
 }

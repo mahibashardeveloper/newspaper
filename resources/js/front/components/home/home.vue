@@ -1,5 +1,18 @@
 <template>
 
+    <header class="py-5 bg-light mb-5">
+        <div class="container">
+            <div class="nav-group">
+                <a href="javascript:void(0)" class="nav-link-hover" @click="formData.category_id = ''; blog_list(current_page = 0)">
+                    সব
+                </a>
+                <a href="javascript:void(0)" class="nav-link-hover" v-for="(category) in getCategoryInRange(1, 9)" :key="category.id" v-if="loading === false" @click="formData.category_id = category.id; blog_list(current_page = 0);">
+                    {{ category.name }}
+                </a>
+            </div>
+        </div>
+    </header>
+
     <section class="container">
 
         <!-- page loading start -->
@@ -19,7 +32,7 @@
         <!-- page loading end -->
 
         <!-- no data start -->
-        <div class="page-no-data-found"  v-if="blogs.length === 0 && loading === false">
+        <div class="page-no-data-found"  v-if="blogs.length === 0 && blogLoading === false">
             <div class="w-100">
                 <div class="mb-3">
                     <i class="bi bi-exclamation-circle fs-1"></i>
@@ -105,6 +118,16 @@
         </div>
     </section>
 
+    <footer class="w-100 bg-light">
+        <div class="container footer">
+            <div class="d-flex justify-content-start flex-wrap py-4">
+                <a href="javascript:void(0)" class="text-secondary footer-hover" v-for="(category) in getCategoryInRange(10, 30)" :key="category.id" v-if="loading === false" @click="formData.category_id = category.id; blog_list(current_page = 0);">
+                    {{ category.name }}
+                </a>
+            </div>
+        </div>
+    </footer>
+
 </template>
 
 <script>
@@ -114,6 +137,16 @@
     import apiRoutes from "../../services/apiRoutes";
 
     export default {
+
+        computed: {
+
+            getCategoryInRange() {
+                return (startId, endId) => {
+                    return this.categories.filter(category => category.id >= startId && category.id <= endId);
+                };
+            },
+
+        },
 
         data(){
 

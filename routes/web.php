@@ -15,12 +15,29 @@ use App\Http\Controllers\FrontController;
 |
 */
 
+/* --------------------------
+    Admin Authentication Controller
+------------------------ */
+
 Route::middleware('AdminLoginCheck')->get('/admin/auth/{any}', [AdminController::class, 'index'])->where('any', '.*')->name('lvs.admin.auth');
 Route::middleware('AdminLoginCheck')->get('/admin/', [AdminController::class, 'index'])->where('any', '.*')->name('lvs.admin');
 Route::middleware('AdminLoginCheck')->get('/admin/{any}', [AdminController::class, 'index'])->where('any', '.*')->name('lvs.admin.any');
 Route::get('/admin', function (){ return redirect()->route('lvs.admin.any','dashboard'); });
 
-Route::get('/front/auth/{any}', [FrontController::class, 'index'])->where('any', '.*')->name('lvs.front.auth');
-Route::get('/front/', [FrontController::class, 'index'])->where('any', '.*')->name('lvs.front');
+/* --------------------------
+    Customer Authentication Controller
+------------------------ */
+
+Route::middleware('UserLoginCheck')->get('/front/auth/{any}', [FrontController::class, 'index'])->where('any', '.*')->name('lvs.front.auth');
+Route::middleware('UserLoginCheck')->get('/front/profile', [FrontController::class, 'index'])->name('lvs.front.profile');
+Route::middleware('UserLoginCheck')->get('/front/my_account', [FrontController::class, 'index'])->name('lvs.front.my_account');
+Route::middleware('UserLoginCheck')->get('/front/order_history', [FrontController::class, 'index'])->name('lvs.front.order_history');
+
+/* --------------------------
+    Front Controller
+------------------------ */
+
+Route::get('/front/profile/', function (){ return redirect()->route('lvs.front.any','my_account'); });
 Route::get('/front/{any}', [FrontController::class, 'index'])->where('any', '.*')->name('lvs.front.any');
-Route::get('/', function (){ return redirect()->route('lvs.front.any',''); });
+Route::get('/front/', [FrontController::class, 'index'])->where('any', '.*')->name('lvs.front');
+Route::get('/', function (){ return redirect()->route('lvs.front.any','home'); });

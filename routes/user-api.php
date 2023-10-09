@@ -22,6 +22,7 @@ use App\Http\Controllers\FrontController;
 Route::group(
     ['middleware' => ['UserAuth'], 'prefix' => 'auth'],
     function () {
+        Route::post('/register', [FrontController::class, 'register'])->name('User.Auth.Register');
         Route::post('/login', [FrontController::class, 'login'])->name('User.Auth.Login');
         Route::post('/forgot', [FrontController::class, 'forgot'])->name('User.Auth.Forgot');
         Route::post('/reset', [FrontController::class, 'reset'])->name('User.Auth.Reset');

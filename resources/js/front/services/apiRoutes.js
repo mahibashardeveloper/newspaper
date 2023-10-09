@@ -40,6 +40,10 @@ const apiRoutes = {
 
     globalBlogList: listApi + '/globalBlog/list',
 
+    // social info
+
+    globalSocialInfo: listApi + '/globalSocialInfo/list',
+
 }
 
 export default apiRoutes;

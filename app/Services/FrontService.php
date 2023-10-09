@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Blogs;
 use App\Models\Companies;
 use App\Models\Categories;
+use App\Models\Settings;
 use Illuminate\Routing\Controller as BaseController;
 
 class FrontService extends BaseController
@@ -41,6 +42,16 @@ class FrontService extends BaseController
     {
         try {
             $user = Companies::orderBy('id','desc')->first();
+            return ['status' => 200, 'data' => $user];
+        } catch (\Exception $e) {
+            return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
+        }
+    }
+
+    public static function social_media_details($request)
+    {
+        try {
+            $user = Settings::orderBy('id','desc')->first();
             return ['status' => 200, 'data' => $user];
         } catch (\Exception $e) {
             return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
