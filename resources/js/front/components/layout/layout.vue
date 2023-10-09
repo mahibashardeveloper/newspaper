@@ -71,104 +71,104 @@
 
 <script>
 
-import apiService from "../../services/apiServices.js";
-import apiRoutes from "../../services/apiRoutes.js";
+    import apiService from "../../services/apiServices.js";
+    import apiRoutes from "../../services/apiRoutes.js";
 
-export default {
+    export default {
 
-    computed: {
+        computed: {
 
-        getCategoryInRange() {
-            return (startId, endId) => {
-                return this.categories.filter(category => category.id >= startId && category.id <= endId);
-            };
-        },
-
-    },
-
-    data(){
-
-        return{
-            isActiveAdminDropDown: false,
-            isActiveAdminSideBar: false,
-            companyInfo_data: '',
-            categories: [],
-            current_page: 0,
-            loading: false,
-            formData:{
-                keyword:'',
-                category_id:'',
-                limit: 10,
-                page: 1
+            getCategoryInRange() {
+                return (startId, endId) => {
+                    return this.categories.filter(category => category.id >= startId && category.id <= endId);
+                };
             },
+
+        },
+
+        data(){
+
+            return{
+                isActiveAdminDropDown: false,
+                isActiveAdminSideBar: false,
+                companyInfo_data: '',
+                categories: [],
+                current_page: 0,
+                loading: false,
+                formData:{
+                    keyword:'',
+                    category_id:'',
+                    limit: 10,
+                    page: 1
+                },
+            }
+
+        },
+
+        mounted() {
+
+            function time() {
+                const currentTime = new Date();
+                const dayNames = ["রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", "বৃহস্পতিবার", "শুক্রবার", "শনিবার"];
+                const monthNames = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+                const yearNames = ["২০২৩", "২০২৪", "২০২৫", "২০২৬", "২০২৭", "২০২৮", "২০২৯", "২০৩০", "২০৩১", "২০৩২", "২০৩৩", "২০৩৪", "২০৩৫"];
+                const datesNames = ["০১", "০২", "০৩", "০৪", "০৫", "০৬", "০৭", "০৮", "০৯", "১০", "১১", "১২", "১৩", "১৪", "১৫", "১৬", "১৭", "১৮", "১৯", "২০", "২১", "২২", "২৩", "২৪", "২৫", "২৬", "২৭", "২৮", "২৯", "৩০"];
+                const day = dayNames[currentTime.getDay()];
+                const month = monthNames[currentTime.getMonth()];
+                const year = yearNames[currentTime.getFullYear() - 2023];
+                const date = datesNames[currentTime.getDate() - 1];
+                const autoLoadTime = `${day}  ${date}  ${month}  ${year}`;
+                document.getElementById("time").innerHTML = autoLoadTime;
+            }
+
+            let timeInterval = setInterval(time, 1000);
+
+            this.getCompanyInfo();
+
+            this.blog_list();
+
+            this.category_list();
+
+        },
+
+        methods: {
+
+            getCompanyInfo() {
+                this.companyInfoLoading = true;
+                apiService.GET(apiRoutes.globalInfo, (res) => {
+                    this.companyInfoLoading = false;
+                    if (res.status === 200) {
+                        this.companyInfo_data = res.data;
+                    }
+                })
+            },
+
+            category_list() {
+                this.loading = true;
+                apiService.GET(apiRoutes.globalCategoryList, (res) =>{
+                    this.loading = false;
+                    if(res.status === 200) {
+                        this.categories = res.data.data;
+                    }
+                })
+            },
+
+            blog_list() {
+                this.blogLoading = true;
+                this.formData.page = this.current_page;
+                apiService.POST(apiRoutes.globalBlogList, this.formData,(res) =>{
+                    this.blogLoading = false;
+                    if (res.status === 200) {
+                        this.blogs = res.data.data;
+                        this.total_pages = res.data.total < res.data.per_page ? 1 : Math.ceil((res.data.total / res.data.per_page));
+                        this.current_page = res.data.current_page;
+                        this.buttons = [...Array(this.total_pages).keys()].map((i) => i + 1);
+                    }
+                })
+            },
+
         }
-
-    },
-
-    mounted() {
-
-        function time() {
-            const currentTime = new Date();
-            const dayNames = ["রবিবার", "সোমবার", "মঙ্গলবার", "বুধবার", "বৃহস্পতিবার", "শুক্রবার", "শনিবার"];
-            const monthNames = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
-            const yearNames = ["২০২৩", "২০২৪", "২০২৫", "২০২৬", "২০২৭", "২০২৮", "২০২৯", "২০৩০", "২০৩১", "২০৩২", "২০৩৩", "২০৩৪", "২০৩৫"];
-            const datesNames = ["০১", "০২", "০৩", "০৪", "০৫", "০৬", "০৭", "০৮", "০৯", "১০", "১১", "১২", "১৩", "১৪", "১৫", "১৬", "১৭", "১৮", "১৯", "২০", "২১", "২২", "২৩", "২৪", "২৫", "২৬", "২৭", "২৮", "২৯", "৩০"];
-            const day = dayNames[currentTime.getDay()];
-            const month = monthNames[currentTime.getMonth()];
-            const year = yearNames[currentTime.getFullYear() - 2023];
-            const date = datesNames[currentTime.getDate() - 1];
-            const autoLoadTime = `${day}  ${date}  ${month}  ${year}`;
-            document.getElementById("time").innerHTML = autoLoadTime;
-        }
-
-        let timeInterval = setInterval(time, 1000);
-
-        this.getCompanyInfo();
-
-        this.blog_list();
-
-        this.category_list();
-
-    },
-
-    methods: {
-
-        getCompanyInfo() {
-            this.companyInfoLoading = true;
-            apiService.GET(apiRoutes.globalInfo, (res) => {
-                this.companyInfoLoading = false;
-                if (res.status === 200) {
-                    this.companyInfo_data = res.data;
-                }
-            })
-        },
-
-        category_list() {
-            this.loading = true;
-            apiService.GET(apiRoutes.globalCategoryList, (res) =>{
-                this.loading = false;
-                if(res.status === 200) {
-                    this.categories = res.data.data;
-                }
-            })
-        },
-
-        blog_list() {
-            this.blogLoading = true;
-            this.formData.page = this.current_page;
-            apiService.POST(apiRoutes.globalBlogList, this.formData,(res) =>{
-                this.blogLoading = false;
-                if (res.status === 200) {
-                    this.blogs = res.data.data;
-                    this.total_pages = res.data.total < res.data.per_page ? 1 : Math.ceil((res.data.total / res.data.per_page));
-                    this.current_page = res.data.current_page;
-                    this.buttons = [...Array(this.total_pages).keys()].map((i) => i + 1);
-                }
-            })
-        },
 
     }
-
-}
 
 </script>
