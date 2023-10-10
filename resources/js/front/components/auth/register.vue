@@ -1,15 +1,11 @@
 <template>
 
     <section class="auth">
-
         <div class="container">
-
             <div class="min-vh-100 row justify-content-center align-items-center p-3">
-
                 <div class="col-12 col-sm-10 col-lg-6 col-xl-5 p-3 d-none d-lg-block">
                     <img :src="'/images/background1.svg'" class="img-fluid" alt="background image">
                 </div>
-
                 <div class="col-12 col-sm-10 col-lg-6 col-xl-5 p-3">
                     <form @submit.prevent="register" class="border rounded-4 px-4 py-5 bg-white shadow">
                         <div class="form-group fw-bold h4">
@@ -53,66 +49,53 @@
                         </div>
                     </form>
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
 </template>
 
 <script>
 
-import apiService from "../../services/apiServices.js";
+    import apiService from "../../services/apiServices.js";
+    import apiRoutes from "../../services/apiRoutes.js";
 
-import apiRoutes from "../../services/apiRoutes.js";
+    export default {
 
-export default {
-
-    data(){
-
-        return{
-
-            registerLoading: false,
-
-            error: null,
-
-            registerParam: {
-                full_name: '',
-                email: '',
-                password: '',
-                password_confirmation: '',
+        data(){
+            return{
+                registerLoading: false,
+                error: null,
+                registerParam: {
+                    full_name: '',
+                    email: '',
+                    password: '',
+                    password_confirmation: '',
+                }
             }
-
-        }
-
-    },
-
-    mounted() {
-
-    },
-
-    methods: {
-
-        register() {
-            this.registerLoading = true;
-            this.error = null;
-            apiService.POST(apiRoutes.register, this.registerParam, (res) => {
-                this.registerLoading = false;
-                this.registerParam = {
-                    full_name: '', email: '', password: '', password_confirmation: '',
-                }
-                if (res.status === 200) {
-                    this.$toast.success('Registration Successfully', { position: "top-right" });
-                } else {
-                    this.error = res.errors
-                }
-            })
         },
 
-    },
+        mounted() {},
 
-}
+        methods: {
+
+            register() {
+                this.registerLoading = true;
+                this.error = null;
+                apiService.POST(apiRoutes.register, this.registerParam, (res) => {
+                    this.registerLoading = false;
+                    this.registerParam = {
+                        full_name: '', email: '', password: '', password_confirmation: '',
+                    }
+                    if (res.status === 200) {
+                        this.$toast.success('Registration Successfully', { position: "top-right" });
+                    } else {
+                        this.error = res.errors
+                    }
+                })
+            },
+
+        },
+    }
 
 </script>

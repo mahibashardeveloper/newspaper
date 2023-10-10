@@ -66,53 +66,36 @@
 </template>
 
 <script>
+
     import apiService from "../../services/apiServices.js";
     import apiRoutes from "../../services/apiRoutes.js";
     export default {
 
         data(){
-
             return{
-
                 isActiveAdminDropDown: false,
-
                 isActiveAdminSideBar: false,
-
                 logoutLoading: false,
-
                 profile_data: '',
-
                 profileDataLoading: false,
-
             }
-
         },
 
         mounted() {
-
             this.getProfile();
-
         },
 
         methods: {
-
             AdminDropdownController(){
-
                 this.isActiveAdminDropDown = !this.isActiveAdminDropDown;
-
             },
-
             AdminSideBarController(){
-
                 this.isActiveAdminSideBar = !this.isActiveAdminSideBar;
-
             },
-
             remove(){
                 this.isActiveAdminDropDown = false;
                 this.isActiveAdminSideBar = false;
             },
-
             logout() {
                 this.logoutLoading = true;
                 apiService.GET(apiRoutes.logout, (res) => {
@@ -123,7 +106,6 @@
                     }
                 })
             },
-
             getProfile() {
                 this.profileDataLoading = true;
                 apiService.GET(apiRoutes.profile_details, (res) => {
@@ -133,9 +115,7 @@
                     }
                 })
             },
-
         }
-
     }
 
 </script>

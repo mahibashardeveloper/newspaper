@@ -124,6 +124,21 @@
             width: 100%;
         }
 
+        .form-control{
+            height: 45px;
+            box-shadow: 0 0 0 0;
+            border-color: #dee2e6;
+        }
+
+        .add-btn{
+            padding: 10px 20px;
+            border-radius: 6px;
+            display: inline-block;
+            text-decoration: none;
+            color: $white;
+            background-color: $black;
+        }
+
         .admin-content-header{
             width: 100%;
             height: 70px;
@@ -414,8 +429,8 @@
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
-                                box-shadow: 0 0 0 0;
-                                border-radius: 10px;
+                                box-shadow: 0 0 5px 0 $border-color;
+                                border-radius: 6px;
                             }
 
                         }
@@ -456,7 +471,6 @@
                                 }
 
                                 .form-select{
-                                    line-height: 40px;
                                     box-shadow: 0 0 0 0;
                                     border-radius: 0;
                                 }
@@ -470,7 +484,6 @@
                                 }
 
                                 .form-control{
-                                    line-height: 40px;
                                     box-shadow: 0 0 0 0;
                                     border-radius: 0;
                                 }

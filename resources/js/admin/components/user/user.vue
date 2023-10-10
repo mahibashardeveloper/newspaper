@@ -1,10 +1,10 @@
 <template>
 
     <div class="px-4 py-3">
-        <div class="row align-items-center">
+        <div class="row align-items-start">
             <div class="col-md-6 mb-3">
                 <div class="position-relative">
-                    <input type="text" class="form-control shadow-none rounded-0 py-3 ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
+                    <input type="text" class="form-control ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
                     <div class="position-absolute top-50 start-0 translate-middle-y ps-3">
                         <i class="bi bi-search"></i>
                     </div>
@@ -77,12 +77,10 @@
                         {{each.email}}
                     </div>
                 </div>
-
             </div>
-
         </div>
-        <div class="card-footer">
 
+        <div class="card-footer">
             <div class="d-flex justify-content-center" v-if="tableData.length > 0 && loading === false">
                 <div class="pagination">
                     <div class="page-item" @click="PrevPage">
@@ -131,7 +129,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -171,10 +168,18 @@
                 createLoading: false,
                 deleteLoading: false,
                 user: [],
-                userParam: { full_name: '', email: '' },
-                deleteParam: { ids: [] },
+                userParam: {
+                    full_name: '',
+                    email: ''
+                },
+                deleteParam: {
+                    ids: []
+                },
                 tableData: [],
-                formData: { limit: 10, page: 1 },
+                formData: {
+                    limit: 10,
+                    page: 1
+                },
                 total_pages: 0,
                 current_page: 0,
                 buttons: [],
@@ -281,14 +286,6 @@
                 });
             },
 
-            getUser() {
-                apiService.POST(apiRoutes.userList, '', (res) => {
-                    if (res.status === 200) {
-                        this.user = res.data.data
-                    }
-                })
-            },
-
             SearchData() {
                 clearTimeout(this.searchTimeout);
                 this.searchTimeout = setTimeout(() => {
@@ -316,7 +313,6 @@
             },
 
         }
-
     }
 
 </script>

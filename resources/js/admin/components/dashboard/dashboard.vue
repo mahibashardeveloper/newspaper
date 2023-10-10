@@ -43,8 +43,19 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 p-3">
                 <div class="bg-white h-100 p-3">
                     <div class="row">
-                        <div class="col-12 col-md-6">Users</div>
-                        <div class="col-12 col-md-6 text-md-end"> 10,000 </div>
+                        <div class="col-12 col-md-6">
+                            <span v-if="user_total_data.total <= 1">
+                                User
+                            </span>
+                            <span v-else>
+                                Users
+                            </span>
+                        </div>
+                        <div class="col-12 col-md-6 text-md-end">
+                            {{user_total_data.total}}
+                            <span v-if="user_total_data.total <= 1"> Person </span>
+                            <span v-else> people </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,11 +94,10 @@
         data(){
 
             return{
-
+                loading: false,
                 category_total_data: '0',
-
                 blog_total_data: '0',
-
+                user_total_data: '0',
             }
 
         },
@@ -96,6 +106,7 @@
 
             this.getCategoryTotal();
             this.getBlogTotal();
+            this.getUserTotal();
 
         },
 
@@ -117,6 +128,16 @@
                     this.loading = false;
                     if (parseInt(res.status) === 200) {
                         this.blog_total_data = res.data;
+                    }
+                });
+            },
+
+            getUserTotal(){
+                this.loading = true;
+                apiService.POST(apiRoutes.userList, this.formData, (res) => {
+                    this.loading = false;
+                    if (parseInt(res.status) === 200) {
+                        this.user_total_data = res.data;
                     }
                 });
             }

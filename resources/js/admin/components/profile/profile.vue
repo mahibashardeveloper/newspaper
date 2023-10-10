@@ -22,27 +22,16 @@
                     <img class="img-fluid profile-circle" v-else :src="profile_data.media && profile_data.media.full_file_path" alt="profile">
                 </div>
                 <div class="py-2">
-                    <div class="fw-bold mb-2">
-                        Name:
-                    </div>
-                    {{profile_data.full_name}}
+                    <div class="fw-bold mb-2"> Name: </div> {{profile_data.full_name}}
                 </div>
                 <div class="py-2">
-                    <div class="fw-bold mb-2">
-                        Email:
-                    </div>
-                    {{profile_data.email}}
+                    <div class="fw-bold mb-2"> Email: </div> {{profile_data.email}}
                 </div>
                 <div class="py-2">
-                    <div class="fw-bold mb-2">
-                        Company Name
-                    </div>
-                    {{companyInfo_data.company_name}}
+                    <div class="fw-bold mb-2"> Company Name: </div> {{companyInfo_data.company_name}}
                 </div>
                 <div class="py-2">
-                    <div class="fw-bold mb-2">
-                        Social Media:
-                    </div>
+                    <div class="fw-bold mb-2"> Social Media: </div>
                     <div class="d-flex justify-content-start align-items-center flex-wrap">
                         <a :href="settings_data.facebook" target="_blank" class="btn btn-outline-dark me-2 rounded-0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Facebook Link">
                             <i class="bi bi-facebook"></i>
@@ -164,44 +153,32 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-0">
-                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
-                        Edit Social Media
-                    </h1>
+                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel"> Edit Social Media </h1>
                     <button type="button" class="btn-close" @click="closeEditSettingsModal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="facebook" class="form-label">
-                            Facebook Link
-                        </label>
+                        <label for="facebook" class="form-label"> Facebook Link </label>
                         <input type="text" id="facebook" name="facebook" class="form-control border-secondary-subtle" v-model="editSettingsParam.facebook">
                         <div class="error-text" v-if="error != null && error.facebook !== undefined" v-text="error.facebook[0]"></div>
                     </div>
                     <div class="form-group">
-                        <label for="last_name" class="form-label">
-                            Twitter Link
-                        </label>
+                        <label for="last_name" class="form-label"> Twitter Link </label>
                         <input type="text" id="twitter" name="twitter" class="form-control border-secondary-subtle" v-model="editSettingsParam.twitter">
                         <div class="error-text" v-if="error != null && error.twitter !== undefined" v-text="error.twitter[0]"></div>
                     </div>
                     <div class="form-group">
-                        <label for="email" class="form-label">
-                            Instagram Link
-                        </label>
+                        <label for="email" class="form-label"> Instagram Link </label>
                         <input type="text" id="instagram" name="instagram" class="form-control border-secondary-subtle" v-model="editSettingsParam.instagram">
                         <div class="error-text" v-if="error != null && error.instagram !== undefined" v-text="error.instagram[0]"></div>
                     </div>
                     <div class="form-group">
-                        <label for="phone_number" class="form-label">
-                            Linkedin Link
-                        </label>
+                        <label for="phone_number" class="form-label"> Linkedin Link </label>
                         <input type="text" id="linkedin" name="linkedin" class="form-control border-secondary-subtle" v-model="editSettingsParam.linkedin">
                         <div class="error-text" v-if="error != null && error.linkedin !== undefined" v-text="error.linkedin[0]"></div>
                     </div>
                     <div class="form-group">
-                        <label for="youtube" class="form-label">
-                            Youtube Link
-                        </label>
+                        <label for="youtube" class="form-label"> Youtube Link </label>
                         <input type="text" id="youtube" name="youtube" class="form-control border-secondary-subtle" v-model="editSettingsParam.youtube">
                         <div class="error-text" v-if="error != null && error.youtube !== undefined" v-text="error.youtube[0]"></div>
                     </div>
@@ -223,16 +200,12 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-0">
-                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
-                        Edit Company info
-                    </h1>
+                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel"> Edit Company info </h1>
                     <button type="button" class="btn-close" @click="closeEditCompanyInfoModal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="company_name" class="form-label">
-                            Company Name
-                        </label>
+                        <label for="company_name" class="form-label"> Company Name </label>
                         <input type="text" id="company_name" name="company_name" class="form-control border-secondary-subtle" v-model="companyParam.company_name">
                         <div class="error-text" v-if="error != null && error.company_name !== undefined" v-text="error.company_name[0]"></div>
                     </div>
@@ -255,57 +228,32 @@
     import apiService from "../../services/apiServices.js";
     import apiRoutes from "../../services/apiRoutes.js";
     export default {
-
         data(){
-
             return{
-
                 profileDataLoading: false,
-
                 profile_data: '',
-
                 updateProfileLoading: false,
-
                 error: null,
-
                 edit: false,
-
                 editParam: { full_name: '', email: '', avatar: '' },
-
                 passwordParam: { password: '', password_confirmation: '' },
-
                 companyParam: {company_name: ''},
-
                 settingsLoading: false,
-
                 settings_data: '',
-
                 updateSettingsLoading: false,
-
                 editSettingsParam: { facebook: '', twitter: '', instagram: '', linkedin: '', youtube: '' },
-
                 companyInfoLoading: false,
-
                 companyInfo_data: '',
-
                 updateCompanyInfoLoading: false,
-
             }
-
         },
 
         mounted() {
-
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
             this.getProfile();
-
             this.getSettings();
-
             this.getCompanyInfo();
-
         },
 
         methods: {
@@ -349,7 +297,10 @@
 
             closeEditPasswordModal() {
                 this.edit = false;
-                this.passwordParam = {password: "", password_confirmation: ""};
+                this.passwordParam = {
+                    password: "",
+                    password_confirmation: ""
+                };
                 this.error = null;
                 let myModalEl = document.getElementById('editPasswordModal');
                 let modal = bootstrap.Modal.getInstance(myModalEl);
@@ -482,7 +433,6 @@
             },
 
         }
-
     }
 
 </script>

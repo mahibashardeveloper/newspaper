@@ -133,62 +133,42 @@
 <script>
 
     import apiService from "../../services/apiServices";
-
     import apiRoutes from "../../services/apiRoutes";
 
     export default {
 
         computed: {
-
             getCategoryInRange() {
                 return (startId, endId) => {
                     return this.categories.filter(category => category.id >= startId && category.id <= endId);
                 };
             },
-
         },
 
         data(){
-
             return{
-
                 categories: [],
-
                 blogs: [],
-
                 formData:{
                     keyword:'',
                     category_id:'',
                     limit: 10,
                     page: 1
                 },
-
                 blogLoading: false,
-
                 loading: false,
-
                 total_pages: 0,
-
                 current_page: 0,
-
-                buttons: [''],
-
+                buttons: [],
                 searchTimeout: null,
-
                 error: null,
-
                 responseData: null,
-
             }
-
         },
 
         mounted() {
-
             this.blog_list();
-
             this.category_list();
-
         },
 
         methods: {
@@ -237,7 +217,6 @@
             },
 
         }
-
     }
 
 </script>

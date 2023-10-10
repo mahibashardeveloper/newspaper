@@ -1,17 +1,17 @@
 <template>
 
     <div class="px-4 py-3">
-        <div class="row align-items-center">
+        <div class="row align-items-start">
             <div class="col-md-6 mb-3">
                 <div class="position-relative">
-                    <input type="text" class="form-control shadow-none rounded-0 py-3 ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
+                    <input type="text" class="form-control ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
                     <div class="position-absolute top-50 start-0 translate-middle-y ps-3">
                         <i class="bi bi-search"></i>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-3 text-end">
-                <a href="javascript:void(0)" class="btn btn-dark py-3 px-5 rounded-0" @click="manageModal(1, null)">
+            <div class="col-md-6 mb-3 text-md-end">
+                <a href="javascript:void(0)" class="add-btn" @click="manageModal(1, null)">
                     Add
                 </a>
             </div>
@@ -30,8 +30,8 @@
                 </a>
             </span>
         </div>
-        <div class="card-body">
 
+        <div class="card-body">
             <!-- page loading start -->
             <div v-if="loading === true">
                 <h6 class="card-text placeholder-glow">
@@ -65,42 +65,38 @@
                     <div class="p-2 border" v-for="(each) in tableData">
                         <div class="row align-items-center blog p-3">
                             <div class="col-12 col-sm-6 col-md-6 col-lg-7">
-                                <div class="h3 mb-4">
-                                    {{each.title}}
-                                </div>
-                                <div class="mb-4">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut delectus, eveniet
-                                    0laudantium nemo quaerat qui veritatis! Ab aliquid corporis, cumque natus optio
-                                    quasi sit tenetur.
-                                </div>
+                                <div class="h3 mb-4"> {{each.title}} </div>
+                                <div class="mb-4"> {{each.description}} </div>
                                 <div class="mb-3">
-                                    <span v-if="each.category_info != null">
-                                        {{ each.category_info.name }}
-                                    </span>
+                                    <span v-if="each.category_info != null"> {{ each.category_info.name }} </span>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-md-6 col-lg-5">
                                 <div class="blog-size">
                                     <span v-if="each.avatar === null">
-                                    No Image Found
-                                </span>
+                                        No Image Found
+                                    </span>
                                     <span class="w-100 h-100" v-if="each.avatar !== null">
-                                    <img class="img-fluid" :src="'/storage/media/image/'+each.avatar" alt="person-image">
-                                </span>
+                                        <img class="img-fluid" :src="'/storage/media/image/'+each.avatar" alt="person-image">
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <a href="javascript:void(0)" class="btn-edit col-5" @click="manageModal(1, each.id)">Edit</a>
-                                    <a href="javascript:void(0)" class="btn-delete col-5" @click="deleteModal(1, each.id)">Delete</a>
+                                    <a href="javascript:void(0)" class="btn-edit col-5" @click="manageModal(1, each.id)">
+                                        Edit
+                                    </a>
+                                    <a href="javascript:void(0)" class="btn-delete col-5" @click="deleteModal(1, each.id)">
+                                        Delete
+                                    </a>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="card-footer">
             <div class="d-flex justify-content-center" v-if="tableData.length > 0 && loading === false">
                 <div class="pagination">
@@ -162,8 +158,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                            <label for="file-upload" class="square-modal-avatar cs-pointer border border-secondary-subtle">
-                                <input type="file" class="d-none" id="file-upload" @change="attachFile($event)">
+                        <label for="file-upload" class="square-modal-avatar cs-pointer border border-secondary-subtle">
+                            <input type="file" class="d-none" id="file-upload" @change="attachFile($event)">
                                 <span v-if="blogParam.avatar === null" class="py-4">
                                     <div class="text-center">
                                         <div class="mb-2">
@@ -172,10 +168,10 @@
                                         Upload Image
                                     </div>
                                 </span>
-                                <img class="img-fluid" v-if="blogParam.avatar !== null" :src="'/storage/media/image/'+blogParam.avatar" alt="profile">
-                            </label>
-                        <div class="error-text" v-if="error != null && error.avatar !== undefined" v-text="error.avatar[0]"></div>
-                    </div>
+                            <img class="img-fluid" v-if="blogParam.avatar !== null" :src="'/storage/media/image/'+blogParam.avatar" alt="profile">
+                        </label>
+                    <div class="error-text" v-if="error != null && error.avatar !== undefined" v-text="error.avatar[0]"></div>
+                </div>
                     <div class="form-group">
                         <label for="title" class="form-label">Name</label>
                         <input type="text" name="title" class="form-control border-secondary-subtle" v-model="blogParam.title">
@@ -183,32 +179,26 @@
                     </div>
                     <div class="form-group">
                         <label for="category_id" class="form-label">Category</label>
-                        <select name="category_id" id="category_id" v-model="blogParam.category_id" class="form-select">
-                            <option :value="0">Select Category Option</option>
-                            <option :value="each.id" v-for="(each) in category"> {{each.name}} </option>
-                        </select>
+                            <select name="category_id" id="category_id" v-model="blogParam.category_id" class="form-select">
+                                <option :value="0">Select Category Option</option>
+                                <option :value="each.id" v-for="(each) in category"> {{each.name}} </option>
+                            </select>
                         <div class="error-text" v-if="error != null && error.category_id !== undefined" v-text="error.category_id[0]"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="description" class="form-label">Description</label>
+                <div class="form-group">
+                    <label for="description" class="form-label">Description</label>
                         <textarea name="description" id="description" cols="30" rows="5" class="form-textarea-control border-secondary-subtle" v-model="blogParam.description"></textarea>
-                        <div class="error-text" v-if="error != null && error.description !== undefined" v-text="error.description[0]"></div>
-                    </div>
+                    <div class="error-text" v-if="error != null && error.description !== undefined" v-text="error.description[0]"></div>
                 </div>
+            </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-cancel" @click="manageModal(2,'')">Cancel</button>
                     <button type="button" class="btn-save" @click="manageBlog">
                         <span v-if="createLoading === false">
-                            <span v-if="blogParam.id === ''">
-                                save
-                            </span>
-                            <span v-if="blogParam.id !== ''">
-                                Update
-                            </span>
+                            <span v-if="blogParam.id === ''"> Save </span>
+                            <span v-if="blogParam.id !== ''"> Update </span>
                         </span>
-                        <span v-if="createLoading === true">
-                            Loading...
-                        </span>
+                        <span v-if="createLoading === true"> Loading... </span>
                     </button>
                 </div>
             </div>
@@ -228,8 +218,12 @@
                     </div>
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-around align-items-center">
-                    <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">Cancel</button>
-                    <button type="button" class="col-5 btn-delete" @click="deleteBlog">Confirm</button>
+                    <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">
+                        Cancel
+                    </button>
+                    <button type="button" class="col-5 btn-delete" @click="deleteBlog">
+                        Confirm
+                    </button>
                 </div>
             </div>
         </div>
@@ -252,10 +246,20 @@
                 deleteLoading: false,
                 blog: [],
                 category: [],
-                blogParam: { avatar: '', title: '', description: '', category_id: '' },
-                deleteParam: { ids: [] },
+                blogParam: {
+                    avatar: '',
+                    title: '',
+                    description: '',
+                    category_id: ''
+                },
+                deleteParam: {
+                    ids: []
+                },
                 tableData: [],
-                formData: { limit: 10, page: 1 },
+                formData: {
+                    limit: 10,
+                    page: 1
+                },
                 total_pages: 0,
                 current_page: 0,
                 buttons: [],
@@ -352,7 +356,13 @@
                     myModal.show();
                 } else {
                     this.selected = [];
-                    this.blogParam = { id: '', avatar: '', title: '', description: '', category_id: '' };
+                    this.blogParam = {
+                        id: '',
+                        avatar: '',
+                        title: '',
+                        description: '',
+                        category_id: ''
+                    };
                     this.current_page = 1;
                     let myModalEl = document.getElementById('deleteModal');
                     let modal = bootstrap.Modal.getInstance(myModalEl)
@@ -362,7 +372,13 @@
 
             manageModal(type, data = null) {
                 this.error = null;
-                this.blogParam = { id: '', title: '', description: '', category_id: 0, avatar: null };
+                this.blogParam = {
+                    id: '',
+                    title: '',
+                    description: '',
+                    category_id: 0,
+                    avatar: null
+                };
                 if (type === 1) {
                     this.getBlog();
                     if (data !== null) {

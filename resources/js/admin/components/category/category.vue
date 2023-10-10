@@ -1,17 +1,17 @@
 <template>
 
     <div class="px-4 py-3">
-        <div class="row align-items-center">
+        <div class="row align-items-start">
             <div class="col-md-6 mb-3">
                 <div class="position-relative">
-                    <input type="text" class="form-control shadow-none rounded-0 py-3 ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
+                    <input type="text" class="form-control ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
                     <div class="position-absolute top-50 start-0 translate-middle-y ps-3">
                         <i class="bi bi-search"></i>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-3 text-end">
-                <a href="javascript:void(0)" class="btn btn-dark py-3 px-5 rounded-0" @click="manageModal(1, null)">
+            <div class="col-md-6 mb-3 text-md-end">
+                <a href="javascript:void(0)" class="add-btn" @click="manageModal(1, null)">
                     Add
                 </a>
             </div>
@@ -210,10 +210,17 @@
                 createLoading: false,
                 deleteLoading: false,
                 category: [],
-                categoryParam: { name: '' },
-                deleteParam: { ids: [] },
+                categoryParam: {
+                    name: ''
+                },
+                deleteParam: {
+                    ids: []
+                },
                 tableData: [],
-                formData: { limit: 10, page: 1 },
+                formData: {
+                    limit: 10,
+                    page: 1
+                },
                 total_pages: 0,
                 current_page: 0,
                 buttons: [],
@@ -285,7 +292,7 @@
                     myModal.show();
                 } else {
                     this.selected = [];
-                    this.categoryParam = { id: '', name: '', avatar: '' };
+                    this.categoryParam = { id: '', name: '' };
                     this.current_page = 1;
                     let myModalEl = document.getElementById('deleteModal');
                     let modal = bootstrap.Modal.getInstance(myModalEl)
@@ -295,7 +302,7 @@
 
             manageModal(type, data = null) {
                 this.error = null;
-                this.categoryParam = { id: '', name: '', avatar: null };
+                this.categoryParam = { id: '', name: '' };
                 if (type === 1) {
                     this.getCategory();
                     if (data !== null) {
