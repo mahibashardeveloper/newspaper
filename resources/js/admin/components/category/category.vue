@@ -1,8 +1,8 @@
 <template>
 
-    <div class="px-4 py-3">
-        <div class="row align-items-start">
-            <div class="col-md-6 mb-3">
+    <div class="content-search-add">
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+            <div class="col-12 col-md-6 mb-3">
                 <div class="position-relative">
                     <input type="text" class="form-control ps-5" placeholder="এখানে অনুসন্ধান করুন" v-model="formData.q" @keyup="SearchData">
                     <div class="position-absolute top-50 start-0 translate-middle-y ps-3">
@@ -10,7 +10,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-3 text-md-end">
+            <div class="col-12 col-md-6 mb-3 text-md-end">
                 <a href="javascript:void(0)" class="add-btn" @click="manageModal(1, null)">
                     যোগ করুন
                 </a>

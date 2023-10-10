@@ -31,9 +31,9 @@ const routes = [
 
     // authentication
 
-    {path: ROOT_URL + '/auth/login', name: 'login', component: login, meta: {title: 'login'}},
+    {path: ROOT_URL + '/auth/login', name: 'login', component: login, meta: {title: 'লগইন'}},
 
-    {path: ROOT_URL + '/auth/forget', name: 'forget', component: forget, meta: {title: 'forget'}},
+    {path: ROOT_URL + '/auth/forget', name: 'forget', component: forget, meta: {title: 'ফরগেট'}},
 
     // layout
 
@@ -43,19 +43,19 @@ const routes = [
 
             // dashboard
 
-            {path: ROOT_URL + '/dashboard', name: 'dashboard', component: dashboard, meta: {title: 'dashboard'}},
+            {path: ROOT_URL + '/dashboard', name: 'dashboard', component: dashboard, meta: {title: 'ড্যাশবোর্ড'}},
 
             // category
-            {path: ROOT_URL + '/categories', name: 'category', component: category, meta: {title: 'categories'}},
+            {path: ROOT_URL + '/categories', name: 'category', component: category, meta: {title: 'বিভাগসমূহ'}},
 
             // blog
-            {path: ROOT_URL + '/blogs', name: 'blog', component: blog, meta: {title: 'blogs'}},
+            {path: ROOT_URL + '/blogs', name: 'blog', component: blog, meta: {title: 'খবরসমূহ'}},
 
             // customer
-            {path: ROOT_URL + '/users', name: 'user', component: user, meta: {title: 'users'}},
+            {path: ROOT_URL + '/users', name: 'user', component: user, meta: {title: 'পরিদর্শকগণ'}},
 
             // profile
-            {path: ROOT_URL + '/profile', name: 'profile', component: profile, meta: {title: 'profile'}},
+            {path: ROOT_URL + '/profile', name: 'profile', component: profile, meta: {title: 'প্রোফাইল'}},
 
         ],
 

@@ -1,8 +1,8 @@
 <template>
 
-    <div class="px-4 py-3">
-        <div class="row align-items-start">
-            <div class="col-md-6 mb-3">
+    <div class="content-search-add">
+        <div class="d-flex align-items-center justify-content-between flex-wrap">
+            <div class="col-12 col-md-6 mb-3">
                 <div class="position-relative">
                     <input type="text" class="form-control ps-5" placeholder="এখানে অনুসন্ধান করুন" v-model="formData.q" @keyup="SearchData">
                     <div class="position-absolute top-50 start-0 translate-middle-y ps-3">
@@ -10,7 +10,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-3 text-md-end">
+            <div class="col-12 col-md-6 mb-3 text-md-end">
                 <a href="javascript:void(0)" class="add-btn" @click="manageModal(1, null)">
                     যোগ করুন
                 </a>
@@ -152,7 +152,7 @@
     <div class="modal fade" id="manageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">খবর তৈরি করুন</h1>
                     <button type="button" class="btn-close" @click="manageModal(2,'')"></button>
                 </div>
@@ -160,18 +160,15 @@
                     <div class="form-group">
                         <label for="file-upload" class="square-modal-avatar cs-pointer border border-secondary-subtle">
                             <input type="file" class="d-none" id="file-upload" @change="attachFile($event)">
-                                <span v-if="blogParam.avatar === null" class="py-4">
-                                    <div class="text-center">
-                                        <div class="mb-2">
-                                            <i class="bi bi-card-image"></i>
-                                        </div>
-                                        আপলোড ইমেজ
-                                    </div>
-                                </span>
+                            <span v-if="blogParam.avatar === null" class="py-4">
+                                <div class="text-center"> <div class="mb-2"> <i class="bi bi-card-image"></i> </div>
+                                    আপলোড ইমেজ
+                                </div>
+                            </span>
                             <img class="img-fluid" v-if="blogParam.avatar !== null" :src="'/storage/media/image/'+blogParam.avatar" alt="profile">
                         </label>
-                    <div class="error-text" v-if="error != null && error.avatar !== undefined" v-text="error.avatar[0]"></div>
-                </div>
+                        <div class="error-text" v-if="error != null && error.avatar !== undefined" v-text="error.avatar[0]"></div>
+                    </div>
                     <div class="form-group">
                         <label for="title" class="form-label">নাম</label>
                         <input type="text" name="title" class="form-control border-secondary-subtle" v-model="blogParam.title">
@@ -179,19 +176,19 @@
                     </div>
                     <div class="form-group">
                         <label for="category_id" class="form-label">বিভাগ নির্বাচন করুন</label>
-                            <select name="category_id" id="category_id" v-model="blogParam.category_id" class="form-select">
-                                <option :value="0">বিভাগ বিকল্প নির্বাচন করুন</option>
-                                <option :value="each.id" v-for="(each) in category"> {{each.name}} </option>
-                            </select>
+                        <select name="category_id" id="category_id" v-model="blogParam.category_id" class="form-select">
+                            <option :value="0">বিভাগ বিকল্প নির্বাচন করুন</option>
+                            <option :value="each.id" v-for="(each) in category"> {{each.name}} </option>
+                        </select>
                         <div class="error-text" v-if="error != null && error.category_id !== undefined" v-text="error.category_id[0]"></div>
                     </div>
-                <div class="form-group">
-                    <label for="description" class="form-label">বর্ণনা করুন</label>
+                    <div class="form-group">
+                        <label for="description" class="form-label">বর্ণনা করুন</label>
                         <textarea name="description" id="description" cols="30" rows="5" class="form-textarea-control border-secondary-subtle" v-model="blogParam.description"></textarea>
-                    <div class="error-text" v-if="error != null && error.description !== undefined" v-text="error.description[0]"></div>
+                        <div class="error-text" v-if="error != null && error.description !== undefined" v-text="error.description[0]"></div>
+                    </div>
                 </div>
-            </div>
-                <div class="modal-footer">
+                <div class="modal-footer border-top-0">
                     <button type="button" class="btn-cancel" @click="manageModal(2,'')">বাতিল করুন</button>
                     <button type="button" class="btn-save" @click="manageBlog">
                         <span v-if="createLoading === false">

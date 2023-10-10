@@ -17,7 +17,7 @@ class BlogSeeder extends Seeder
             $blog = new Blogs;
             $blog->admin_id = "1";
             $blog->title = $faker->title;
-            $blog->avatar = $faker->randomElement([Storage::disk('public/media/image/')]);
+            $blog->avatar = $faker->image;
             $blog->description = $faker->text;
             $blog->save();
         }

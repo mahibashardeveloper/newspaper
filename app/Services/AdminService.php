@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Admins;
 use App\Models\Settings;
-use App\Models\Media;
 use App\Models\Companies;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
