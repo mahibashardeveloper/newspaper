@@ -495,6 +495,10 @@
                                     overflow: hidden;
                                     object-fit: cover;
 
+                                    img{
+                                        object-fit: cover;
+                                    }
+
                                     &.cs-pointer{
                                         cursor: pointer;
                                     }
@@ -507,6 +511,11 @@
                                     align-items: center;
                                     overflow: hidden;
                                     object-fit: cover;
+
+                                    img{
+                                        width: 60%;
+                                        object-fit: cover;
+                                    }
 
                                     &.cs-pointer{
                                         cursor: pointer;

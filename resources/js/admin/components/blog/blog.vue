@@ -4,7 +4,7 @@
         <div class="row align-items-start">
             <div class="col-md-6 mb-3">
                 <div class="position-relative">
-                    <input type="text" class="form-control ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
+                    <input type="text" class="form-control ps-5" placeholder="এখানে অনুসন্ধান করুন" v-model="formData.q" @keyup="SearchData">
                     <div class="position-absolute top-50 start-0 translate-middle-y ps-3">
                         <i class="bi bi-search"></i>
                     </div>
@@ -12,7 +12,7 @@
             </div>
             <div class="col-md-6 mb-3 text-md-end">
                 <a href="javascript:void(0)" class="add-btn" @click="manageModal(1, null)">
-                    Add
+                    যোগ করুন
                 </a>
             </div>
         </div>
@@ -20,7 +20,7 @@
 
     <div class="card-section">
         <div class="card-header">
-            <div class="card-title">Blogs</div>
+            <div class="card-title">খবরসমূহ</div>
             <span class="d-flex align-items-center ms-3" v-if="tableData.length > 0 && loading === false && selected.length > 0">
                 <a href="javascript:void(0)" class="select-icon" @click="deleteModal(1)">
                     <i class="bi bi-trash2"></i>
@@ -54,8 +54,8 @@
                     <div class="mb-3">
                         <i class="bi bi-exclamation-circle fs-1"></i>
                     </div>
-                    <div class="mb-3">There are no data founded.</div>
-                    <span>Click “Add” to create new data.</span>
+                    <div class="mb-3">কোন তথ্য নেই.</div>
+                    <span>নতুন ডেটা তৈরি করতে "যোগ করুন" এ চাপ দেবেন।</span>
                 </div>
             </div>
             <!-- no data end -->
@@ -74,7 +74,7 @@
                             <div class="col-12 col-sm-6 col-md-6 col-lg-5">
                                 <div class="blog-size">
                                     <span v-if="each.avatar === null">
-                                        No Image Found
+                                        ছবি নেই
                                     </span>
                                     <span class="w-100 h-100" v-if="each.avatar !== null">
                                         <img class="img-fluid" :src="'/storage/media/image/'+each.avatar" alt="person-image">
@@ -84,10 +84,10 @@
                             <div class="col-12">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="javascript:void(0)" class="btn-edit col-5" @click="manageModal(1, each.id)">
-                                        Edit
+                                        আধুনিক করুন
                                     </a>
                                     <a href="javascript:void(0)" class="btn-delete col-5" @click="deleteModal(1, each.id)">
-                                        Delete
+                                        মুছুন
                                     </a>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Blog</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">খবর তৈরি করুন</h1>
                     <button type="button" class="btn-close" @click="manageModal(2,'')"></button>
                 </div>
                 <div class="modal-body">
@@ -165,7 +165,7 @@
                                         <div class="mb-2">
                                             <i class="bi bi-card-image"></i>
                                         </div>
-                                        Upload Image
+                                        আপলোড ইমেজ
                                     </div>
                                 </span>
                             <img class="img-fluid" v-if="blogParam.avatar !== null" :src="'/storage/media/image/'+blogParam.avatar" alt="profile">
@@ -173,32 +173,32 @@
                     <div class="error-text" v-if="error != null && error.avatar !== undefined" v-text="error.avatar[0]"></div>
                 </div>
                     <div class="form-group">
-                        <label for="title" class="form-label">Name</label>
+                        <label for="title" class="form-label">নাম</label>
                         <input type="text" name="title" class="form-control border-secondary-subtle" v-model="blogParam.title">
                         <div class="error-text" v-if="error != null && error.title !== undefined" v-text="error.title[0]"></div>
                     </div>
                     <div class="form-group">
-                        <label for="category_id" class="form-label">Category</label>
+                        <label for="category_id" class="form-label">বিভাগ নির্বাচন করুন</label>
                             <select name="category_id" id="category_id" v-model="blogParam.category_id" class="form-select">
-                                <option :value="0">Select Category Option</option>
+                                <option :value="0">বিভাগ বিকল্প নির্বাচন করুন</option>
                                 <option :value="each.id" v-for="(each) in category"> {{each.name}} </option>
                             </select>
                         <div class="error-text" v-if="error != null && error.category_id !== undefined" v-text="error.category_id[0]"></div>
                     </div>
                 <div class="form-group">
-                    <label for="description" class="form-label">Description</label>
+                    <label for="description" class="form-label">বর্ণনা করুন</label>
                         <textarea name="description" id="description" cols="30" rows="5" class="form-textarea-control border-secondary-subtle" v-model="blogParam.description"></textarea>
                     <div class="error-text" v-if="error != null && error.description !== undefined" v-text="error.description[0]"></div>
                 </div>
             </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn-cancel" @click="manageModal(2,'')">Cancel</button>
+                    <button type="button" class="btn-cancel" @click="manageModal(2,'')">বাতিল করুন</button>
                     <button type="button" class="btn-save" @click="manageBlog">
                         <span v-if="createLoading === false">
-                            <span v-if="blogParam.id === ''"> Save </span>
-                            <span v-if="blogParam.id !== ''"> Update </span>
+                            <span v-if="blogParam.id === ''"> সংরক্ষণ করুন </span>
+                            <span v-if="blogParam.id !== ''"> আধুনিক করুন </span>
                         </span>
-                        <span v-if="createLoading === true"> Loading... </span>
+                        <span v-if="createLoading === true"> লোড হচ্ছে... </span>
                     </button>
                 </div>
             </div>
@@ -209,20 +209,25 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-header border-bottom-0">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Blog</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">খবর মুছুন</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="h4 fw-bold text-center">
-                        Are you sure ?
+                        আপনি কি নিশ্চিত ?
                     </div>
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-around align-items-center">
                     <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">
-                        Cancel
+                        বাতিল করুন
                     </button>
                     <button type="button" class="col-5 btn-delete" @click="deleteBlog">
-                        Confirm
+                        <span v-if="deleteLoading === false">
+                            নিশ্চিত করুন
+                        </span>
+                        <span v-if="deleteLoading === true">
+                            লোড হচ্ছে...
+                        </span>
                     </button>
                 </div>
             </div>

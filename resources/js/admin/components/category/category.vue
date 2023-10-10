@@ -55,7 +55,7 @@
                         <i class="bi bi-exclamation-circle fs-1"></i>
                     </div>
                     <div class="mb-3">কোন তথ্য নেই.</div>
-                    <span>নতুন ডেটা তৈরি করতে "যোগ করুন" এ ক্লিক করুন।</span>
+                    <span>নতুন ডেটা তৈরি করতে "যোগ করুন" এ চাপ দেবেন।</span>
                 </div>
             </div>
             <!-- no data end -->
@@ -163,7 +163,7 @@
                         <button type="button" class="btn-save" @click="manageCategory">
                             <span v-if="createLoading === false">
                                 <span v-if="categoryParam.id === ''">
-                                    সংরক্ষণ
+                                    সংরক্ষণ করুন
                                 </span>
                                 <span v-if="categoryParam.id !== ''">
                                     আধুনিক করুন
@@ -193,7 +193,14 @@
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-around align-items-center">
                     <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">বাতিল করুন</button>
-                    <button type="button" class="col-5 btn-delete" @click="deleteCategory">নিশ্চিত করুন</button>
+                    <button type="button" class="col-5 btn-delete" @click="deleteCategory">
+                        <span v-if="deleteLoading === false">
+                            নিশ্চিত করুন
+                        </span>
+                        <span v-if="deleteLoading === true">
+                            লোড হচ্ছে...
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>

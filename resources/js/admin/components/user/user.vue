@@ -4,7 +4,7 @@
         <div class="row align-items-start">
             <div class="col-md-6 mb-3">
                 <div class="position-relative">
-                    <input type="text" class="form-control ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
+                    <input type="text" class="form-control ps-5" placeholder="এখানে অনুসন্ধান করুন" v-model="formData.q" @keyup="SearchData">
                     <div class="position-absolute top-50 start-0 translate-middle-y ps-3">
                         <i class="bi bi-search"></i>
                     </div>
@@ -15,7 +15,7 @@
 
     <div class="card-section">
         <div class="card-header">
-            <div class="card-title">Users</div>
+            <div class="card-title">পরিদর্শকগণ</div>
             <span class="d-flex align-items-center ms-3" v-if="tableData.length > 0 && loading === false && selected.length > 0">
                 <a href="javascript:void(0)" class="select-icon" @click="deleteModal(1)">
                     <i class="bi bi-trash2"></i>
@@ -46,8 +46,7 @@
                     <div class="mb-3">
                         <i class="bi bi-exclamation-circle fs-1"></i>
                     </div>
-                    <div class="mb-3">There are no data founded.</div>
-                    <span>Click “Add” to create new data.</span>
+                    <div class="mb-3">কোন তথ্য নেই.</div>
                 </div>
             </div>
             <!-- no data end -->
@@ -55,26 +54,36 @@
             <div v-if="tableData.length > 0 && loading === false">
 
                 <div class="row card-topic">
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 d-none d-sm-block">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-none d-sm-block">
                         <div class="d-flex align-items-center">
                             <input type="checkbox" class="form-check-input me-3 d-none d-sm-block" :checked="tableData.length > 0 && tableData.length === selected.length" @change="toggleCheckAll($event)">
-                            Name
+                            নাম
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 d-none d-sm-block">Email</div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-none d-sm-block">
+                        ইমেইল
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-none d-sm-block">
+
+                    </div>
                 </div>
 
                 <div class="row card-list" v-for="(each) in tableData">
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                         <div class="marge-title py-3"> Name </div>
                         <div class="d-flex align-items-center justify-content-start">
                             <input type="checkbox" class="form-check-input me-3 d-none d-sm-block" :checked="CheckIfChecked(each.id)" @change="toggleCheck($event,each.id)">
                             {{each.full_name}}
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                         <div class="marge-title py-3"> Email </div>
                         {{each.email}}
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                        <a href="javascript:void(0)" class="text-decoration-none text-danger" @click="deleteModal(1, each.id)">
+                            <i class="bi bi-trash2"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -136,17 +145,24 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-header border-bottom-0">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete User</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">পরিদর্শক মুছুন</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="h4 fw-bold text-center">
-                        Are you sure ?
+                        আপনি কি নিশ্চিত ?
                     </div>
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-around align-items-center">
-                    <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">Cancel</button>
-                    <button type="button" class="col-5 btn-delete" @click="deleteUser">Confirm</button>
+                    <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">বাতিল করুন</button>
+                    <button type="button" class="col-5 btn-delete" @click="deleteUser">
+                        <span v-if="deleteLoading === false">
+                            নিশ্চিত করুন
+                        </span>
+                        <span v-if="deleteLoading === true">
+                            লোড হচ্ছে...
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>

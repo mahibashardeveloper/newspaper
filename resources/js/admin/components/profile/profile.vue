@@ -22,16 +22,16 @@
                     <img class="img-fluid profile-circle" v-else :src="profile_data.media && profile_data.media.full_file_path" alt="profile">
                 </div>
                 <div class="py-2">
-                    <div class="fw-bold mb-2"> Name: </div> {{profile_data.full_name}}
+                    <div class="fw-bold mb-2"> নাম - </div> {{profile_data.full_name}}
                 </div>
                 <div class="py-2">
-                    <div class="fw-bold mb-2"> Email: </div> {{profile_data.email}}
+                    <div class="fw-bold mb-2"> ইমেইল - </div> {{profile_data.email}}
                 </div>
                 <div class="py-2">
-                    <div class="fw-bold mb-2"> Company Name: </div> {{companyInfo_data.company_name}}
+                    <div class="fw-bold mb-2"> কোম্পানির নাম - </div> {{companyInfo_data.company_name}}
                 </div>
                 <div class="py-2">
-                    <div class="fw-bold mb-2"> Social Media: </div>
+                    <div class="fw-bold mb-2"> সোশ্যাল মিডিয়া - </div>
                     <div class="d-flex justify-content-start align-items-center flex-wrap">
                         <a :href="settings_data.facebook" target="_blank" class="btn btn-outline-dark me-2 rounded-0" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Facebook Link">
                             <i class="bi bi-facebook"></i>
@@ -60,7 +60,7 @@
             <div class="modal-content p-3">
                 <div class="modal-header border-0">
                     <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
-                        Edit Profile
+                        প্রোফাইল সম্পাদন করুন
                     </h1>
                     <button type="button" class="btn-close" @click="closeEditProfileModal"></button>
                 </div>
@@ -74,7 +74,7 @@
                                         <div class="mb-2">
                                             <i class="bi bi-card-image"></i>
                                         </div>
-                                        Upload Image
+                                        আপলোড ইমেজ
                                     </div>
                                 </span>
                             </label>
@@ -83,24 +83,24 @@
                     </div>
                     <div class="form-group">
                         <label for="full_name" class="form-label">
-                            Full Name
+                            পুরো নাম
                         </label>
-                        <input type="text" id="full_name" name="full_name" class="form-control border-secondary-subtle" v-model="editParam.full_name">
+                        <input type="text" id="full_name" name="full_name" class="form-control border-secondary-subtle" v-model="editParam.full_name" autocomplete="off">
                         <div class="error-text" v-if="error != null && error.full_name !== undefined" v-text="error.full_name[0]"></div>
                     </div>
                     <div class="form-group">
                         <label for="email" class="form-label">
-                            Email
+                            ইমেইল
                         </label>
-                        <input type="email" id="email" name="email" class="form-control border-secondary-subtle" v-model="editParam.email">
+                        <input type="email" id="email" name="email" class="form-control border-secondary-subtle" v-model="editParam.email" autocomplete="off">
                         <div class="error-text" v-if="error != null && error.email !== undefined" v-text="error.email[0]"></div>
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn-cancel" @click="closeEditProfileModal"> Close </button>
+                    <button type="button" class="btn-cancel" @click="closeEditProfileModal"> বাতিল করুন </button>
                     <button type="button" class="btn-save" @click="updateProfile">
-                        <span v-if="updateProfileLoading === false">Edit</span>
-                        <span v-if="updateProfileLoading === true">Loading...</span>
+                        <span v-if="updateProfileLoading === false">সম্পাদনা করুন</span>
+                        <span v-if="updateProfileLoading === true">লোড হচ্ছে...</span>
                     </button>
                 </div>
             </div>
@@ -114,33 +114,33 @@
             <div class="modal-content p-3">
                 <div class="modal-header border-0">
                     <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
-                        Edit Password
+                        পাসওয়ার্ড সম্পাদনা করুন
                     </h1>
                     <button type="button" class="btn-close" @click="closeEditPasswordModal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="password" class="form-label">
-                            New Password
+                            নতুন পাসওয়ার্ড
                         </label>
-                        <input type="password" id="password" name="password" class="form-control border-secondary-subtle" v-model="passwordParam.password">
+                        <input type="password" id="password" name="password" class="form-control border-secondary-subtle" v-model="passwordParam.password" autocomplete="off">
                         <div class="error-text" v-if="error != null && error.password !== undefined" v-text="error.password[0]"></div>
                     </div>
                     <div class="form-group">
                         <label for="password_confirmation" class="form-label">
-                            Confirm Password
+                            পাসওয়ার্ড নিশ্চিত করুন
                         </label>
-                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control border-secondary-subtle" v-model="passwordParam.password_confirmation">
+                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control border-secondary-subtle" v-model="passwordParam.password_confirmation" autocomplete="off">
                         <div class="error-text" v-if="error != null && error.password_confirmation !== undefined" v-text="error.password_confirmation[0]"></div>
                     </div>
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn-cancel" @click="closeEditPasswordModal">
-                        Close
+                        বাতিল করুন
                     </button>
                     <button type="submit" class="btn-save" @click="updatePassword">
-                        <span v-if="updateProfileLoading === false"> Edit </span>
-                        <span v-if="updateProfileLoading === true"> Loading... </span>
+                        <span v-if="updateProfileLoading === false"> সম্পাদনা করুন </span>
+                        <span v-if="updateProfileLoading === true"> লোড হচ্ছে... </span>
                     </button>
                 </div>
             </div>
@@ -153,41 +153,41 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-0">
-                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel"> Edit Social Media </h1>
+                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel"> সোশ্যাল মিডিয়া সম্পাদন করুন </h1>
                     <button type="button" class="btn-close" @click="closeEditSettingsModal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="facebook" class="form-label"> Facebook Link </label>
-                        <input type="text" id="facebook" name="facebook" class="form-control border-secondary-subtle" v-model="editSettingsParam.facebook">
+                        <input type="text" id="facebook" name="facebook" class="form-control border-secondary-subtle" v-model="editSettingsParam.facebook" autocomplete="off">
                         <div class="error-text" v-if="error != null && error.facebook !== undefined" v-text="error.facebook[0]"></div>
                     </div>
                     <div class="form-group">
                         <label for="last_name" class="form-label"> Twitter Link </label>
-                        <input type="text" id="twitter" name="twitter" class="form-control border-secondary-subtle" v-model="editSettingsParam.twitter">
+                        <input type="text" id="twitter" name="twitter" class="form-control border-secondary-subtle" v-model="editSettingsParam.twitter" autocomplete="off">
                         <div class="error-text" v-if="error != null && error.twitter !== undefined" v-text="error.twitter[0]"></div>
                     </div>
                     <div class="form-group">
                         <label for="email" class="form-label"> Instagram Link </label>
-                        <input type="text" id="instagram" name="instagram" class="form-control border-secondary-subtle" v-model="editSettingsParam.instagram">
+                        <input type="text" id="instagram" name="instagram" class="form-control border-secondary-subtle" v-model="editSettingsParam.instagram" autocomplete="off">
                         <div class="error-text" v-if="error != null && error.instagram !== undefined" v-text="error.instagram[0]"></div>
                     </div>
                     <div class="form-group">
                         <label for="phone_number" class="form-label"> Linkedin Link </label>
-                        <input type="text" id="linkedin" name="linkedin" class="form-control border-secondary-subtle" v-model="editSettingsParam.linkedin">
+                        <input type="text" id="linkedin" name="linkedin" class="form-control border-secondary-subtle" v-model="editSettingsParam.linkedin" autocomplete="off">
                         <div class="error-text" v-if="error != null && error.linkedin !== undefined" v-text="error.linkedin[0]"></div>
                     </div>
                     <div class="form-group">
                         <label for="youtube" class="form-label"> Youtube Link </label>
-                        <input type="text" id="youtube" name="youtube" class="form-control border-secondary-subtle" v-model="editSettingsParam.youtube">
+                        <input type="text" id="youtube" name="youtube" class="form-control border-secondary-subtle" v-model="editSettingsParam.youtube" autocomplete="off">
                         <div class="error-text" v-if="error != null && error.youtube !== undefined" v-text="error.youtube[0]"></div>
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn-cancel" @click="closeEditSettingsModal"> Close </button>
+                    <button type="button" class="btn-cancel" @click="closeEditSettingsModal"> বাতিল করুন </button>
                     <button type="button" class="btn-save" @click="updateSettings">
-                        <span v-if="updateSettingsLoading === false">Edit</span>
-                        <span v-if="updateSettingsLoading === true">Loading...</span>
+                        <span v-if="updateSettingsLoading === false"> সম্পাদন করুন </span>
+                        <span v-if="updateSettingsLoading === true">লোড হচ্ছে...</span>
                     </button>
                 </div>
             </div>
@@ -200,21 +200,21 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header border-0">
-                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel"> Edit Company info </h1>
+                    <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel"> কোম্পানির তথ্য সম্পাদনা করুন </h1>
                     <button type="button" class="btn-close" @click="closeEditCompanyInfoModal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="company_name" class="form-label"> Company Name </label>
-                        <input type="text" id="company_name" name="company_name" class="form-control border-secondary-subtle" v-model="companyParam.company_name">
+                        <label for="company_name" class="form-label"> কোম্পানি নাম </label>
+                        <input type="text" id="company_name" name="company_name" class="form-control border-secondary-subtle" v-model="companyParam.company_name" autocomplete="off">
                         <div class="error-text" v-if="error != null && error.company_name !== undefined" v-text="error.company_name[0]"></div>
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn-cancel" @click="closeEditCompanyInfoModal"> Close </button>
+                    <button type="button" class="btn-cancel" @click="closeEditCompanyInfoModal"> বাতিল করুন </button>
                     <button type="button" class="btn-save" @click="updateCompanyInfo">
-                        <span v-if="updateCompanyInfoLoading === false">Edit</span>
-                        <span v-if="updateCompanyInfoLoading === true">Loading...</span>
+                        <span v-if="updateCompanyInfoLoading === false">সম্পাদনা করুন</span>
+                        <span v-if="updateCompanyInfoLoading === true">লোড হচ্ছে...</span>
                     </button>
                 </div>
             </div>
@@ -235,13 +235,28 @@
                 updateProfileLoading: false,
                 error: null,
                 edit: false,
-                editParam: { full_name: '', email: '', avatar: '' },
-                passwordParam: { password: '', password_confirmation: '' },
-                companyParam: {company_name: ''},
+                editParam: {
+                    full_name: '',
+                    email: '',
+                    avatar: ''
+                },
+                passwordParam: {
+                    password: '',
+                    password_confirmation: ''
+                },
+                companyParam: {
+                    company_name: ''
+                },
                 settingsLoading: false,
                 settings_data: '',
                 updateSettingsLoading: false,
-                editSettingsParam: { facebook: '', twitter: '', instagram: '', linkedin: '', youtube: '' },
+                editSettingsParam: {
+                    facebook: '',
+                    twitter: '',
+                    instagram: '',
+                    linkedin: '',
+                    youtube: ''
+                },
                 companyInfoLoading: false,
                 companyInfo_data: '',
                 updateCompanyInfoLoading: false,

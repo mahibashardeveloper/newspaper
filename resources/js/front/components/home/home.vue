@@ -42,7 +42,7 @@
         </div>
         <!-- no data end -->
 
-        <div class="row row cols-1 row-cols-sm-1 row-cols-md-2" v-if="blogLoading === false">
+        <div class="row row cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2" v-if="blogLoading === false">
             <div class="post" v-for="(blog) in blogs" :key="blog.id">
                 <div class="row align-items-center">
                     <div class="col-md-7">
@@ -52,7 +52,7 @@
                         <div class="mb-4">
                             {{blog.description}}
                         </div>
-                        <router-link :to="{name: 'post'}" class="btn-post-link">Read me</router-link>
+                        <router-link :to="{name: 'post'}" class="btn-post-link"> আরো পড়ুন </router-link>
                     </div>
                     <div class="col-md-5">
                         <div class="post-image">
@@ -141,10 +141,10 @@
 
         computed: {
             displayedHeaderCategories() {
-                return this.categories.slice(0, 12);
+                return this.categories.slice(0, 11);
             },
             displayedFooterCategories() {
-                return this.categories.slice(12,40);
+                return this.categories.slice(11,40);
             }
         },
 

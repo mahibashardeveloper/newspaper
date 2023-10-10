@@ -18,8 +18,8 @@ class RemoveUnnecessaryFiles extends Command
     public function handle()
     {
 
-        $storageAppPath = storage_path('app/public/media/image');
-        $publicStoragePath = public_path('storage/media/image');
+        $storageAppPath = storage_path('app/public/media');
+        $publicStoragePath = public_path('storage/media');
 
 
         File::deleteDirectory($storageAppPath);

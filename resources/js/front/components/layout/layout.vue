@@ -17,25 +17,21 @@
                             একাউন্ট
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <span v-if="profile_data === null">
-                                <li>
-                                    <router-link :to="{name: 'registration'}" class="dropdown-item"> নিবন্ধন করুন </router-link>
-                                </li>
-                                <li>
-                                    <router-link :to="{name: 'login'}" class="dropdown-item"> প্রবেশ করুন </router-link>
-                                </li>
-                            </span>
-                            <span v-if="profile_data !== null">
-                                <li>
-                                    <router-link :to="{name: 'my_account'}" class="dropdown-item"> পার্শ্বচিত্র </router-link>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)" class="dropdown-item" @click="logout">
-                                        <span v-if="logoutLoading === false"> প্রস্থান করুন </span>
-                                        <span v-if="logoutLoading === true"> লোড হচ্ছে... </span>
-                                    </a>
-                                </li>
-                            </span>
+                            <li v-if="profile_data === null">
+                                <router-link :to="{name: 'registration'}" class="dropdown-item"> নিবন্ধন করুন </router-link>
+                            </li>
+                            <li v-if="profile_data === null">
+                                <router-link :to="{name: 'login'}" class="dropdown-item"> প্রবেশ করুন </router-link>
+                            </li>
+                            <li v-if="profile_data !== null">
+                                <router-link :to="{name: 'my_account'}" class="dropdown-item"> পার্শ্বচিত্র </router-link>
+                            </li>
+                            <li v-if="profile_data !== null">
+                                <a href="javascript:void(0)" class="dropdown-item" @click="logout">
+                                    <span v-if="logoutLoading === false"> প্রস্থান করুন </span>
+                                    <span v-if="logoutLoading === true"> লোড হচ্ছে... </span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -116,8 +112,8 @@
                 const month = monthNames[currentTime.getMonth()];
                 const year = yearNames[currentTime.getFullYear() - 2023];
                 const date = datesNames[currentTime.getDate() - 1];
-                const autoLoadTime = `${day}  ${date}  ${month}  ${year}`;
-                document.getElementById("time").innerHTML = autoLoadTime;
+                const loadTime = `${day}  ${date}  ${month}  ${year}`;
+                document.getElementById("time").innerHTML = loadTime;
             }
 
             let timeInterval = setInterval(time, 1000);
