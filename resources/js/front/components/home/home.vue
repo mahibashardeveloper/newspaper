@@ -6,7 +6,7 @@
                 <a href="javascript:void(0)" class="nav-link-hover" @click="formData.category_id = ''; blog_list(current_page = 0)">
                     সব
                 </a>
-                <a href="javascript:void(0)" class="nav-link-hover" v-for="(category) in getCategoryInRange(1, 9)" :key="category.id" v-if="loading === false" @click="formData.category_id = category.id; blog_list(current_page = 0);">
+                <a href="javascript:void(0)" class="nav-link-hover" v-for="(category) in displayedHeaderCategories" :key="category.id" v-if="loading === false" @click="formData.category_id = category.id; blog_list(current_page = 0);">
                     {{ category.name }}
                 </a>
             </div>
@@ -121,9 +121,11 @@
     <footer class="w-100 bg-light">
         <div class="container footer">
             <div class="d-flex justify-content-start flex-wrap py-4">
-                <a href="javascript:void(0)" class="text-secondary footer-hover" v-for="(category) in getCategoryInRange(10, 30)" :key="category.id" v-if="loading === false" @click="formData.category_id = category.id; blog_list(current_page = 0);">
-                    {{ category.name }}
-                </a>
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" v-for="(category) in displayedFooterCategories" :key="category.id" v-if="loading === false">
+                    <a href="javascript:void(0)" class="footer-hover w-100" @click="formData.category_id = category.id; blog_list(current_page = 0);">
+                        {{ category.name }}
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
@@ -138,11 +140,12 @@
     export default {
 
         computed: {
-            getCategoryInRange() {
-                return (startId, endId) => {
-                    return this.categories.filter(category => category.id >= startId && category.id <= endId);
-                };
+            displayedHeaderCategories() {
+                return this.categories.slice(0, 12);
             },
+            displayedFooterCategories() {
+                return this.categories.slice(12,40);
+            }
         },
 
         data(){

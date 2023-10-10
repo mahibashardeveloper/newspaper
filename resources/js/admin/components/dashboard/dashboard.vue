@@ -7,16 +7,16 @@
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <span v-if="category_total_data.total <= 1">
-                                Category
+                                বিভাগ
                             </span>
                             <span v-else>
-                                Categories
+                                বিভাগসমূহ
                             </span>
                         </div>
                         <div class="col-12 col-md-6 text-md-end">
                             {{category_total_data.total}}
-                            <span v-if="category_total_data.total <= 1"> Item </span>
-                            <span v-else> Items </span>
+                            <span v-if="category_total_data.total <= 1"> টি </span>
+                            <span v-else> টি </span>
                         </div>
                     </div>
                 </div>
@@ -26,16 +26,16 @@
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <span v-if="blog_total_data.total <= 1">
-                                Blog
+                                খবর
                             </span>
                             <span v-else>
-                                Blogs
+                                খবরসমূহ
                             </span>
                         </div>
                         <div class="col-12 col-md-6 text-md-end">
                             {{blog_total_data.total}}
-                            <span v-if="blog_total_data.total <= 1"> Item </span>
-                            <span v-else> Items </span>
+                            <span v-if="blog_total_data.total <= 1"> টি </span>
+                            <span v-else> টি </span>
                         </div>
                     </div>
                 </div>
@@ -45,16 +45,16 @@
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <span v-if="user_total_data.total <= 1">
-                                User
+                                পরিদর্শক
                             </span>
                             <span v-else>
-                                Users
+                                পরিদর্শকগণ
                             </span>
                         </div>
                         <div class="col-12 col-md-6 text-md-end">
                             {{user_total_data.total}}
-                            <span v-if="user_total_data.total <= 1"> Person </span>
-                            <span v-else> people </span>
+                            <span v-if="user_total_data.total <= 1"> ব্যক্তি </span>
+                            <span v-else> জন </span>
                         </div>
                     </div>
                 </div>

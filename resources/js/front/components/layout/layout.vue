@@ -4,17 +4,17 @@
         <div class="container">
             <div class="row align-items-center text-center">
                 <div class="col-md-4 p-3">
-                    <div id="time" class="fw-bold"></div>
+                    <div id="time"></div>
                 </div>
                 <div class="col-md-4 p-3">
-                    <router-link :to="{name: 'home'}" class="h3 text-decoration-none text-dark fw-bold">
+                    <router-link :to="{name: 'home'}" class="h3 text-decoration-none text-dark">
                         {{ companyInfo_data.company_name }}
                     </router-link>
                 </div>
                 <div class="col-md-4 p-3 d-flex justify-content-center fw-bold">
                     <div class="dropdown">
-                        <button class="btn btn-link text-decoration-none text-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            হিসাব
+                        <button class="btn btn-link text-decoration-none text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            একাউন্ট
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <span v-if="profile_data === null">
@@ -50,9 +50,9 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="my-5">
-                        <a href="javascript:void(0)" class="h3 text-decoration-none text-dark fw-bold">
+                        <router-link :to="{name: 'home'}" class="h3 text-decoration-none text-dark">
                             {{ companyInfo_data.company_name }}
-                        </a>
+                        </router-link>
                     </div>
                 </div>
                 <div class="col-md-6 d-flex justify-content-md-end">

@@ -4,7 +4,7 @@
         <div class="row align-items-start">
             <div class="col-md-6 mb-3">
                 <div class="position-relative">
-                    <input type="text" class="form-control ps-5" placeholder="Search Here" v-model="formData.q" @keyup="SearchData">
+                    <input type="text" class="form-control ps-5" placeholder="এখানে অনুসন্ধান করুন" v-model="formData.q" @keyup="SearchData">
                     <div class="position-absolute top-50 start-0 translate-middle-y ps-3">
                         <i class="bi bi-search"></i>
                     </div>
@@ -12,7 +12,7 @@
             </div>
             <div class="col-md-6 mb-3 text-md-end">
                 <a href="javascript:void(0)" class="add-btn" @click="manageModal(1, null)">
-                    Add
+                    যোগ করুন
                 </a>
             </div>
         </div>
@@ -20,7 +20,7 @@
 
     <div class="card-section">
         <div class="card-header">
-            <div class="card-title">Categories</div>
+            <div class="card-title">বিভাগসমূহ</div>
             <span class="d-flex align-items-center ms-3" v-if="tableData.length > 0 && loading === false && selected.length > 0">
                 <a href="javascript:void(0)" class="select-icon" @click="deleteModal(1)">
                     <i class="bi bi-trash2"></i>
@@ -54,8 +54,8 @@
                     <div class="mb-3">
                         <i class="bi bi-exclamation-circle fs-1"></i>
                     </div>
-                    <div class="mb-3">There are no data founded.</div>
-                    <span>Click “Add” to create new data.</span>
+                    <div class="mb-3">কোন তথ্য নেই.</div>
+                    <span>নতুন ডেটা তৈরি করতে "যোগ করুন" এ ক্লিক করুন।</span>
                 </div>
             </div>
             <!-- no data end -->
@@ -65,20 +65,19 @@
                     <div class="col-12 col-sm-6 d-none d-sm-block">
                         <div class="d-flex align-items-center">
                             <input type="checkbox" class="form-check-input me-3 d-none d-sm-block" :checked="tableData.length > 0 && tableData.length === selected.length" @change="toggleCheckAll($event)">
-                            Name
+                            নাম
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 d-none d-sm-block text-sm-end">Action</div>
+                    <div class="col-12 col-sm-6 d-none d-sm-block text-sm-end"></div>
                 </div>
                 <div class="row card-list" v-for="(each) in tableData">
-                    <div class="col-12 col-sm-6"> <div class="marge-title py-3"> Name </div>
+                    <div class="col-12 col-sm-6"> <div class="marge-title py-3"> নাম </div>
                         <div class="d-flex align-items-center">
                             <input type="checkbox" class="form-check-input me-3 d-none d-sm-block" :checked="CheckIfChecked(each.id)" @change="toggleCheck($event,each.id)">
                             {{each.name}}
                         </div>
                     </div>
-                    <div class="col-12 col-sm-6 text-sm-end">
-                        <div class="marge-title py-3"> Action </div>
+                    <div class="col-12 col-sm-6 text-sm-end mt-3 mt-sm-0">
                         <a href="javascript:void(0)" class="text-decoration-none text-secondary me-3" @click="manageModal(1, each.id)">
                             <i class="bi bi-pencil-square"></i>
                         </a>
@@ -147,29 +146,31 @@
             <div class="modal-content rounded-0">
                 <form>
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Create Category</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">বিভাগ তৈরি করুন</h1>
                         <button type="button" class="btn-close" @click="manageModal(2,'')"></button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control border-secondary-subtle" v-model="categoryParam.name">
+                            <label for="name" class="form-label">নাম</label>
+                            <input type="text" name="name" class="form-control border-secondary-subtle" v-model="categoryParam.name" autocomplete="off">
                             <div class="error-text" v-if="error != null && error.name !== undefined" v-text="error.name[0]"></div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn-cancel" @click="manageModal(2,'')">Cancel</button>
+                        <button type="button" class="btn-cancel" @click="manageModal(2,'')">
+                            বাতিল করুন
+                        </button>
                         <button type="button" class="btn-save" @click="manageCategory">
                             <span v-if="createLoading === false">
                                 <span v-if="categoryParam.id === ''">
-                                    save
+                                    সংরক্ষণ
                                 </span>
                                 <span v-if="categoryParam.id !== ''">
-                                    Update
+                                    আধুনিক করুন
                                 </span>
                             </span>
                             <span v-if="createLoading === true">
-                                Loading...
+                                লোড হচ্ছে...
                             </span>
                         </button>
                     </div>
@@ -182,17 +183,17 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
                 <div class="modal-header border-bottom-0">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Category</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">বিভাগ মুছুন</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="h4 fw-bold text-center">
-                        Are you sure ?
+                        আপনি কি নিশ্চিত ?
                     </div>
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-around align-items-center">
-                    <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">Cancel</button>
-                    <button type="button" class="col-5 btn-delete" @click="deleteCategory">Confirm</button>
+                    <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">বাতিল করুন</button>
+                    <button type="button" class="col-5 btn-delete" @click="deleteCategory">নিশ্চিত করুন</button>
                 </div>
             </div>
         </div>

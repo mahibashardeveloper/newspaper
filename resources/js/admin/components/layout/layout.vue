@@ -4,7 +4,7 @@
         <div class="admin-sidebar" :class="{active: isActiveAdminSideBar}">
             <div class="admin-sidebar-header">
                 <router-link :to="{name: 'dashboard'}" class="admin-title">
-                    Admin Portal
+                    অ্যাডমিন পোর্টাল
                 </router-link>
                 <a href="javascript:void(0)" class="admin-close" @click="remove">
                     <i class="bi bi-x-lg"></i>
@@ -12,16 +12,16 @@
             </div>
             <div class="admin-sidebar-body">
                 <router-link :to="{name: 'dashboard'}" class="admin-page-link" @click="remove">
-                    Dashboard
+                    ড্যাশবোর্ড
                 </router-link>
                 <router-link :to="{name: 'category'}" class="admin-page-link" @click="remove">
-                    Categories
+                    বিভাগসমূহ
                 </router-link>
                 <router-link :to="{name: 'blog'}" class="admin-page-link" @click="remove">
-                    Blogs
+                    খবরসমূহ
                 </router-link>
                 <router-link :to="{name: 'user'}" class="admin-page-link" @click="remove">
-                    Users
+                    পরিদর্শকগণ
                 </router-link>
             </div>
             <div class="admin-sidebar-footer">
@@ -46,19 +46,16 @@
                     </div>
                     <div class="admin-dropdown-menu" :class="{active: isActiveAdminDropDown}">
                         <router-link :to="{name: 'profile'}" class="admin-dropdown-link"  @click="remove">
-                            Profile
+                            প্রোফাইল
                         </router-link>
                         <a href="javascript:void(0)" class="admin-dropdown-link" @click="logout">
-                            Logout
+                            প্রস্থান করুন
                         </a>
                     </div>
                 </div>
             </div>
             <div class="admin-content-body">
                 <router-view/>
-            </div>
-            <div class="admin-content-footer fw-bold">
-                @ CopyRight - SesAlo - 2023 - 2050
             </div>
         </div>
     </div>
