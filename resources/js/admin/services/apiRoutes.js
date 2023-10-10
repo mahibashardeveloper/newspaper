@@ -60,6 +60,10 @@ const apiRoutes = {
 
     userList: apiVersion + '/user/list',
 
+    userSingle: apiVersion + '/user/single',
+
+    userDelete: apiVersion + '/user/delete',
+
     // Media
 
     media: apiVersion + '/media/upload',

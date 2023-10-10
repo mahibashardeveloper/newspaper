@@ -171,7 +171,7 @@
 
                 current_page: 0,
 
-                buttons: [],
+                buttons: [''],
 
                 searchTimeout: null,
 

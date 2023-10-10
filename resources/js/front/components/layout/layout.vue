@@ -67,20 +67,20 @@
                     </div>
                 </div>
                 <div class="col-md-6 d-flex justify-content-md-end">
-                    <a :href="socialInfo_data.facebook" target="_blank">
-                        <i class="bi bi-facebook py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                    <a :href="socialInfo_data.facebook" target="_blank" class="text-secondary footer-hover">
+                        <i class="bi bi-facebook"></i>
                     </a>
-                    <a :href="socialInfo_data.twitter" target="_blank">
-                        <i class="bi bi-twitter py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                    <a :href="socialInfo_data.twitter" target="_blank" class="text-secondary footer-hover">
+                        <i class="bi bi-twitter"></i>
                     </a>
-                    <a :href="socialInfo_data.instagram" target="_blank">
-                        <i class="bi bi-instagram py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                    <a :href="socialInfo_data.instagram" target="_blank" class="text-secondary footer-hover">
+                        <i class="bi bi-instagram"></i>
                     </a>
-                    <a :href="socialInfo_data.linkedin" target="_blank">
-                        <i class="bi bi-linkedin py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                    <a :href="socialInfo_data.linkedin" target="_blank" class="text-secondary footer-hover">
+                        <i class="bi bi-linkedin"></i>
                     </a>
-                    <a :href="socialInfo_data.youtube" target="_blank">
-                        <i class="bi bi-youtube py-1 px-3 btn btn-dark mx-1 rounded-0 mb-2"></i>
+                    <a :href="socialInfo_data.youtube" target="_blank" class="text-secondary footer-hover">
+                        <i class="bi bi-youtube"></i>
                     </a>
                 </div>
             </div>

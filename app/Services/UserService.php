@@ -188,7 +188,7 @@ class UserService extends BaseController
         }
     }
 
-    public static function user_list($request)
+    public static function userList($request)
     {
         try {
             $limit = $request->limit ?? 10000;
@@ -202,6 +202,38 @@ class UserService extends BaseController
             }
             $paginatedData = $results->paginate($limit);
             return ['status' => 200, 'data' => $paginatedData];
+        } catch (\Exception $e) {
+            return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
+        }
+    }
+
+    public static function userSingle($request)
+    {
+        try {
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'id' => 'required',
+                ]
+            );
+            if ($validator->fails()) {
+                return ['status' => 500, 'errors' => $validator->errors()];
+            }
+            $user = User::where('id', $request->id)->first();
+            if($user == null){
+                return ['status' => 500, 'errors' => 'data not found'];
+            }
+            return ['status' => 200, 'data' => $user];
+        } catch (\Exception $e) {
+            return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
+        }
+    }
+
+    public static function userDelete($request)
+    {
+        try {
+            User::whereIn('id', $request->ids)->delete();
+            return ['status' => 200, 'msg' => 'data has been deleted successfully'];
         } catch (\Exception $e) {
             return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
         }

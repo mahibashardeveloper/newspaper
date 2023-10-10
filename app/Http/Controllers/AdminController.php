@@ -137,8 +137,18 @@ class AdminController extends BaseController
         return response()->json($rv, 200);
     }
 
-    public function user_list(Request $request){
-        $rv = UserService::user_list($request);
+    public function userList(Request $request){
+        $rv = UserService::userList($request);
+        return response()->json($rv, 200);
+    }
+
+    public function userSingle(Request $request){
+        $rv = UserService::userSingle($request);
+        return response()->json($rv, 200);
+    }
+
+    public function userDelete(Request $request){
+        $rv = UserService::userDelete($request);
         return response()->json($rv, 200);
     }
 

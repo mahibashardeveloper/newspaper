@@ -105,5 +105,7 @@ Route::prefix('media')->group( function () {
 --------------------------- */
 
 Route::prefix('user')->group( function () {
-    Route::post('/list', [AdminController::class, 'user_list'])->name('Admin.User.List');
+    Route::post('/list', [AdminController::class, 'userList'])->name('Admin.User.List');
+    Route::post('/single', [AdminController::class, 'userSingle'])->name('Admin.User.Single');
+    Route::post('/delete', [AdminController::class, 'userDelete'])->name('Admin.User.Delete');
 });

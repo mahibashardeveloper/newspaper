@@ -27,7 +27,7 @@
             <div class="modal-content p-3">
                 <div class="modal-header border-0">
                     <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
-                        Edit Profile
+                        পার্শ্বচিত্র সম্পাদন করুন
                     </h1>
                     <button type="button" class="btn-close" @click="closeEditProfileModal"></button>
                 </div>
@@ -50,14 +50,14 @@
                     </div>
                     <div class="form-group">
                         <label for="full_name" class="form-label">
-                            Full Name
+                            পুরো নাম
                         </label>
                         <input type="text" id="full_name" name="full_name" class="form-control border-secondary-subtle" v-model="editParam.full_name">
                         <div class="error-text" v-if="error != null && error.full_name !== undefined" v-text="error.full_name[0]"></div>
                     </div>
                     <div class="form-group">
                         <label for="email" class="form-label">
-                            Email
+                            ইমেইল
                         </label>
                         <input type="email" id="email" name="email" class="form-control border-secondary-subtle" v-model="editParam.email">
                         <div class="error-text" v-if="error != null && error.email !== undefined" v-text="error.email[0]"></div>
@@ -66,8 +66,8 @@
                 <div class="modal-footer border-0">
                     <button type="button" class="btn-cancel" @click="closeEditProfileModal"> Close </button>
                     <button type="button" class="btn-save" @click="updateProfile">
-                        <span v-if="updateProfileLoading === false">Edit</span>
-                        <span v-if="updateProfileLoading === true">Loading...</span>
+                        <span v-if="updateProfileLoading === false">সম্পাদন করুন</span>
+                        <span v-if="updateProfileLoading === true">লোড হচ্ছে...</span>
                     </button>
                 </div>
             </div>
@@ -81,21 +81,21 @@
             <div class="modal-content p-3">
                 <div class="modal-header border-0">
                     <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
-                        Edit Password
+                        পাসওয়ার্ড পরিবর্তন করুন
                     </h1>
                     <button type="button" class="btn-close" @click="closeEditPasswordModal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="password" class="form-label">
-                            New Password
+                            নতুন পাসওয়ার্ড
                         </label>
                         <input type="password" id="password" name="password" class="form-control border-secondary-subtle" v-model="passwordParam.password">
                         <div class="error-text" v-if="error != null && error.password !== undefined" v-text="error.password[0]"></div>
                     </div>
                     <div class="form-group">
                         <label for="password_confirmation" class="form-label">
-                            Confirm Password
+                            পাসওয়ার্ড নিশ্চিতকরণ
                         </label>
                         <input type="password" id="password_confirmation" name="password_confirmation" class="form-control border-secondary-subtle" v-model="passwordParam.password_confirmation">
                         <div class="error-text" v-if="error != null && error.password_confirmation !== undefined" v-text="error.password_confirmation[0]"></div>
