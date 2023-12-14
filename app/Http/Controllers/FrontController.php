@@ -74,6 +74,11 @@ class FrontController extends BaseController
         return response()->json($rv, 200);
     }
 
+    public function blog_single(Request $request){
+        $rv = FrontService::blog_single($request);
+        return response()->json($rv, 200);
+    }
+
     public function company_details(Request $request){
         $rv = FrontService::company_details($request);
         return response()->json($rv, 200);

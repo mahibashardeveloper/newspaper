@@ -39,6 +39,7 @@ const apiRoutes = {
     // blog
 
     globalBlogList: listApi + '/globalBlog/list',
+    globalBlogSingle: listApi + '/globalBlog/single',
 
     // social info
 

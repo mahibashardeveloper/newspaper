@@ -36,6 +36,7 @@ Route::prefix('globalCategory')->group(function () {
 
 Route::prefix('globalBlog')->group(function () {
     Route::post('/list', [FrontController::class, 'blog_list']);
+    Route::post('/single', [FrontController::class, 'blog_single']);
 } );
 
 /* --------------------------

@@ -31,7 +31,7 @@ class Settings extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-
+        'admin_id',
     ];
 
     /**

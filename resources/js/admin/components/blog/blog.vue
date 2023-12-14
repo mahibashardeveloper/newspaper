@@ -66,7 +66,7 @@
                         <div class="row align-items-center blog p-3">
                             <div class="col-12 col-sm-6 col-md-6 col-lg-7">
                                 <div class="h3 mb-4"> {{each.title}} </div>
-                                <div class="mb-4"> {{each.description}} </div>
+                                <div class="mb-4"> {{truncateDescription(each.description)}} </div>
                                 <div class="mb-3">
                                     <span v-if="each.category_info != null"> {{ each.category_info.name }} </span>
                                 </div>
@@ -280,6 +280,15 @@
         },
 
         methods: {
+
+            truncateDescription(description){
+                const words = description.split(' ');
+                if (words.length > 10) {
+                    return words.slice(0, 10).join(' ') + '...';
+                } else {
+                    return description;
+                }
+            },
 
             getCategory() {
                 apiService.POST(apiRoutes.categoryList, '', (res) =>{

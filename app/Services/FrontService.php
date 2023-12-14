@@ -7,6 +7,8 @@ use App\Models\Companies;
 use App\Models\Categories;
 use App\Models\Settings;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class FrontService extends BaseController
 {
@@ -33,6 +35,28 @@ class FrontService extends BaseController
             }
             $paginatedData = $results->paginate($limit);
             return ['status' => 200, 'data' => $paginatedData];
+        } catch (\Exception $e) {
+            return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
+        }
+    }
+
+    public static function blog_single($request)
+    {
+        try {
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'id' => 'required',
+                ]
+            );
+            if ($validator->fails()) {
+                return ['status' => 500, 'errors' => $validator->errors()];
+            }
+            $blog = Blogs::where('id', $request->id)->first();
+            if($blog == null){
+                return ['status' => 500, 'errors' => 'data not found'];
+            }
+            return ['status' => 200, 'data' => $blog];
         } catch (\Exception $e) {
             return ['status' => 500, 'errors' => $e->getMessage(), 'line' => $e->getLine()];
         }

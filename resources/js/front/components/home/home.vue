@@ -50,9 +50,9 @@
                             {{blog.title}}
                         </div>
                         <div class="mb-4">
-                            {{blog.description}}
+                            {{truncateDescription(blog.description)}}
                         </div>
-                        <router-link :to="{name: 'post'}" class="btn-post-link"> আরো পড়ুন </router-link>
+                        <button class="btn border-0 btn-post-link" @click="openBlogModal(blog.id)"> আরো পড়ুন </button>
                     </div>
                     <div class="col-md-5">
                         <div class="post-image">
@@ -130,6 +130,36 @@
         </div>
     </footer>
 
+    <div class="modal fade" id="singleBlogModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content p-3">
+                <div class="modal-header border-bottom-0">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel"> খবর </h1>
+                    <button type="button" class="btn-close" @click="hideBlogModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="post">
+                        <div class="row align-items-center">
+                            <div class="col-md-7">
+                                <div class="h3 mb-4">
+                                    {{blogSingleParam.title}}
+                                </div>
+                                <div class="mb-4">
+                                    {{blogSingleParam.description}}
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="post-image">
+                                    <img :src="'/storage/media/image/'+blogSingleParam.avatar" class="img-fluid object-fit-cover" :alt="blogSingleParam.avatar">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </template>
 
 <script>
@@ -166,6 +196,8 @@
                 searchTimeout: null,
                 error: null,
                 responseData: null,
+                singleParam: { id: '' },
+                blogSingleParam: {},
             }
         },
 
@@ -175,6 +207,39 @@
         },
 
         methods: {
+
+            truncateDescription(description){
+                const words = description.split(' ');
+                if (words.length > 10) {
+                    return words.slice(0, 10).join(' ') + '...';
+                } else {
+                    return description;
+                }
+            },
+
+            openBlogModal(id) {
+                this.getSingle(id);
+                let modal = new bootstrap.Modal(document.getElementById('singleBlogModal'))
+                modal.show();
+            },
+
+            hideBlogModal() {
+                const Modal = document.querySelector('#singleBlogModal');
+                const Instance = bootstrap.Modal.getInstance(Modal);
+                Instance.hide();
+            },
+
+            getSingle(id = null) {
+                let param = { id: '' }
+                if (id != null) { param.id = id } else { param.id = this.selected[0] }
+                apiService.POST(apiRoutes.globalBlogSingle, param, (res) => {
+                    if (res.status === 200) {
+                        this.blogSingleParam = res.data;
+                    } else {
+                        this.error = res.errors;
+                    }
+                });
+            },
 
             category_list() {
                 this.loading = true;

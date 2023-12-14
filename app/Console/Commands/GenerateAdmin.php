@@ -58,9 +58,9 @@ class GenerateAdmin extends Command
         );
         Settings::insert([$settings]);
         $company_info = array(
-            'company_name' => 'Ses Alo',
+            'company_name' => 'শেষ আলো',
         );
         Companies::insert([$company_info]);
-        print_r("company Name : Ses Alo".PHP_EOL.PHP_EOL);
+        print_r("company Name : শেষ আলো".PHP_EOL.PHP_EOL);
     }
 }
