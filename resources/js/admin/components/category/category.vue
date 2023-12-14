@@ -144,7 +144,7 @@
     <div class="modal fade" id="manageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
-                <form>
+                <form @submit.prevent="manageCategory">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">বিভাগ তৈরি করুন</h1>
                         <button type="button" class="btn-close" @click="manageModal(2,'')"></button>
@@ -160,7 +160,7 @@
                         <button type="button" class="btn-cancel" @click="manageModal(2,'')">
                             বাতিল করুন
                         </button>
-                        <button type="button" class="btn-save" @click="manageCategory">
+                        <button type="submit" class="btn-save">
                             <span v-if="createLoading === false">
                                 <span v-if="categoryParam.id === ''">
                                     সংরক্ষণ করুন
@@ -181,7 +181,7 @@
 
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-0">
+            <form class="modal-content rounded-0" @submit.prevent="deleteCategory">
                 <div class="modal-header border-bottom-0">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">বিভাগ মুছুন</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -193,7 +193,7 @@
                 </div>
                 <div class="modal-footer border-top-0 d-flex justify-content-around align-items-center">
                     <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">বাতিল করুন</button>
-                    <button type="button" class="col-5 btn-delete" @click="deleteCategory">
+                    <button type="submit" class="col-5 btn-delete">
                         <span v-if="deleteLoading === false">
                             নিশ্চিত করুন
                         </span>
@@ -202,7 +202,7 @@
                         </span>
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

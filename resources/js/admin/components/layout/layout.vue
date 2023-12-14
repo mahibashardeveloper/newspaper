@@ -1,7 +1,7 @@
 <template>
 
     <div class="admin-wrapper">
-        <div class="admin-sidebar" :class="{active: isActiveAdminSideBar}">
+        <div class="admin-sidebar bg-light" :class="{active: isActiveAdminSideBar}">
             <div class="admin-sidebar-header">
                 <router-link :to="{name: 'dashboard'}" class="admin-title">
                     অ্যাডমিন পোর্টাল
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="admin-content">
-            <div class="admin-content-header">
+            <div class="admin-content-header bg-light">
                 <a href="javascript:void(0)" class="admin-sidebar-controller-link" @click="AdminSideBarController">
                     <i class="bi bi-justify-left"></i>
                 </a>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-            <div class="admin-content-body">
+            <div class="admin-content-body bg-secondary-subtle">
                 <router-view/>
             </div>
         </div>

@@ -151,7 +151,7 @@
 
     <div class="modal fade" id="manageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-0">
+            <form @submit.prevent="manageBlog" class="modal-content rounded-0">
                 <div class="modal-header border-bottom-0">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">খবর তৈরি করুন</h1>
                     <button type="button" class="btn-close" @click="manageModal(2,'')"></button>
@@ -190,7 +190,7 @@
                 </div>
                 <div class="modal-footer border-top-0">
                     <button type="button" class="btn-cancel" @click="manageModal(2,'')">বাতিল করুন</button>
-                    <button type="button" class="btn-save" @click="manageBlog">
+                    <button type="submit" class="btn-save">
                         <span v-if="createLoading === false">
                             <span v-if="blogParam.id === ''"> সংরক্ষণ করুন </span>
                             <span v-if="blogParam.id !== ''"> আধুনিক করুন </span>
@@ -198,13 +198,13 @@
                         <span v-if="createLoading === true"> লোড হচ্ছে... </span>
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-0">
+            <form @submit.prevent="deleteBlog" class="modal-content rounded-0">
                 <div class="modal-header border-bottom-0">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">খবর মুছুন</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -218,7 +218,7 @@
                     <button type="button" class="col-5 btn-cancel" @click="deleteModal(2,'')">
                         বাতিল করুন
                     </button>
-                    <button type="button" class="col-5 btn-delete" @click="deleteBlog">
+                    <button type="button" class="col-5 btn-delete">
                         <span v-if="deleteLoading === false">
                             নিশ্চিত করুন
                         </span>
@@ -227,7 +227,7 @@
                         </span>
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

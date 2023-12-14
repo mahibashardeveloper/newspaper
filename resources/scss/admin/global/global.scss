@@ -254,7 +254,6 @@
             width: 100%;
             height: calc(100vh - 70px);
             overflow-y: scroll;
-            background-color: rgba(205, 250, 213, 0.5);
 
             .profile{
 
@@ -333,6 +332,8 @@
                     display: flex;
                     align-items: center;
                     justify-content: flex-start;
+                    border-top-left-radius: 5px;
+                    border-top-right-radius: 5px;
 
                     .card-title{
                         font-weight: bold;
@@ -356,10 +357,7 @@
 
                 .card-body{
                     background-color: $white;
-                    padding-left: 20px;
-                    padding-right: 20px;
-                    padding-top: 0;
-                    padding-bottom: 20px;
+                    padding: 0 20px 20px;
                     height: calc(100vh - 400px);
                     overflow-y: scroll;
 
@@ -418,6 +416,8 @@
                     justify-content: center;
                     align-items: center;
                     background-color: $white;
+                    border-bottom-left-radius: 5px;
+                    border-bottom-right-radius: 5px;
 
                     .pagination{
 

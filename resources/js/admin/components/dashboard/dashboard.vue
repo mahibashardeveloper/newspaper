@@ -3,7 +3,7 @@
     <div class="px-3">
         <div class="row fw-bold">
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 p-3">
-                <div class="bg-white h-100 p-3">
+                <div class="h-100 px-4 py-3 border bg-light rounded-3">
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <span v-if="category_total_data.total <= 1">
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 p-3">
-                <div class="bg-white h-100 p-3">
+                <div class="h-100 px-4 py-3 border bg-light rounded-3">
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <span v-if="blog_total_data.total <= 1">
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-4 p-3">
-                <div class="bg-white h-100 p-3">
+                <div class="h-100 px-4 py-3 border bg-light rounded-3">
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <span v-if="user_total_data.total <= 1">
