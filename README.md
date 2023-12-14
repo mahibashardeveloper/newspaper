@@ -1,4 +1,4 @@
-## componser install
+## composer install
 
 ## npm install
 
